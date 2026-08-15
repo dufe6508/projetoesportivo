@@ -1,0 +1,29 @@
+# dependências e build
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# ambiente e credenciais
+.env
+.env.*
+.vercel/
+
+# Acervo bruto: 125 MB de PNG originais, incluindo duplicatas.
+# O que o site usa está em site/public/fotos (WebP, 7,6 MB), gerado por
+# site/_fotos.mjs a partir desta pasta. Para versionar os originais, o
+# caminho é Git LFS, não o repositório comum.
+/fotos/
+
+# capturas de trabalho
+/site/shot/
+
+# ferramentas locais
+.claude-flow/
+.impeccable/
+site/.impeccable/
+
+# sistema
+.DS_Store
+Thumbs.db

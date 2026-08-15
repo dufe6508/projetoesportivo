@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+/* ============================================================
+   PECB, tokens do design system.
+   Tipografia revista em 14/08/2026: Oswald, Newsreader e Martian Mono
+   saíram por lerem duras e mecânicas. Família única, humanista e macia.
+   ============================================================ */
+
+@theme {
+  --color-brand: #002154;
+  --color-accent: #FBE47A;
+
+  --color-navy-50:  #EDF3FC;
+  --color-navy-100: #D2E2F8;
+  --color-navy-200: #A3C3F1;
+  --color-navy-300: #6098E4;
+  --color-navy-400: #2A6FD4;
+  --color-navy-500: #0A50B5;
+  --color-navy-600: #003D95;
+  --color-navy-700: #002E72;
+  --color-navy-800: #002154;
+  --color-navy-900: #00152F;
+  --color-navy-950: #000E22;
+
+  --color-gold-100: #FDF6D2;
+  --color-gold-200: #FCEFAB;
+  --color-gold-300: #FBE47A;
+  --color-gold-400: #F5D23F;
+  --color-gold-500: #E5B814;
+  --color-gold-700: #7A5C0B;
+
+  --color-ink-0:   #FFFFFF;
+  --color-ink-25:  #FAFBFD;
+  --color-ink-50:  #F4F6FA;
+  --color-ink-100: #E9EDF3;
+  --color-ink-200: #D8DEE8;
+  --color-ink-300: #BAC3D2;
+  --color-ink-400: #8A94A8;
+  --color-ink-500: #667089;
+  --color-ink-700: #363E4D;
+  --color-ink-900: #141922;
+
+  --color-success: #127A55;
+  --color-danger:  #B0342A;
+
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* celular grande: onde o card do carrossel deixa de ocupar quase a tela toda */
+  --breakpoint-xs: 30rem;
+}
+
+:root {
+  --dur-press: 100ms;
+  --dur-fast: 160ms;
+  --dur-base: 220ms;
+  --dur-slow: 320ms;
+  --focus-ring: 0 0 0 3px rgb(0 33 84 / 0.45);
+}
+
+.on-navy { --focus-ring: 0 0 0 3px rgb(255 255 255 / 0.7); }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-ink-0);
+  color: var(--color-navy-800);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 { text-wrap: balance; margin: 0; }
+p { text-wrap: pretty; margin: 0; }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- vozes tipográficas ----------
+   Uma família só, três vozes por peso e espaçamento. */
+
+/* títulos de impacto */
+.u-display {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+}
+
+/* títulos de leitura, mais macios que o display */
+.u-titulo {
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.12;
+}
+
+/* rótulo de seção */
+.u-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.u-tabular { font-variant-numeric: tabular-nums; }
+.u-measure { max-width: 62ch; }
+
+/* Título nunca deixa palavra órfã numa linha só. `balance` cuida disso até
+   6 linhas, que cobre todo título do site. */
+.u-titulo, .u-display { text-wrap: balance; }
+
+/* ---------- ritmo vertical ----------
+   Um lugar só para o espaçamento de seção. No celular ele cai quase pela
+   metade: a régua de 128px foi desenhada para monitor, e repetida no telefone
+   vira tela de rolagem vazia. */
+
+.u-sec { padding-block: 3.5rem; }
+.u-sec-tight { padding-block: 2.5rem; }
+
+@media (min-width: 48rem) {
+  .u-sec { padding-block: 7rem; }
+  .u-sec-tight { padding-block: 4.5rem; }
+}
+
+/* ---------- junta entre seções ----------
+   Substitui o corte seco entre dois blocos de fundo diferente por uma
+   passagem curta. É o que tira a aparência de retângulos empilhados sem
+   mexer na cor de nenhuma seção. */
+
+.u-junta { position: relative; }
+.u-junta::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 5rem;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--junta-de, transparent), transparent);
+}
+
+/* ---------- par de ações ----------
+   Dois CTAs irmãos dividem a linha no celular em vez de empilhar. Só quebram
+   quando o rótulo não cabe, e aí cada um ocupa a linha inteira. */
+
+.u-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+.u-acoes > * {
+  flex: 1 1 9.5rem;
+}
+@media (min-width: 30rem) {
+  .u-acoes > * { flex: 0 0 auto; }
+}
+
+/* Régua fina, herdada da marcação de quadra */
+.u-courtrule { position: relative; }
+.u-courtrule::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.16;
+}
+
+/* Recorte da foto do hero no celular. A foto 16:9 entra num contêiner
+   retrato, então o corte deixa de ser de teto e passa a ser de lateral: o
+   ponto de foco tem que mudar junto, senão sai gente pela borda. */
+@media (max-width: 47.99rem) {
+  .hero-foto { object-position: var(--pos-mobile) !important; }
+}
+
+/* ---------- trilho do carrossel ----------
+   A barra de rolagem some porque as setas e a fresta do próximo card já
+   dizem que há mais conteúdo. O trilho continua rolando por dedo, roda e
+   teclado, então esconder a barra não tira navegação de ninguém. */
+
+.carrossel-trilho {
+  scrollbar-width: none;
+  /* o snap encaixa na borda do card, não no meio: leitura da esquerda pra direita */
+  scroll-padding-inline: 1.25rem;
+}
+.carrossel-trilho::-webkit-scrollbar { display: none; }
+
+@media (min-width: 48rem) {
+  .carrossel-trilho { scroll-padding-inline: 2.5rem; }
+}
+
+/* Foco no trilho precisa de anel próprio: sem isso, quem navega por teclado
+   rola uma caixa invisível. */
+.carrossel-trilho:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-lg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carrossel-trilho { scroll-behavior: auto; }
+}
+
+/* ---------- estados de entrada ----------
+   Escritos pelo GSAP em useLayoutEffect, nunca no CSS: se o script falhar,
+   o conteúdo continua visível. */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::selection { background: var(--color-gold-300); color: var(--color-navy-900); }
+
+@supports (scrollbar-color: auto) {
+  html { scrollbar-color: var(--color-navy-300) transparent; }
+}

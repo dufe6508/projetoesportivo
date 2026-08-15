@@ -1,0 +1,298 @@
+/* ============================================================
+   Projeto Esportivo Cláudio Brandão: Design Tokens
+   Tailwind v4 (@theme). Fonte normativa: DESIGN_SYSTEM.md
+   Uso: importar em app/globals.css
+   ============================================================ */
+
+@import "tailwindcss";
+
+@theme {
+  /* ---------- MARCA ------------------------------------------------ */
+  --color-brand: #002154;
+  --color-accent: #FBE47A;
+
+  /* ---------- RAMPA NAVY ------------------------------------------- */
+  --color-navy-50:  #EDF3FC;
+  --color-navy-100: #D2E2F8;
+  --color-navy-200: #A3C3F1;
+  --color-navy-300: #6098E4;
+  --color-navy-400: #2A6FD4;
+  --color-navy-500: #0A50B5;
+  --color-navy-600: #003D95;
+  --color-navy-700: #002E72;
+  --color-navy-800: #002154;  /* marca */
+  --color-navy-900: #00152F;
+  --color-navy-950: #000E22;
+
+  /* ---------- RAMPA AMARELA ----------------------------------------
+     ATENÇÃO: gold-300 (#FBE47A) sobre branco = 1,3:1. Reprovado em AA.
+     Para amarelo como TEXTO em fundo claro, use --color-gold-700.     */
+  --color-gold-50:  #FEFBEC;
+  --color-gold-100: #FDF6D2;
+  --color-gold-200: #FCEFAB;
+  --color-gold-300: #FBE47A;  /* marca, só sobre navy-700+ */
+  --color-gold-400: #F5D23F;
+  --color-gold-500: #E5B814;
+  --color-gold-600: #BE930C;
+  --color-gold-700: #7A5C0B;  /* accent-ink */
+  --color-gold-800: #5C4509;
+  --color-gold-900: #3D2E06;
+
+  /* ---------- NEUTROS (enviesados para o azul da marca) ------------- */
+  --color-ink-0:   #FFFFFF;
+  --color-ink-25:  #FAFBFD;
+  --color-ink-50:  #F4F6FA;
+  --color-ink-100: #E9EDF3;
+  --color-ink-200: #D8DEE8;
+  --color-ink-300: #BAC3D2;
+  --color-ink-400: #8A94A8;
+  --color-ink-500: #667089;
+  --color-ink-600: #4B5568;
+  --color-ink-700: #363E4D;
+  --color-ink-800: #232935;
+  --color-ink-900: #141922;
+
+  /* ---------- FEEDBACK --------------------------------------------- */
+  --color-success:    #127A55;
+  --color-success-bg: #E6F4EE;
+  --color-warning:    #7A5C0B;
+  --color-warning-bg: #FDF6D2;
+  --color-danger:     #B0342A;
+  --color-danger-bg:  #FBEAE8;
+  --color-info:       #003D95;
+  --color-info-bg:    #EDF3FC;
+
+  /* ---------- TIPOGRAFIA -------------------------------------------
+     --font-display trocado por direção (ver DESIGN_SYSTEM.md §11):
+     A/Escudo = Oswald · B/Quadra = Newsreader · C/Placar = Archivo Black */
+  --font-sans:    "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    "Martian Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --text-hero:     clamp(2.75rem, 1.2rem + 7vw, 6rem);
+  --text-hero--line-height: 0.95;
+  --text-hero--letter-spacing: -0.03em;
+  --text-hero--font-weight: 800;
+
+  --text-h1:       clamp(2.25rem, 1.25rem + 4.4vw, 4rem);
+  --text-h1--line-height: 1.02;
+  --text-h1--letter-spacing: -0.03em;
+  --text-h1--font-weight: 800;
+
+  --text-h2:       clamp(1.75rem, 1.15rem + 2.6vw, 2.75rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h2--font-weight: 700;
+
+  --text-h3:       clamp(1.375rem, 1.1rem + 1.2vw, 1.75rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.015em;
+  --text-h3--font-weight: 700;
+
+  --text-subtitle: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --text-subtitle--line-height: 1.5;
+  --text-subtitle--letter-spacing: -0.01em;
+
+  --text-body-lg:  1.125rem;
+  --text-body-lg--line-height: 1.65;
+  --text-body:     1rem;
+  --text-body--line-height: 1.7;
+  --text-body-sm:  0.9375rem;
+  --text-body-sm--line-height: 1.6;
+  --text-caption:  0.8125rem;
+  --text-caption--line-height: 1.5;
+
+  --text-label:    0.75rem;
+  --text-label--line-height: 1.3;
+  --text-label--letter-spacing: 0.16em;
+  --text-label--font-weight: 500;
+
+  --text-button:   0.9375rem;
+  --text-button--line-height: 1;
+  --text-button--letter-spacing: 0.01em;
+  --text-button--font-weight: 600;
+
+  --text-nav:      0.875rem;
+  --text-nav--line-height: 1;
+  --text-nav--letter-spacing: 0.02em;
+  --text-nav--font-weight: 600;
+
+  --text-stat:     clamp(3rem, 1.8rem + 5.5vw, 5.5rem);
+  --text-stat--line-height: 0.9;
+  --text-stat--letter-spacing: -0.04em;
+  --text-stat--font-weight: 800;
+
+  /* ---------- ESPAÇAMENTO (base 4) ---------------------------------- */
+  --spacing: 0.25rem; /* Tailwind v4 gera a escala a partir daqui */
+
+  /* ---------- CONTÊINER --------------------------------------------- */
+  --container-prose: 42.5rem; /* 680 */
+  --container-main:  75rem;   /* 1200 */
+  --container-wide:  90rem;   /* 1440 */
+
+  /* ---------- RAIO --------------------------------------------------- */
+  --radius-none: 0px;
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   20px;
+  --radius-full: 9999px;
+
+  /* ---------- SOMBRA (tingida de navy, nunca preta) ------------------
+     Repouso = sem sombra. Sombra é feedback, não decoração.            */
+  --shadow-hairline: inset 0 0 0 1px var(--color-ink-200);
+  --shadow-sm: 0 1px 2px rgb(0 33 84 / 0.06), 0 1px 1px rgb(0 33 84 / 0.04);
+  --shadow-md: 0 4px 12px rgb(0 33 84 / 0.08);
+  --shadow-lg: 0 12px 32px rgb(0 33 84 / 0.12);
+
+  /* ---------- MOVIMENTO ---------------------------------------------- */
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* ============================================================
+   PAPÉIS SEMÂNTICOS
+   Componentes referenciam ESTES, nunca a rampa direta.
+   ============================================================ */
+
+:root {
+  --bg:              var(--color-ink-0);
+  --surface:         var(--color-ink-50);
+  --surface-pressed: var(--color-ink-100);
+  --border:          var(--color-ink-200);
+  --border-strong:   var(--color-ink-300);
+
+  --text-primary:   var(--color-navy-800);
+  --text-secondary: var(--color-ink-500);
+  --text-muted:     var(--color-ink-400);
+  --text-inverse:   var(--color-ink-0);
+
+  --link:       var(--color-navy-600);
+  --link-hover: var(--color-navy-500);
+
+  --focus-ring: 0 0 0 3px rgb(0 61 149 / 0.4);
+
+  /* ritmo vertical */
+  --space-section:       8rem;   /* 128 */
+  --space-section-tight: 5rem;   /* 80  */
+  --space-block:         3rem;   /* 48  */
+  --space-stack:         1.5rem; /* 24  */
+  --gutter:              2.5rem; /* 40  */
+
+  /* motion */
+  --dur-press: 100ms;
+  --dur-fast:  160ms;
+  --dur-base:  220ms;
+  --dur-slow:  320ms;
+}
+
+/* Contexto escuro: aplicar .on-navy no wrapper da seção.
+   Não é dark mode do site, é a seção escura da identidade. */
+.on-navy {
+  --bg:              var(--color-navy-900);
+  --surface:         var(--color-navy-700);
+  --surface-pressed: var(--color-navy-600);
+  --border:          rgb(210 226 248 / 0.18);
+  --border-strong:   rgb(210 226 248 / 0.3);
+
+  --text-primary:   var(--color-ink-0);
+  --text-secondary: var(--color-navy-200);
+  --text-muted:     rgb(163 195 241 / 0.7);
+  --text-inverse:   var(--color-navy-900);
+
+  --link:       var(--color-gold-300);
+  --link-hover: var(--color-gold-400);
+
+  --focus-ring: 0 0 0 3px rgb(251 228 122 / 0.55);
+
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --space-section:       4rem;    /* 64 */
+    --space-section-tight: 3rem;    /* 48 */
+    --space-block:         2rem;    /* 32 */
+    --space-stack:         1.25rem; /* 20 */
+    --gutter:              1.25rem; /* 20 */
+  }
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+/* Foco: nunca remover. */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Números não podem tremer em contador. */
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Eyebrow / label da marca */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--text-label--letter-spacing);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+@media (max-width: 480px) {
+  .eyebrow { font-size: 0.8125rem; }
+}
+
+/* Press: o detalhe que faz o botão parecer vivo. */
+.pressable {
+  transition: transform var(--dur-press) var(--ease-out);
+}
+.pressable:active { transform: scale(0.97); }
+
+/* Hover só em ponteiro fino, em toque gera falso positivo. */
+@media (hover: hover) and (pointer: fine) {
+  .card-hover {
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out);
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .card-hover:hover .card-media img { transform: scale(1.03); }
+}
+
+.card-media { overflow: hidden; }
+.card-media img {
+  transition: transform var(--dur-slow) var(--ease-out);
+  will-change: transform;
+}
+
+/* Reduzido = menos movimento, não zero. Cor e opacidade permanecem. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .card-hover:hover { transform: none; }
+  .pressable:active { transform: none; }
+}

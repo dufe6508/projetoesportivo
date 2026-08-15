@@ -1,0 +1,225 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState } from "react";
+import { FotoCapa } from "./FotoCapa";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { Icone } from "./Icone";
+
+gsap.registerPlugin(useGSAP);
+
+/**
+ * Hero em carrossel com as fotos reais do projeto.
+ *
+ * Legibilidade: a foto recebe um escurecimento de base uniforme, mais um
+ * gradiente da esquerda para o texto e uma faixa no topo para a barra de
+ * navegação. Sem isso a nav sumia sobre céu claro.
+ *
+ * Acessibilidade: setas e pontos são botões de verdade, o giro para no hover
+ * e no foco, e não existe quando o usuário pede menos movimento.
+ */
+
+type Lamina = {
+  foto: string;
+  /** recorte 3:4 servido no celular, ver components/FotoCapa.tsx */
+  fotoMovel?: string;
+  posicao?: string;
+  posicaoMobile?: string;
+  titulo: string;
+  apoio: string;
+};
+
+/**
+ * As três lâminas são os três elencos completos do acervo. O hero é o único
+ * lugar da home onde eles aparecem: nas páginas de modalidade cada um volta
+ * com outra composição, e nas demais seções entram fotos de rotina.
+ */
+/**
+ * `posicao` tem duas leituras porque o recorte muda de natureza: no celular a
+ * foto 16:9 entra num retrato e o corte é horizontal, no desktop é vertical.
+ * Sem separar as duas, ou sobra teto no monitor ou some rosto no telefone.
+ */
+const laminas: Lamina[] = [
+  {
+    foto: "/fotos/elenco-volei-feminino.webp",
+    fotoMovel: "/fotos/elenco-volei-feminino-movel.webp",
+    posicao: "50% 62%",
+    posicaoMobile: "50% 58%",
+    titulo: "Esporte que transforma",
+    apoio: "Futsal e vôlei no Vale do Jatobá.",
+  },
+  {
+    foto: "/fotos/elenco-futsal-feminino.webp",
+    fotoMovel: "/fotos/elenco-futsal-feminino-movel.webp",
+    posicao: "50% 68%",
+    posicaoMobile: "50% 62%",
+    titulo: "Quatro equipes",
+    apoio: "Treino toda semana, o ano letivo inteiro.",
+  },
+  {
+    foto: "/fotos/elenco-futsal-masculino.webp",
+    fotoMovel: "/fotos/elenco-futsal-masculino-movel.webp",
+    posicao: "50% 86%",
+    posicaoMobile: "50% 78%",
+    titulo: "Seja patrocinador",
+    apoio: "Material, uniforme e transporte.",
+  },
+];
+
+const GIRO = 7000;
+
+export function Hero() {
+  const [atual, setAtual] = useState(0);
+  const [pausado, setPausado] = useState(false);
+  const raiz = useRef<HTMLElement>(null);
+
+  const ir = useCallback((i: number) => setAtual((i + laminas.length) % laminas.length), []);
+
+  useEffect(() => {
+    if (pausado) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setTimeout(() => ir(atual + 1), GIRO);
+    return () => clearTimeout(t);
+  }, [atual, pausado, ir]);
+
+  // cada troca reanima o texto: sem isso a lâmina nova entra seca
+  useGSAP(
+    () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      gsap.fromTo(
+        "[data-ativa] [data-anima]",
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.65, ease: "power3.out", stagger: 0.07 },
+      );
+    },
+    { scope: raiz, dependencies: [atual] },
+  );
+
+  return (
+    <section
+      ref={raiz}
+      className="relative isolate h-[70svh] min-h-[440px] w-full overflow-hidden
+                 rounded-b-[26px] bg-navy-950 md:h-[90svh] md:min-h-[560px] md:rounded-b-[44px]"
+      aria-roledescription="carrossel"
+      aria-label="Destaques do projeto"
+      onMouseEnter={() => setPausado(true)}
+      onMouseLeave={() => setPausado(false)}
+      onFocusCapture={() => setPausado(true)}
+      onBlurCapture={() => setPausado(false)}
+    >
+      {laminas.map((l, i) => (
+        <div
+          key={l.foto}
+          data-ativa={i === atual ? "" : undefined}
+          aria-hidden={i !== atual}
+          className={`absolute inset-0 transition-opacity duration-[800ms] ease-[cubic-bezier(0.23,1,0.32,1)]
+                      ${i === atual ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        >
+          <FotoCapa
+            src={l.foto}
+            movel={l.fotoMovel}
+            alt=""
+            prioridade={i === 0}
+            posicao={l.posicao ?? "50% 50%"}
+            posicaoMobile={l.posicaoMobile ?? l.posicao ?? "50% 50%"}
+            className={`transition-transform duration-[9000ms] ease-linear
+                        ${i === atual ? "scale-[1.06]" : "scale-100"}`}
+          />
+
+          {/* O texto foi para o alto, então o escurecimento também.
+              As três fotos de elenco têm arquitetura em cima (parede, rede,
+              muro) e gente embaixo: escrever no topo é escrever sobre parede,
+              não sobre rosto, que era o problema da versão ancorada no pé. */}
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(0,14,34,.9) 0%, rgba(0,14,34,.72) 26%, rgba(0,14,34,.28) 52%, rgba(0,14,34,.5) 100%)",
+            }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 hidden md:block"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(0,14,34,.78) 0%, rgba(0,14,34,.42) 44%, rgba(0,14,34,0) 78%)",
+            }}
+          />
+
+          <div className="relative flex h-full items-start">
+            <div className="mx-auto w-full max-w-[1320px] px-5 pt-[4.75rem] md:px-10 md:pt-[7.75rem]">
+              {/* Sem a linha de localização e com título curto: o bairro já
+                  aparece no apoio, no rodapé e na página de contato, e era o
+                  terceiro nível de texto competindo dentro do mesmo bloco. */}
+              <div className="max-w-[58ch]">
+                <h1
+                  data-anima
+                  className="u-display max-w-[20ch] text-[clamp(1.75rem,6.6vw,4.25rem)] text-white"
+                >
+                  {l.titulo}
+                </h1>
+                <p
+                  data-anima
+                  className="mt-2.5 max-w-[32ch] text-[0.875rem] leading-relaxed text-white/70
+                             md:mt-4 md:max-w-[38ch] md:text-[1.0625rem]"
+                >
+                  {l.apoio}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* Setas nas laterais, sem moldura, integradas à foto. Antes ficavam
+          empilhadas no rodapé do hero disputando espaço com os CTAs. */}
+      <div className="pointer-events-none absolute inset-y-0 inset-x-0 z-10 flex items-center justify-between px-1 md:px-3">
+        {(
+          [
+            ["CaretLeft", -1, "Destaque anterior"],
+            ["CaretRight", 1, "Próximo destaque"],
+          ] as const
+        ).map(([icone, passo, rotulo]) => (
+          <button
+            key={rotulo}
+            onClick={() => ir(atual + passo)}
+            aria-label={rotulo}
+            className="pointer-events-auto grid h-12 w-12 place-items-center rounded-full
+                       text-white/70 transition-[color,background-color,transform] duration-[160ms]
+                       ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-white/10 hover:text-white
+                       active:scale-[0.92]"
+          >
+            <Icone nome={icone} className="h-5 w-5 drop-shadow-[0_1px_6px_rgba(0,14,34,.8)]" />
+          </button>
+        ))}
+      </div>
+
+      {/* posição, centralizada no pé */}
+      <div className="absolute inset-x-0 bottom-5 z-10 md:bottom-8">
+        <div className="flex items-center justify-center gap-2">
+          {laminas.map((l, i) => (
+            <button
+              key={l.foto}
+              onClick={() => ir(i)}
+              aria-label={`Ir para o destaque ${i + 1}: ${l.titulo}`}
+              aria-current={i === atual}
+              className="grid h-11 w-7 place-items-center"
+            >
+              <span
+                aria-hidden
+                className={`block h-[2.5px] rounded-full transition-all duration-300
+                            ease-[cubic-bezier(0.23,1,0.32,1)]
+                            ${i === atual ? "w-8 bg-white" : "w-3.5 bg-white/40 hover:bg-white/70"}`}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <p className="sr-only" aria-live="polite">
+        Destaque {atual + 1} de {laminas.length}: {laminas[atual].titulo}
+      </p>
+    </section>
+  );
+}
