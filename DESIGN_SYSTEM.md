@@ -14,9 +14,10 @@ Tokens implementáveis: [tokens.css](tokens.css)
 
 | Item | Antes | Agora | Motivo |
 |---|---|---|---|
-| Geometria da barra de navegação | Pill do botão, círculo do menu, painel de 16px | **Aresta viva.** Nada arredondado dentro do header: botão Apoie, menu sanfona, painel suspenso, ladrilhos e miniaturas do menu móvel | Pedido direto do cliente. A barra passa a ler como estrutura, e não como um controle flutuante sobre a foto |
-| Alcance do raio | Raio único em todo o site | **O resto do site continua arredondado.** A aresta viva é exclusiva do header | Sem isso a exceção vira regra e o site inteiro endurece |
-| Instagram | Só no rodapé e no menu móvel | **Também na barra**, como ícone com moldura, ao lado do botão Apoie | É onde o dia a dia das equipes é publicado; estava a dois cliques de distância |
+| Foto de capa | Cantos inferiores em 26px, 44px no monitor | **Base reta.** Hero da home, cabeçalho das páginas internas, capa do índice de modalidades e hero de equipe encostam na seção seguinte sem raio | Pedido direto do cliente. A foto ganha peso de faixa, e a junta em curva do miolo passa a ser o único lugar onde o corte é desenhado |
+| Controles | Pill do botão, círculo do menu, painel de 16px | **Sem mudança.** Botão, menu sanfona, painel suspenso e ladrilhos seguem o raio do design system | O reto vale para a foto, não para o que se clica |
+| Instagram | Só no rodapé e no menu móvel | **Também na barra**, ícone solto, sem moldura, ao lado do botão Apoie | É onde o dia a dia das equipes é publicado; estava a dois cliques de distância |
+| Grade de modalidades | Quatro colunas | **Duas colunas em faixa contida de 820px**, recorte 4:3 | Com duas equipes no ar, o card de largura cheia virava pôster |
 | Ordem da navegação | Home, Modalidades, O projeto, Apoie, Contato | **Home, O projeto, Modalidades, Transparência, Apoie, Contato** | Quem chega quer saber o que é o projeto antes de escolher equipe |
 | Transparência | Não existia | **Seção própria** com ficha da associação, documentos com estado declarado e subpágina de diretoria | Associação nova precisa mostrar CNPJ, estatuto e quem responde. Documento que ainda não existe aparece como pendência nomeada, nunca como link morto |
 | Equipes fora de atividade | Todas as quatro no ar | **`suspensa: true` em `lib/dados.ts`.** A equipe sai do menu, das grades e do mapa do site, e o registro fica preservado | Futsal masculino e vôlei masculino suspensos. Voltar ao ar é apagar uma linha |

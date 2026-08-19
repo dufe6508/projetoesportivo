@@ -16,7 +16,7 @@ export default function Modalidades() {
       {/* Header com foto em vez do bloco navy chapado: é a página que
           apresenta as equipes, começar por tipografia sozinha era o bloco
           mais vazio do site. */}
-      <header className="on-navy relative isolate flex h-[42svh] min-h-[280px] flex-col justify-end overflow-hidden rounded-b-[26px] bg-navy-950 md:h-[52svh] md:min-h-[400px] md:rounded-b-[44px]">
+      <header className="on-navy relative isolate flex h-[42svh] min-h-[280px] flex-col justify-end overflow-hidden bg-navy-950 md:h-[52svh] md:min-h-[400px]">
         <FotoCapa
           src="/fotos/elenco-volei-feminino.webp"
           movel="/fotos/elenco-volei-feminino-movel.webp"
@@ -45,10 +45,10 @@ export default function Modalidades() {
 
       <section className="u-sec bg-white">
         <div className="mx-auto max-w-[1320px] px-5 md:px-10">
-          <div className="grid grid-cols-2 gap-3 md:gap-5">
+          <div className="grid grid-cols-2 gap-3 md:max-w-[820px] md:gap-5">
             {modalidadesAtivas.map((m, i) => (
               <Reveal key={m.slug} delay={i * 0.05} className="h-full">
-                <CardModalidade m={m} nivel="h2" prioridade largo />
+                <CardModalidade m={m} nivel="h2" prioridade />
               </Reveal>
             ))}
           </div>

@@ -32,7 +32,7 @@ export function CabecalhoPagina({
 }) {
   return (
     <header
-      className="on-navy relative overflow-hidden rounded-b-[26px] bg-navy-900 md:rounded-b-[44px]"
+      className="on-navy relative overflow-hidden bg-navy-900"
     >
       {foto ? (
         <>

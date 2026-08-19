@@ -13,13 +13,10 @@ import type { Modalidade } from "@/lib/dados";
 export function CardModalidade({
   m,
   prioridade,
-  largo,
   nivel: Titulo = "h3",
 }: {
   m: Modalidade;
   prioridade?: boolean;
-  /** grade de duas colunas: o card fica largo e o recorte 4:3 ficaria alto demais */
-  largo?: boolean;
   /** na home o card vem depois de um h2, no índice ele É o h2 */
   nivel?: "h2" | "h3";
 }) {
@@ -31,16 +28,14 @@ export function CardModalidade({
                  ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1
                  hover:shadow-[0_18px_36px_-20px_rgb(0_21_47/0.45)]"
     >
-      <div
-        className={`relative aspect-4/5 overflow-hidden ${largo ? "sm:aspect-16/10" : "sm:aspect-4/3"}`}
-      >
+      <div className="relative aspect-4/5 overflow-hidden sm:aspect-4/3">
         {m.capa ? (
           <Image
             src={m.capa.src}
             alt=""
             fill
             priority={prioridade}
-            sizes="(max-width: 640px) 50vw, 50vw"
+            sizes="(max-width: 640px) 50vw, (max-width: 1100px) 50vw, 30vw"
             style={{ objectPosition: m.capa.posicao ?? "50% 50%" }}
             className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]
                        group-hover:scale-[1.05]"

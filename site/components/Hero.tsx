@@ -101,7 +101,7 @@ export function Hero() {
     <section
       ref={raiz}
       className="relative isolate h-[70svh] min-h-[440px] w-full overflow-hidden
-                 rounded-b-[26px] bg-navy-950 md:h-[90svh] md:min-h-[560px] md:rounded-b-[44px]"
+                 bg-navy-950 md:h-[90svh] md:min-h-[560px]"
       aria-roledescription="carrossel"
       aria-label="Destaques do projeto"
       onMouseEnter={() => setPausado(true)}

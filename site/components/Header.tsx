@@ -11,9 +11,8 @@ import { navegacao, contato, modalidadesAtivas as modalidades } from "@/lib/dado
 /**
  * Barra de navegação.
  *
- * Geometria reta: nesta barra nada é arredondado. O resto do site continua na
- * pílula do design system; aqui a aresta viva é o que separa a navegação da
- * página e faz a barra ler como estrutura, não como um controle flutuante.
+ * Botões e ícones seguem o raio do design system. O que virou reto foi a foto
+ * de capa embaixo da barra, não os controles.
  *
  * Dois tipos de submenu convivem: Modalidades abre o painel com a foto de
  * cada equipe, e os demais abrem uma lista curta de links. Por isso o estado
@@ -91,7 +90,7 @@ export function Header() {
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200]
-                   focus:bg-white focus:px-5 focus:py-3 focus:text-navy-900"
+                   focus:rounded-full focus:bg-white focus:px-5 focus:py-3 focus:text-navy-900"
       >
         Ir para o conteúdo
       </a>
@@ -186,7 +185,7 @@ export function Header() {
                     onMouseLeave={fecharSub}
                   >
                     <ul
-                      className="overflow-hidden border border-ink-200 bg-white p-1.5
+                      className="overflow-hidden rounded-[16px] border border-ink-200 bg-white p-1.5
                                  shadow-[0_20px_44px_-18px_rgb(0_14_34/0.45)]"
                     >
                       {item.submenu &&
@@ -194,14 +193,14 @@ export function Header() {
                           <li key={m.slug}>
                             <Link
                               href={`/modalidades/${m.slug}`}
-                              className="flex items-center gap-3 px-3 py-2.5 text-[0.875rem]
+                              className="flex items-center gap-3 rounded-[11px] px-3 py-2.5 text-[0.875rem]
                                          font-medium text-navy-800 transition-colors duration-150
                                          hover:bg-navy-50"
                             >
                               {/* miniatura do elenco no lugar do ícone de bola:
                                   o círculo com a bola era o mesmo desenho para
                                   duas equipes diferentes e não distinguia nada */}
-                              <span className="relative h-9 w-12 shrink-0 overflow-hidden bg-navy-800">
+                              <span className="relative h-9 w-12 shrink-0 overflow-hidden rounded-[7px] bg-navy-800">
                                 {m.capa ? (
                                   <Image
                                     src={m.capa.src}
@@ -231,7 +230,7 @@ export function Header() {
                         <li key={f.href}>
                           <Link
                             href={f.href}
-                            className="flex items-center justify-between gap-3 px-3 py-2.5
+                            className="flex items-center justify-between gap-3 rounded-[11px] px-3 py-2.5
                                        text-[0.875rem] font-medium text-navy-800 transition-colors
                                        duration-150 hover:bg-navy-50"
                           >
@@ -249,7 +248,7 @@ export function Header() {
                         <li className="mt-1 border-t border-ink-100 pt-1">
                           <Link
                             href={item.href}
-                            className="flex items-center justify-between px-3 py-2.5
+                            className="flex items-center justify-between rounded-[11px] px-3 py-2.5
                                        text-[0.8125rem] font-semibold text-navy-700 transition-colors
                                        duration-150 hover:bg-navy-50"
                           >
@@ -273,18 +272,17 @@ export function Header() {
               target="_blank"
               rel="noreferrer"
               aria-label={`Instagram do projeto, ${contato.instagramHandle}`}
-              className="hidden h-11 w-11 place-items-center border border-white/22 text-white/80
-                         transition-colors duration-150 hover:bg-white/10 hover:text-white
-                         lg:grid"
+              className="hidden h-11 w-11 place-items-center text-white/70 transition-colors
+                         duration-150 hover:text-white lg:grid"
             >
-              <Icone nome="InstagramLogo" className="h-[19px] w-[19px]" />
+              <Icone nome="InstagramLogo" className="h-[20px] w-[20px]" />
             </a>
 
             <span className="hidden sm:block">
               <BotaoLink
                 href="/apoie"
                 tom="claro"
-                className="!rounded-none px-5 py-3 text-[0.875rem]"
+                className="px-5 py-3 text-[0.875rem]"
               >
                 Apoie
               </BotaoLink>
@@ -295,13 +293,13 @@ export function Header() {
               onClick={() => setAberto((v) => !v)}
               aria-expanded={aberto}
               aria-controls="menu-movel"
-              className="flex h-12 w-12 flex-col items-center justify-center gap-[5px]
+              className="flex h-12 w-12 flex-col items-center justify-center gap-[5px] rounded-full
                          border border-white/22 transition-colors duration-150 hover:bg-white/10 lg:hidden"
             >
               <span className="sr-only">{aberto ? "Fechar menu" : "Abrir menu"}</span>
-              <span className={`block h-[1.5px] w-5 bg-white transition-transform duration-200 ease-out ${aberto ? "translate-y-[6.5px] rotate-45" : ""}`} />
-              <span className={`block h-[1.5px] w-5 bg-white transition-opacity duration-150 ${aberto ? "opacity-0" : ""}`} />
-              <span className={`block h-[1.5px] w-5 bg-white transition-transform duration-200 ease-out ${aberto ? "-translate-y-[6.5px] -rotate-45" : ""}`} />
+              <span className={`block h-[1.5px] w-5 rounded-full bg-white transition-transform duration-200 ease-out ${aberto ? "translate-y-[6.5px] rotate-45" : ""}`} />
+              <span className={`block h-[1.5px] w-5 rounded-full bg-white transition-opacity duration-150 ${aberto ? "opacity-0" : ""}`} />
+              <span className={`block h-[1.5px] w-5 rounded-full bg-white transition-transform duration-200 ease-out ${aberto ? "-translate-y-[6.5px] -rotate-45" : ""}`} />
             </button>
           </div>
         </div>
@@ -345,7 +343,7 @@ export function Header() {
                         }}
                       >
                         {item.rotulo}
-                        {ativo && <span aria-hidden className="ml-2.5 h-1 w-1 bg-gold-300" />}
+                        {ativo && <span aria-hidden className="ml-2.5 h-1 w-1 rounded-full bg-gold-300" />}
                       </Link>
 
                       {/* subitem recuado com fio à esquerda: no celular ele
@@ -393,7 +391,7 @@ export function Header() {
                     <Link
                       href={`/modalidades/${m.slug}`}
                       className="group relative flex aspect-16/10 items-end overflow-hidden
-                                 bg-navy-800 ring-1 ring-white/10
+                                 rounded-[11px] bg-navy-800 ring-1 ring-white/10
                                  transition-transform duration-200 active:scale-[0.98]"
                     >
                       {m.capa ? (
@@ -447,7 +445,7 @@ export function Header() {
               <Icone nome="InstagramLogo" className="h-[18px] w-[18px]" />
               Instagram
             </a>
-            <BotaoLink href="/apoie" tom="ouro" className="!rounded-none shrink-0">
+            <BotaoLink href="/apoie" tom="ouro" className="shrink-0">
               Apoie
             </BotaoLink>
           </div>

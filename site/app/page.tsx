@@ -32,10 +32,13 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <div className="mt-7 grid grid-cols-2 gap-3 md:mt-12 md:gap-5">
+          {/* Com duas equipes no ar, a grade não ocupa a faixa inteira: dois
+              cards de 650px viravam pôster e engoliam a dobra. A largura fica
+              contida e o card volta ao recorte 4:3 do resto do site. */}
+          <div className="mt-7 grid grid-cols-2 gap-3 md:mt-12 md:max-w-[820px] md:gap-5">
             {modalidadesAtivas.map((m, i) => (
               <Reveal key={m.slug} delay={i * 0.05} className="h-full">
-                <CardModalidade m={m} prioridade largo />
+                <CardModalidade m={m} prioridade />
               </Reveal>
             ))}
           </div>

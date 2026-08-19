@@ -17,8 +17,7 @@ export function HeroModalidade({ m }: { m: Modalidade }) {
   return (
     <header
       className="on-navy relative isolate flex h-[56svh] min-h-[360px] w-full flex-col justify-start
-                 overflow-hidden rounded-b-[26px] bg-navy-950 md:h-[64svh] md:min-h-[480px]
-                 md:rounded-b-[44px]"
+                 overflow-hidden bg-navy-950 md:h-[64svh] md:min-h-[480px]"
     >
       {m.elenco ? (
         <FotoCapa
