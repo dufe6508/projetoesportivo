@@ -53,14 +53,16 @@ const laminas: Lamina[] = [
     fotoMovel: "/fotos/elenco-futsal-feminino-movel.webp",
     posicao: "50% 68%",
     posicaoMobile: "50% 62%",
-    titulo: "Quatro equipes",
-    apoio: "Treino toda semana, o ano letivo inteiro.",
+    titulo: "Treino toda semana",
+    apoio: "O ano letivo inteiro, com comissão técnica.",
   },
   {
-    foto: "/fotos/elenco-futsal-masculino.webp",
-    fotoMovel: "/fotos/elenco-futsal-masculino-movel.webp",
-    posicao: "50% 86%",
-    posicaoMobile: "50% 78%",
+    // a quadra da escola, vazia: é o lugar que o patrocínio sustenta, e não
+    // depende de qual equipe está em atividade na temporada
+    foto: "/fotos/local-escola-claudio-brandao-amplo.webp",
+    fotoMovel: "/fotos/local-escola-claudio-brandao-amplo-movel.webp",
+    posicao: "50% 54%",
+    posicaoMobile: "50% 50%",
     titulo: "Seja patrocinador",
     apoio: "Material, uniforme e transporte.",
   },

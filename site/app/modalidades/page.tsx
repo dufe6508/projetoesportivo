@@ -3,11 +3,11 @@ import { CardModalidade } from "@/components/CardModalidade";
 import { FotoCapa } from "@/components/FotoCapa";
 import { Reveal } from "@/components/Motion";
 import { BotaoLink } from "@/components/Botao";
-import { modalidades } from "@/lib/dados";
+import { modalidadesAtivas } from "@/lib/dados";
 
 export const metadata: Metadata = {
   title: "Modalidades",
-  description: "Futsal e voleibol, masculino e feminino. Quatro equipes, todas gratuitas.",
+  description: "Futsal e vôlei para os alunos da escola. Duas equipes em atividade, gratuitas.",
 };
 
 export default function Modalidades() {
@@ -35,7 +35,7 @@ export default function Modalidades() {
         />
         <div className="relative mx-auto w-full max-w-[1320px] px-5 pb-8 md:px-10 md:pb-14">
           <Reveal>
-            <p className="u-eyebrow text-white/55">Quatro equipes</p>
+            <p className="u-eyebrow text-white/55">Duas equipes</p>
             <h1 className="u-display mt-2 max-w-[20ch] text-[clamp(1.75rem,6.6vw,4rem)] text-white md:mt-3">
               Escolha a sua
             </h1>
@@ -45,10 +45,10 @@ export default function Modalidades() {
 
       <section className="u-sec bg-white">
         <div className="mx-auto max-w-[1320px] px-5 md:px-10">
-          <div className="grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-4">
-            {modalidades.map((m, i) => (
+          <div className="grid grid-cols-2 gap-3 md:gap-5">
+            {modalidadesAtivas.map((m, i) => (
               <Reveal key={m.slug} delay={i * 0.05} className="h-full">
-                <CardModalidade m={m} nivel="h2" prioridade={i < 2} />
+                <CardModalidade m={m} nivel="h2" prioridade largo />
               </Reveal>
             ))}
           </div>

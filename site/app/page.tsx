@@ -7,7 +7,7 @@ import { Icone } from "@/components/Icone";
 import { BotaoLink, Acoes } from "@/components/Botao";
 import { Curva } from "@/components/Curva";
 import { Reveal, TextoScrub } from "@/components/Motion";
-import { modalidades, principios, galeria, locais } from "@/lib/dados";
+import { modalidadesAtivas, principios, galeria, locais } from "@/lib/dados";
 
 export default function Home() {
   return (
@@ -19,7 +19,7 @@ export default function Home() {
         <div className="mx-auto max-w-[1320px] px-5 md:px-10">
           <Reveal className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8">
             <div>
-              <p className="u-eyebrow text-ink-400">Quatro equipes</p>
+              <p className="u-eyebrow text-ink-400">Duas equipes</p>
               <h2
                 id="t-modalidades"
                 className="u-display mt-2.5 max-w-[16ch] text-[clamp(1.8rem,7vw,3.8rem)] text-navy-800 md:mt-4"
@@ -28,14 +28,14 @@ export default function Home() {
               </h2>
             </div>
             <p className="max-w-[38ch] text-[0.9375rem] leading-relaxed text-ink-500 md:text-[1.0625rem]">
-              Futsal e voleibol, para os alunos da escola, com turmas o ano letivo inteiro.
+              Futsal e voleibol para os alunos da escola, com turmas o ano letivo inteiro.
             </p>
           </Reveal>
 
-          <div className="mt-7 grid grid-cols-2 gap-3 md:mt-12 md:gap-5 lg:grid-cols-4">
-            {modalidades.map((m, i) => (
+          <div className="mt-7 grid grid-cols-2 gap-3 md:mt-12 md:gap-5">
+            {modalidadesAtivas.map((m, i) => (
               <Reveal key={m.slug} delay={i * 0.05} className="h-full">
-                <CardModalidade m={m} prioridade={i < 2} />
+                <CardModalidade m={m} prioridade largo />
               </Reveal>
             ))}
           </div>

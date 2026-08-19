@@ -8,6 +8,21 @@ Tokens implementáveis: [tokens.css](tokens.css)
 
 ---
 
+## Revisão 1.2 · 18/08/2026
+
+**Vence sobre a 1.1 e sobre o restante do documento no que ela toca.**
+
+| Item | Antes | Agora | Motivo |
+|---|---|---|---|
+| Geometria da barra de navegação | Pill do botão, círculo do menu, painel de 16px | **Aresta viva.** Nada arredondado dentro do header: botão Apoie, menu sanfona, painel suspenso, ladrilhos e miniaturas do menu móvel | Pedido direto do cliente. A barra passa a ler como estrutura, e não como um controle flutuante sobre a foto |
+| Alcance do raio | Raio único em todo o site | **O resto do site continua arredondado.** A aresta viva é exclusiva do header | Sem isso a exceção vira regra e o site inteiro endurece |
+| Instagram | Só no rodapé e no menu móvel | **Também na barra**, como ícone com moldura, ao lado do botão Apoie | É onde o dia a dia das equipes é publicado; estava a dois cliques de distância |
+| Ordem da navegação | Home, Modalidades, O projeto, Apoie, Contato | **Home, O projeto, Modalidades, Transparência, Apoie, Contato** | Quem chega quer saber o que é o projeto antes de escolher equipe |
+| Transparência | Não existia | **Seção própria** com ficha da associação, documentos com estado declarado e subpágina de diretoria | Associação nova precisa mostrar CNPJ, estatuto e quem responde. Documento que ainda não existe aparece como pendência nomeada, nunca como link morto |
+| Equipes fora de atividade | Todas as quatro no ar | **`suspensa: true` em `lib/dados.ts`.** A equipe sai do menu, das grades e do mapa do site, e o registro fica preservado | Futsal masculino e vôlei masculino suspensos. Voltar ao ar é apagar uma linha |
+
+---
+
 ## Revisão 1.1 · 15/08/2026
 
 **Esta seção vence sobre o restante do documento no que ela toca.** O que não aparece

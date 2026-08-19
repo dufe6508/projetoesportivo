@@ -66,7 +66,7 @@ export default function Sobre() {
             <div className="flex flex-col gap-4 text-[0.9375rem] leading-[1.75] text-ink-500 md:text-[1rem]">
               <p>
                 Um professor abriu o ginásio e assumiu o compromisso de estar lá toda semana. Hoje
-                são quatro equipes, com comissão técnica e calendário próprio.
+                são duas equipes em atividade, com comissão técnica e calendário próprio.
               </p>
               <p>
                 Em julho de 2026 a iniciativa ganhou personalidade jurídica com a criação da{" "}

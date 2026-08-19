@@ -9,26 +9,30 @@ import { HeroModalidade } from "@/components/HeroModalidade";
 import { Icone } from "@/components/Icone";
 import { Reveal } from "@/components/Motion";
 import { BotaoLink, Acoes } from "@/components/Botao";
-import { modalidades } from "@/lib/dados";
+import { modalidadesAtivas } from "@/lib/dados";
 
 type Params = { params: Promise<{ slug: string }> };
 
+/* Equipe suspensa não tem rota: sai do mapa do site inteiro, não fica como
+   página órfã que só o Google encontra. */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return modalidades.map((m) => ({ slug: m.slug }));
+  return modalidadesAtivas.map((m) => ({ slug: m.slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const m = modalidades.find((x) => x.slug === slug);
+  const m = modalidadesAtivas.find((x) => x.slug === slug);
   return m ? { title: m.nome, description: m.resumo } : {};
 }
 
 export default async function Pagina({ params }: Params) {
   const { slug } = await params;
-  const m = modalidades.find((x) => x.slug === slug);
+  const m = modalidadesAtivas.find((x) => x.slug === slug);
   if (!m) notFound();
 
-  const outras = modalidades.filter((x) => x.slug !== slug);
+  const outras = modalidadesAtivas.filter((x) => x.slug !== slug);
 
   return (
     <>
@@ -184,15 +188,22 @@ export default async function Pagina({ params }: Params) {
       )}
 
       {/* ---------- navegação entre equipes ----------
-           Cards horizontais: miniatura à esquerda, nome à direita. Cabem três
-           numa linha no monitor e empilham no celular sem deixar célula vazia,
-           que é o que uma grade de 2 colunas com 3 itens sempre deixa. */}
+           Cards horizontais: miniatura à esquerda, nome à direita. A grade
+           acompanha quantas equipes existem: com uma só, três colunas
+           deixariam dois terços da linha vazios. A seção some quando não há
+           outra equipe no ar. */}
+      {outras.length > 0 && (
       <section className="u-sec-tight bg-ink-25" aria-labelledby="t-outras">
         <div className="mx-auto max-w-[1320px] px-5 md:px-10">
           <h2 id="t-outras" className="u-eyebrow text-ink-400">
-            Outras equipes
+            {outras.length === 1 ? "A outra equipe" : "Outras equipes"}
           </h2>
-          <ul role="list" className="mt-4 grid list-none gap-3 p-0 md:mt-6 md:grid-cols-3 md:gap-4">
+          <ul
+            role="list"
+            className={`mt-4 grid list-none gap-3 p-0 md:mt-6 md:gap-4 ${
+              outras.length === 1 ? "md:max-w-[420px]" : "md:grid-cols-3"
+            }`}
+          >
             {outras.map((o) => (
               <li key={o.slug}>
                 <Link
@@ -241,6 +252,7 @@ export default async function Pagina({ params }: Params) {
           </ul>
         </div>
       </section>
+      )}
     </>
   );
 }

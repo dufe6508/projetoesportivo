@@ -48,6 +48,12 @@ export type Modalidade = {
   destaqueTitulo?: string;
   /** registros de competição, treino e bastidor daquela equipe */
   registros: Foto[];
+  /**
+   * Equipe fora de atividade no momento. Continua descrita aqui, com elenco e
+   * fotos, mas sai da navegação, das grades e do mapa do site. Voltar ao ar é
+   * apagar esta linha, não reconstruir o registro.
+   */
+  suspensa?: boolean;
 };
 
 export const modalidades: Modalidade[] = [
@@ -120,6 +126,7 @@ export const modalidades: Modalidade[] = [
     atletas: [],
     comissao: [],
     registros: [],
+    suspensa: true,
   },
   {
     slug: "volei-feminino",
@@ -212,8 +219,16 @@ export const modalidades: Modalidade[] = [
     atletas: [],
     comissao: [],
     registros: [],
+    suspensa: true,
   },
 ];
+
+/**
+ * As equipes que o site apresenta hoje. Toda grade, menu e rota de modalidade
+ * lê desta lista; `modalidades` continua sendo o registro completo, usado por
+ * quem precisa também das suspensas.
+ */
+export const modalidadesAtivas = modalidades.filter((m) => !m.suspensa);
 
 /* ------------------------------------------------------------------
    Elencos.
@@ -289,7 +304,7 @@ export const locais: Local[] = [
     nome: "Poliesportivo Vale do Jatobá",
     endereco: "Vale do Jatobá",
     bairro: "Belo Horizonte, MG",
-    modalidades: ["Vôlei Feminino", "Vôlei Masculino"],
+    modalidades: ["Vôlei Feminino"],
     descricao: "Ginásio coberto, quadra oficial e arquibancada.",
     foto: {
       src: "/fotos/local-poliesportivo-vale-do-jatoba.webp",
@@ -301,9 +316,13 @@ export const locais: Local[] = [
     nome: "Escola Estadual Professor Cláudio Brandão",
     endereco: "Av. Senador Levindo Coelho, 250",
     bairro: "Vale do Jatobá, Belo Horizonte, MG",
-    modalidades: ["Futsal Feminino", "Futsal Masculino"],
+    modalidades: ["Futsal Feminino"],
     descricao: "A quadra da escola, onde o projeto começou.",
-    foto: null,
+    foto: {
+      src: "/fotos/local-escola-claudio-brandao.webp",
+      alt: "Quadra coberta da Escola Estadual Professor Cláudio Brandão, com o nome da escola grafitado na parede do fundo",
+      posicao: "50% 46%",
+    },
   },
 ];
 
@@ -382,10 +401,92 @@ export const contato = {
   cnpj: "68.369.689/0001-60",
 };
 
+/* ------------------------------------------------------------------
+   Transparência.
+   A associação é nova e ainda não fechou exercício. O que existe entra aqui
+   com data; o que não existe aparece como pendência declarada, nunca como
+   número inventado ou linha vazia.
+   ------------------------------------------------------------------ */
+
+export type MembroDiretoria = {
+  nome: string;
+  cargo: string;
+  /** o que a pessoa responde na prática, em uma linha */
+  atribuicao?: string;
+  /** retrato 3:4; sem foto o card usa o bloco-marca */
+  foto?: string;
+};
+
+/**
+ * Diretoria eleita da associação.
+ * Lista vazia rende o estado de espera desenhado em /transparencia/diretoria.
+ */
+export const diretoria: MembroDiretoria[] = [];
+
+/** Vigência do mandato desta diretoria. */
+export const mandatoDiretoria = "Gestão 2026 a 2028";
+
+export const institucional = {
+  natureza: "Associação civil sem fins lucrativos",
+  fundacao: "Julho de 2026",
+  /** primeiro exercício ainda em curso; nada de balanço antes da hora */
+  exercicio: "2026",
+};
+
+export type Documento = {
+  nome: string;
+  descricao: string;
+  /** caminho em /public quando o arquivo já pode ser publicado */
+  arquivo?: string;
+};
+
+export const documentos: Documento[] = [
+  {
+    nome: "Estatuto social",
+    descricao: "Finalidade, estrutura de governança e regras de funcionamento da associação.",
+  },
+  {
+    nome: "Ata de fundação",
+    descricao: "Assembleia que criou a associação e elegeu a primeira diretoria.",
+  },
+  {
+    nome: "Cartão CNPJ",
+    descricao: "Inscrição na Receita Federal, com natureza jurídica e atividade registrada.",
+  },
+  {
+    nome: "Prestação de contas",
+    descricao: "Entradas, saídas e destino dos recursos do exercício, publicada ao fim de cada ano.",
+  },
+];
+
+/**
+ * Para onde vai o apoio recebido.
+ * Lido pela página de apoio e pela de transparência: a mesma promessa não
+ * pode existir em duas versões que divergem com o tempo.
+ */
+export const destinoRecursos = [
+  { item: "Material esportivo", nota: "Bolas, redes, cones e reposição de desgaste" },
+  { item: "Uniforme", nota: "Jogo e treino, para as equipes em atividade" },
+  { item: "Transporte", nota: "Deslocamento das equipes para festivais e amistosos" },
+  { item: "Estrutura de treino", nota: "Manutenção do que é usado toda semana" },
+];
+
 export const navegacao = [
   { href: "/", rotulo: "Home" },
-  { href: "/modalidades", rotulo: "Modalidades", submenu: true },
   { href: "/sobre", rotulo: "O projeto" },
+  { href: "/modalidades", rotulo: "Modalidades", submenu: true },
+  {
+    href: "/transparencia",
+    rotulo: "Transparência",
+    filhos: [{ href: "/transparencia/diretoria", rotulo: "Diretoria" }],
+  },
   { href: "/apoie", rotulo: "Apoie" },
   { href: "/contato", rotulo: "Contato" },
-] as { href: string; rotulo: string; submenu?: boolean }[];
+] as {
+  href: string;
+  rotulo: string;
+  /** abre o painel com as fotos das equipes */
+  submenu?: boolean;
+  /** submenu simples, de links */
+  filhos?: { href: string; rotulo: string }[];
+}[];

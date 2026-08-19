@@ -3,6 +3,7 @@ import { CabecalhoPagina } from "@/components/CabecalhoPagina";
 import { Curva } from "@/components/Curva";
 import { Reveal } from "@/components/Motion";
 import { BotaoLink } from "@/components/Botao";
+import { destinoRecursos as destino } from "@/lib/dados";
 
 export const metadata: Metadata = {
   title: "Apoie",
@@ -37,12 +38,6 @@ const formas = [
   },
 ];
 
-const destino = [
-  { item: "Material esportivo", nota: "Bolas, redes, cones e reposição de desgaste" },
-  { item: "Uniforme", nota: "Jogo e treino, para as quatro equipes" },
-  { item: "Transporte", nota: "Deslocamento das equipes para festivais e amistosos" },
-  { item: "Estrutura de treino", nota: "Manutenção do que é usado toda semana" },
-];
 
 export default function Apoie() {
   return (

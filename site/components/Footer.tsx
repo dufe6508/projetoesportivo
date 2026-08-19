@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Icone } from "./Icone";
-import { contato, navegacao, modalidades } from "@/lib/dados";
+import { contato, navegacao, modalidadesAtivas as modalidades } from "@/lib/dados";
 
 /**
  * Rodapé.
@@ -59,7 +59,7 @@ export function Footer() {
               Navegar
             </h2>
             <ul className="flex flex-wrap gap-x-5 gap-y-1 md:mt-3 md:flex-col md:gap-1">
-              {navegacao.map((i) => (
+              {navegacao.flatMap((i) => [
                 <li key={i.href}>
                   <Link
                     href={i.href}
@@ -68,8 +68,21 @@ export function Footer() {
                   >
                     {i.rotulo}
                   </Link>
-                </li>
-              ))}
+                </li>,
+                /* subpáginas entram na mesma lista: no rodapé, um segundo
+                   nível recuado só criaria hierarquia onde não há escolha */
+                ...(i.filhos ?? []).map((f) => (
+                  <li key={f.href}>
+                    <Link
+                      href={f.href}
+                      className="inline-flex min-h-[44px] items-center text-[0.8125rem]
+                                 transition-colors duration-150 hover:text-white md:min-h-[32px]"
+                    >
+                      {f.rotulo}
+                    </Link>
+                  </li>
+                )),
+              ])}
             </ul>
           </nav>
 

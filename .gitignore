@@ -16,6 +16,11 @@ build/
 # caminho é Git LFS, não o repositório comum.
 /fotos/
 
+# Originais avulsos que chegam fora do acervo. Ficam de fora do walk de
+# /fotos para nao deslocar os ids do manifesto em site/_fotos.mjs, e de fora
+# do repositorio pelo mesmo motivo que /fotos: sao PNG de varios MB.
+/originais/
+
 # capturas de trabalho
 /site/shot/
 
