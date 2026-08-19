@@ -4,7 +4,6 @@ import Link from "next/link";
 import { CabecalhoPagina } from "@/components/CabecalhoPagina";
 import { Icone } from "@/components/Icone";
 import { Reveal } from "@/components/Motion";
-import { BotaoLink, Acoes } from "@/components/Botao";
 import { contato, diretoria, mandatoDiretoria } from "@/lib/dados";
 
 export const metadata: Metadata = {
@@ -30,11 +29,11 @@ export default function Diretoria() {
           </h2>
 
           {vazia ? (
-            /* Estado de espera desenhado: enquanto a ata não é registrada, a
-               página diz o que falta e para onde ir, em vez de mostrar uma
-               grade vazia ou nomes provisórios. */
+            /* Estado de espera: uma linha e nada mais. Botao e explicação
+               longa faziam a ausência parecer conteúdo; o caminho para falar
+               com a coordenação já está no menu e no rodapé. */
             <Reveal>
-              <div className="relative overflow-hidden rounded-[22px] bg-navy-950 px-5 py-10 text-center md:px-10 md:py-16">
+              <div className="relative overflow-hidden rounded-[22px] bg-navy-950 px-5 py-12 text-center md:px-10 md:py-16">
                 <Image
                   src="/escudo.png"
                   alt=""
@@ -43,31 +42,20 @@ export default function Diretoria() {
                   className="pointer-events-none absolute -right-12 -top-10 w-[200px] opacity-[0.05]
                              md:-right-6 md:w-[300px]"
                 />
-                <div className="on-navy relative mx-auto max-w-[46ch]">
+                <div className="on-navy relative mx-auto max-w-[34ch]">
                   <span
                     aria-hidden
                     className="mx-auto grid h-12 w-12 place-items-center rounded-[14px] bg-white/10 text-white"
                   >
-                    <Icone nome="UsersThree" className="h-5 w-5" />
+                    <Icone nome="Relogio" className="h-5 w-5" />
                   </span>
                   <p className="u-eyebrow mt-5 text-white/50">{mandatoDiretoria}</p>
-                  <h3 className="u-titulo mt-2 text-[1.35rem] text-white md:text-[1.75rem]">
-                    A composição ainda não foi publicada
-                  </h3>
-                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-white/65">
-                    A associação foi criada em julho de 2026 e os nomes entram aqui assim que a ata
-                    de eleição estiver registrada, com cargo e responsabilidade de cada pessoa. Até
-                    lá, quem quiser falar com quem responde pelo projeto pode escrever para a
-                    coordenação.
+                  <p className="u-titulo mt-2 text-[1.25rem] text-white md:text-[1.5rem]">
+                    Em breve
                   </p>
-                  <Acoes className="mt-7 justify-center">
-                    <BotaoLink href="/contato" tom="claro">
-                      Falar com a coordenação
-                    </BotaoLink>
-                    <BotaoLink href="/transparencia" tom="contornoClaro">
-                      Voltar à transparência
-                    </BotaoLink>
-                  </Acoes>
+                  <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-white/55">
+                    Os nomes são publicados aqui assim que a ata de eleição for registrada.
+                  </p>
                 </div>
               </div>
             </Reveal>
