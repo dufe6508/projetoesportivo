@@ -11,6 +11,9 @@ import type { Pessoa } from "@/lib/dados";
  */
 export function CardPessoa({ p, prioridade }: { p: Pessoa; prioridade?: boolean }) {
   const ct = p.numero === "CT";
+  // "00" é o que a arte imprime em quem ainda não tem camisa numerada. Repetir
+  // dois zeros na legenda daria a entender que o número é esse.
+  const semNumero = p.numero === "00";
 
   return (
     <figure
@@ -22,7 +25,13 @@ export function CardPessoa({ p, prioridade }: { p: Pessoa; prioridade?: boolean 
       <div className="relative aspect-3/4 overflow-hidden bg-navy-50">
         <Image
           src={p.foto}
-          alt={`${p.nome}, ${ct ? (p.funcao ?? "comissão técnica") : `camisa ${p.numero}`}`}
+          alt={
+            ct
+              ? `${p.nome}, ${p.funcao ?? "comissão técnica"}`
+              : semNumero
+                ? `${p.nome}, atleta do elenco`
+                : `${p.nome}, camisa ${p.numero}`
+          }
           fill
           loading={prioridade ? "eager" : "lazy"}
           priority={prioridade}
@@ -50,9 +59,11 @@ export function CardPessoa({ p, prioridade }: { p: Pessoa; prioridade?: boolean 
             <span className="u-titulo min-w-0 text-[0.875rem] leading-tight text-navy-800">
               {p.nome}
             </span>
-            <span className="u-tabular shrink-0 text-[0.75rem] font-bold text-navy-600">
-              {p.numero}
-            </span>
+            {!semNumero && (
+              <span className="u-tabular shrink-0 text-[0.75rem] font-bold text-navy-600">
+                {p.numero}
+              </span>
+            )}
           </span>
         )}
       </figcaption>

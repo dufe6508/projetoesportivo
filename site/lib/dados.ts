@@ -58,77 +58,6 @@ export type Modalidade = {
 
 export const modalidades: Modalidade[] = [
   {
-    slug: "futsal-feminino",
-    nome: "Futsal Feminino",
-    naipe: "Feminino",
-    esporte: "Futsal",
-    resumo: "Fundamento, coletivo e leitura de jogo.",
-    descricao: [
-      "Treina em quadra coberta, com material próprio e comissão técnica acompanhando de perto.",
-      "A entrada passa por seleção. Quem não fica em uma temporada continua treinando e tenta na próxima.",
-    ],
-    elenco: {
-      src: "/fotos/elenco-futsal-feminino.webp",
-      movel: "/fotos/elenco-futsal-feminino-movel.webp",
-      alt: "Elenco completo do futsal feminino na quadra externa da escola",
-      posicao: "50% 50%",
-      posicaoMobile: "50% 62%",
-    },
-    capa: {
-      src: "/fotos/elenco-futsal-feminino.webp",
-      alt: "",
-      posicao: "50% 55%",
-    },
-    atletas: [],
-    comissao: [],
-    destaque: {
-      src: "/fotos/competicao-futsal-feminino-campeas-jebh.webp",
-      alt: "Equipe de futsal feminino campeã dos Jogos Escolares de Belo Horizonte de 2026",
-      posicao: "50% 42%",
-      posicaoMobile: "50% 40%",
-    },
-    destaqueTitulo: "Campeãs do JEBH 2026",
-    registros: [
-      {
-        src: "/fotos/futsal-feminino-equipe-ginasio.webp",
-        alt: "Equipe de futsal feminino reunida em quadra de ginásio antes da partida",
-        posicao: "50% 38%",
-      },
-      {
-        src: "/fotos/competicao-jebh-bandeira-escola.webp",
-        alt: "Atletas e professor com a bandeira da escola na arena dos Jogos Escolares",
-        posicao: "50% 28%",
-      },
-    ],
-  },
-  {
-    slug: "futsal-masculino",
-    nome: "Futsal Masculino",
-    naipe: "Masculino",
-    esporte: "Futsal",
-    resumo: "Posicionamento e disciplina ao longo da temporada.",
-    descricao: [
-      "Fundamento individual e organização coletiva, com treino fixo durante o ano letivo inteiro.",
-      "A frequência conta tanto quanto o desempenho. É o combinado que sustenta o grupo.",
-    ],
-    elenco: {
-      src: "/fotos/elenco-futsal-masculino.webp",
-      movel: "/fotos/elenco-futsal-masculino-movel.webp",
-      alt: "Elenco completo do futsal masculino diante de parede azul, com uniforme preto e dourado",
-      posicao: "50% 74%",
-      posicaoMobile: "50% 78%",
-    },
-    capa: {
-      src: "/fotos/elenco-futsal-masculino.webp",
-      alt: "",
-      posicao: "50% 78%",
-    },
-    atletas: [],
-    comissao: [],
-    registros: [],
-    suspensa: true,
-  },
-  {
     slug: "volei-feminino",
     nome: "Vôlei Feminino",
     naipe: "Feminino",
@@ -141,14 +70,14 @@ export const modalidades: Modalidade[] = [
     elenco: {
       src: "/fotos/elenco-volei-feminino.webp",
       movel: "/fotos/elenco-volei-feminino-movel.webp",
-      alt: "Elenco completo do vôlei feminino e a comissão técnica diante da rede no ginásio",
-      posicao: "50% 44%",
-      posicaoMobile: "50% 58%",
+      alt: "Elenco completo do vôlei feminino e a comissão técnica diante da rede, no ginásio do Vale do Jatobá",
+      posicao: "50% 58%",
+      posicaoMobile: "50% 50%",
     },
     capa: {
       src: "/fotos/elenco-volei-feminino.webp",
       alt: "",
-      posicao: "50% 48%",
+      posicao: "50% 60%",
     },
     atletas: [],
     comissao: [
@@ -205,6 +134,96 @@ export const modalidades: Modalidade[] = [
     ],
   },
   {
+    slug: "futsal-feminino",
+    nome: "Futsal Feminino",
+    naipe: "Feminino",
+    esporte: "Futsal",
+    resumo: "Fundamento, coletivo e leitura de jogo.",
+    descricao: [
+      "Treina em quadra coberta, com material próprio e comissão técnica acompanhando de perto.",
+      "A entrada passa por seleção. Quem não fica em uma temporada continua treinando e tenta na próxima.",
+    ],
+    elenco: {
+      src: "/fotos/elenco-futsal-feminino.webp",
+      movel: "/fotos/elenco-futsal-feminino-movel.webp",
+      alt: "Elenco completo do futsal feminino na quadra externa da escola",
+      posicao: "50% 50%",
+      posicaoMobile: "50% 62%",
+    },
+    capa: {
+      src: "/fotos/elenco-futsal-feminino.webp",
+      alt: "",
+      posicao: "50% 55%",
+    },
+    atletas: [],
+    comissao: [
+      {
+        nome: "Daiane Keren",
+        numero: "CT",
+        funcao: "Comissão técnica",
+        foto: "/fotos/comissao-tecnica-daiane-keren.webp",
+      },
+      {
+        nome: "Isaque Moura",
+        numero: "CT",
+        funcao: "Comissão técnica",
+        foto: "/fotos/comissao-tecnica-isaque-moura.webp",
+      },
+      {
+        nome: "Yasmin Oliveira",
+        numero: "CT",
+        funcao: "Comissão técnica",
+        foto: "/fotos/comissao-tecnica-yasmin-oliveira.webp",
+      },
+    ],
+    destaque: {
+      src: "/fotos/competicao-futsal-feminino-campeas-jebh.webp",
+      alt: "Equipe de futsal feminino campeã dos Jogos Escolares de Belo Horizonte de 2026",
+      posicao: "50% 42%",
+      posicaoMobile: "50% 40%",
+    },
+    destaqueTitulo: "Campeãs do JEBH 2026",
+    registros: [
+      {
+        src: "/fotos/futsal-feminino-equipe-ginasio.webp",
+        alt: "Equipe de futsal feminino reunida em quadra de ginásio antes da partida",
+        posicao: "50% 38%",
+      },
+      {
+        src: "/fotos/competicao-jebh-bandeira-escola.webp",
+        alt: "Atletas e professor com a bandeira da escola na arena dos Jogos Escolares",
+        posicao: "50% 28%",
+      },
+    ],
+  },
+  {
+    slug: "futsal-masculino",
+    nome: "Futsal Masculino",
+    naipe: "Masculino",
+    esporte: "Futsal",
+    resumo: "Posicionamento e disciplina ao longo da temporada.",
+    descricao: [
+      "Fundamento individual e organização coletiva, com treino fixo durante o ano letivo inteiro.",
+      "A frequência conta tanto quanto o desempenho. É o combinado que sustenta o grupo.",
+    ],
+    elenco: {
+      src: "/fotos/elenco-futsal-masculino.webp",
+      movel: "/fotos/elenco-futsal-masculino-movel.webp",
+      alt: "Elenco completo do futsal masculino diante de parede azul, com uniforme preto e dourado",
+      posicao: "50% 74%",
+      posicaoMobile: "50% 78%",
+    },
+    capa: {
+      src: "/fotos/elenco-futsal-masculino.webp",
+      alt: "",
+      posicao: "50% 78%",
+    },
+    atletas: [],
+    comissao: [],
+    registros: [],
+    suspensa: true,
+  },
+  {
     slug: "volei-masculino",
     nome: "Vôlei Masculino",
     naipe: "Masculino",
@@ -236,49 +255,67 @@ export const modalidadesAtivas = modalidades.filter((m) => !m.suspensa);
    são listas longas e mudam a cada temporada.
    ------------------------------------------------------------------ */
 
-/** futsal feminino, ordenado por número de camisa */
+/**
+ * Elencos, na ordem em que as equipes foram apresentadas no Instagram.
+ *
+ * Não é ordem de número de camisa: é a sequência dos cards publicados no
+ * perfil, lida como a grade é lida, da apresentação da equipe até a comissão
+ * técnica. Quem ainda não fez a foto tem card de silhueta e número "00", que
+ * o site trata como "sem número definido" em vez de imprimir dois zeros.
+ */
 const futsalFeminino: Pessoa[] = [
-  { nome: "Raiane Fernandes", numero: "3", foto: "/fotos/futsal-feminino-atleta-raiane-fernandes.webp" },
-  { nome: "Tainá Carvalho", numero: "5", foto: "/fotos/futsal-feminino-atleta-taina-carvalho.webp" },
+  { nome: "Anna Gonçalves", numero: "12", foto: "/fotos/futsal-feminino-atleta-anna-goncalves.webp" },
   { nome: "Isabelle Siqueira", numero: "7", foto: "/fotos/futsal-feminino-atleta-isabelle-siqueira.webp" },
   { nome: "Alice Catalanio", numero: "8", foto: "/fotos/futsal-feminino-atleta-alice-catalanio.webp" },
-  { nome: "Laryssa Sousa", numero: "8", foto: "/fotos/futsal-feminino-atleta-laryssa-sousa.webp" },
   { nome: "Fernanda Campos", numero: "9", foto: "/fotos/futsal-feminino-atleta-fernanda-campos.webp" },
-  { nome: "Emanuelle Silva", numero: "11", foto: "/fotos/futsal-feminino-atleta-emanuelle-silva.webp" },
-  { nome: "Anna Gonçalves", numero: "12", foto: "/fotos/futsal-feminino-atleta-anna-goncalves.webp" },
   { nome: "Samara Schuina", numero: "15", foto: "/fotos/futsal-feminino-atleta-samara-schuina.webp" },
-  { nome: "Gabriela Silva", numero: "18", foto: "/fotos/futsal-feminino-atleta-gabriela-silva.webp" },
+  { nome: "Tainá Carvalho", numero: "5", foto: "/fotos/futsal-feminino-atleta-taina-carvalho.webp" },
+  { nome: "Laryssa Sousa", numero: "8", foto: "/fotos/futsal-feminino-atleta-laryssa-sousa.webp" },
   { nome: "Thaís Ferreira", numero: "20", foto: "/fotos/futsal-feminino-atleta-thais-ferreira.webp" },
+  { nome: "Gabriela Silva", numero: "18", foto: "/fotos/futsal-feminino-atleta-gabriela-silva.webp" },
+  { nome: "Raiane Fernandes", numero: "3", foto: "/fotos/futsal-feminino-atleta-raiane-fernandes.webp" },
+  { nome: "Emanuelle Silva", numero: "11", foto: "/fotos/futsal-feminino-atleta-emanuelle-silva.webp" },
+  { nome: "Ana Cassiano", numero: "1", foto: "/fotos/futsal-feminino-atleta-ana-cassiano.webp" },
+  { nome: "Marcely Mello", numero: "00", foto: "/fotos/futsal-feminino-atleta-marcely-mello.webp" },
+  { nome: "Mariany Mello", numero: "00", foto: "/fotos/futsal-feminino-atleta-mariany-mello.webp" },
+  { nome: "Ester Gonçalves", numero: "61", foto: "/fotos/futsal-feminino-atleta-ester-goncalves.webp" },
+  { nome: "Vitória Gonçalves", numero: "00", foto: "/fotos/futsal-feminino-atleta-vitoria-goncalves.webp" },
+  { nome: "Laura Suriani", numero: "00", foto: "/fotos/futsal-feminino-atleta-laura-suriani.webp" },
+  { nome: "Ana Beatriz", numero: "00", foto: "/fotos/futsal-feminino-atleta-ana-beatriz.webp" },
+  { nome: "Nicolly Santos", numero: "00", foto: "/fotos/futsal-feminino-atleta-nicolly-santos.webp" },
 ];
 
 const voleiFeminino: Pessoa[] = [
-  { nome: "Marcelle Aguilar", numero: "1", foto: "/fotos/volei-feminino-atleta-marcelle-aguilar.webp" },
-  { nome: "Nicolle Souza", numero: "3", foto: "/fotos/volei-feminino-atleta-nicolle-souza.webp" },
-  { nome: "Maria Eduarda", numero: "4", foto: "/fotos/volei-feminino-atleta-maria-eduarda.webp" },
-  { nome: "Julia Vilela", numero: "6", foto: "/fotos/volei-feminino-atleta-julia-vilela.webp" },
-  { nome: "Iza Alves", numero: "8", foto: "/fotos/volei-feminino-atleta-iza-alves.webp" },
-  { nome: "Eduarda Carvalho", numero: "9", foto: "/fotos/volei-feminino-atleta-eduarda-carvalho.webp" },
+  { nome: "Giovanna Monteiro", numero: "12", foto: "/fotos/volei-feminino-atleta-giovanna-monteiro.webp" },
+  { nome: "Sibele Santos", numero: "26", foto: "/fotos/volei-feminino-atleta-sibele-santos.webp" },
   { nome: "Ana Cassiano", numero: "10", foto: "/fotos/volei-feminino-atleta-ana-cassiano.webp" },
   { nome: "Letícia Campêlo", numero: "11", foto: "/fotos/volei-feminino-atleta-leticia-campelo.webp" },
-  { nome: "Giovanna Monteiro", numero: "12", foto: "/fotos/volei-feminino-atleta-giovanna-monteiro.webp" },
-  { nome: "Maria Souza", numero: "13", foto: "/fotos/volei-feminino-atleta-maria-souza.webp" },
   { nome: "Gabriela Victória", numero: "14", foto: "/fotos/volei-feminino-atleta-gabriela-victoria.webp" },
-  { nome: "Isabella Borges", numero: "15", foto: "/fotos/volei-feminino-atleta-isabella-borges.webp" },
-  { nome: "Alana Silva", numero: "16", foto: "/fotos/volei-feminino-atleta-alana-silva.webp" },
-  { nome: "Yasmim Santos", numero: "16", foto: "/fotos/volei-feminino-atleta-yasmim-santos.webp" },
+  { nome: "Eduarda Carvalho", numero: "9", foto: "/fotos/volei-feminino-atleta-eduarda-carvalho.webp" },
+  { nome: "Laura Carvalho", numero: "23", foto: "/fotos/volei-feminino-atleta-laura-carvalho.webp" },
+  { nome: "Julia Vilela", numero: "6", foto: "/fotos/volei-feminino-atleta-julia-vilela.webp" },
   { nome: "Yasmin Batista", numero: "17", foto: "/fotos/volei-feminino-atleta-yasmin-batista.webp" },
-  { nome: "Nathaly Izidório", numero: "18", foto: "/fotos/volei-feminino-atleta-nathaly-izidorio.webp" },
-  { nome: "Kelly Silva", numero: "19", foto: "/fotos/volei-feminino-atleta-kelly-silva.webp" },
   { nome: "Lara Karolyne", numero: "20", foto: "/fotos/volei-feminino-atleta-lara-karolyne.webp" },
+  { nome: "Isabella Borges", numero: "15", foto: "/fotos/volei-feminino-atleta-isabella-borges.webp" },
+  { nome: "Mirella Melo", numero: "22", foto: "/fotos/volei-feminino-atleta-mirella-melo.webp" },
+  { nome: "Flávia Silva", numero: "27", foto: "/fotos/volei-feminino-atleta-flavia-silva.webp" },
+  { nome: "Maria Eduarda", numero: "4", foto: "/fotos/volei-feminino-atleta-maria-eduarda.webp" },
+  { nome: "Sophia Gomes", numero: "25", foto: "/fotos/volei-feminino-atleta-sophia-gomes.webp" },
+  { nome: "Kelly Silva", numero: "19", foto: "/fotos/volei-feminino-atleta-kelly-silva.webp" },
+  { nome: "Marcelle Aguilar", numero: "1", foto: "/fotos/volei-feminino-atleta-marcelle-aguilar.webp" },
+  { nome: "Alana Silva", numero: "16", foto: "/fotos/volei-feminino-atleta-alana-silva.webp" },
+  { nome: "Maria Souza", numero: "13", foto: "/fotos/volei-feminino-atleta-maria-souza.webp" },
   { nome: "Vitória Caitano", numero: "21", foto: "/fotos/volei-feminino-atleta-vitoria-caitano.webp" },
   { nome: "Bruna Gomes", numero: "22", foto: "/fotos/volei-feminino-atleta-bruna-gomes.webp" },
-  { nome: "Mirella Melo", numero: "22", foto: "/fotos/volei-feminino-atleta-mirella-melo.webp" },
-  { nome: "Laura Carvalho", numero: "23", foto: "/fotos/volei-feminino-atleta-laura-carvalho.webp" },
-  { nome: "Sophia Gomes", numero: "25", foto: "/fotos/volei-feminino-atleta-sophia-gomes.webp" },
-  { nome: "Sibele Santos", numero: "26", foto: "/fotos/volei-feminino-atleta-sibele-santos.webp" },
-  { nome: "Flávia Silva", numero: "27", foto: "/fotos/volei-feminino-atleta-flavia-silva.webp" },
+  { nome: "Yasmim Santos", numero: "16", foto: "/fotos/volei-feminino-atleta-yasmim-santos.webp" },
+  { nome: "Iza Alves", numero: "8", foto: "/fotos/volei-feminino-atleta-iza-alves.webp" },
   { nome: "Maria Clara", numero: "28", foto: "/fotos/volei-feminino-atleta-maria-clara.webp" },
+  { nome: "Nathaly Izidório", numero: "18", foto: "/fotos/volei-feminino-atleta-nathaly-izidorio.webp" },
   { nome: "Gabriele Ferreira", numero: "43", foto: "/fotos/volei-feminino-atleta-gabriele-ferreira.webp" },
+  { nome: "Nicolle Souza", numero: "3", foto: "/fotos/volei-feminino-atleta-nicolle-souza.webp" },
+  { nome: "Ana Prates", numero: "00", foto: "/fotos/volei-feminino-atleta-ana-prates.webp" },
+  { nome: "Maria Sophia", numero: "00", foto: "/fotos/volei-feminino-atleta-maria-sophia.webp" },
+  { nome: "Lara Souza", numero: "00", foto: "/fotos/volei-feminino-atleta-lara-souza.webp" },
 ];
 
 modalidades.find((m) => m.slug === "futsal-feminino")!.atletas = futsalFeminino;
@@ -388,6 +425,113 @@ export const galeria: Foto[] = [
   },
 ];
 
+/* ------------------------------------------------------------------
+   Títulos.
+
+   Uma competição é uma marca de terceiro: entra pelo escudo oficial, nunca
+   redesenhada. Cada uma tem PNG (a versão em cor, que a interface usa) e SVG
+   (o traço, para impresso e para quem pedir o arquivo aberto).
+
+   O escudo é decorativo aqui: quem lê por leitor de tela recebe a linha de
+   texto completa do card, não o nome da competição duas vezes.
+   ------------------------------------------------------------------ */
+
+export type Competicao = {
+  sigla: string;
+  nome: string;
+  ambito: string;
+  logo: string;
+  vetor: string;
+  /**
+   * Fundo que o escudo exige. O do JEBH é branco sobre transparente e some
+   * em ladrilho claro; os demais são coloridos sobre transparente e somem em
+   * ladrilho escuro. É informação da marca, não preferência de layout.
+   */
+  fundo: "claro" | "escuro";
+};
+
+export const competicoes = {
+  jime: {
+    sigla: "JIME",
+    nome: "Jogos Intercolegiais Metropolitanos",
+    ambito: "Região metropolitana de Belo Horizonte",
+    logo: "/competicoes/jime.png",
+    vetor: "/competicoes/jime.svg",
+    fundo: "claro",
+  },
+  jebh: {
+    sigla: "JEBH",
+    nome: "Jogos Escolares de Belo Horizonte",
+    ambito: "Municipal",
+    logo: "/competicoes/jebh.png",
+    vetor: "/competicoes/jebh.svg",
+    fundo: "escuro",
+  },
+  jemg: {
+    sigla: "JEMG",
+    nome: "Jogos Escolares de Minas Gerais",
+    ambito: "Estadual",
+    logo: "/competicoes/jemg.png",
+    vetor: "/competicoes/jemg.svg",
+    fundo: "claro",
+  },
+} satisfies Record<string, Competicao>;
+
+export type Titulo = {
+  /** equipe que conquistou, na mesma grafia das modalidades */
+  equipe: string;
+  /** rota da modalidade, para o card levar a algum lugar */
+  slug: string;
+  competicao: keyof typeof competicoes;
+  /** o resultado em uma expressão: "Tricampeãs", "7º lugar" */
+  conquista: string;
+  /** anos em que veio; vazio quando a data ainda não foi confirmada */
+  anos: string[];
+  /** conquista de título, o que distingue um campeonato de uma colocação */
+  campeao: boolean;
+};
+
+/** Vôlei primeiro, como em toda listagem do site. */
+export const titulos: Titulo[] = [
+  {
+    equipe: "Vôlei Feminino",
+    slug: "volei-feminino",
+    competicao: "jime",
+    conquista: "Bicampeãs",
+    anos: ["2023", "2025"],
+    campeao: true,
+  },
+  {
+    equipe: "Futsal Feminino",
+    slug: "futsal-feminino",
+    competicao: "jime",
+    conquista: "Tricampeãs",
+    anos: ["2023", "2024", "2025"],
+    campeao: true,
+  },
+  {
+    equipe: "Futsal Feminino",
+    slug: "futsal-feminino",
+    competicao: "jebh",
+    conquista: "Campeãs",
+    anos: ["2026"],
+    campeao: true,
+  },
+  {
+    equipe: "Futsal Feminino",
+    slug: "futsal-feminino",
+    competicao: "jemg",
+    conquista: "7º lugar",
+    anos: [],
+    campeao: false,
+  },
+];
+
+/** Equipes na ordem do site, cada uma com os títulos que já tem. */
+export const titulosPorEquipe = modalidadesAtivas
+  .map((m) => ({ modalidade: m, lista: titulos.filter((t) => t.slug === m.slug) }))
+  .filter((g) => g.lista.length > 0);
+
 export const contato = {
   endereco: "Av. Senador Levindo Coelho, 250",
   bairro: "Vale do Jatobá, Belo Horizonte, MG",
@@ -399,6 +543,35 @@ export const contato = {
   instagramHandle: "@claudiobrandaoprojetoesportivo",
   razaoSocial: "Associação Esportiva Escola da Bola",
   cnpj: "68.369.689/0001-60",
+};
+
+/* ------------------------------------------------------------------
+   Como o apoio chega.
+
+   O payload PIX é o BR Code da associação, copiado do aplicativo do banco.
+   Não é montado em código: qualquer caractere fora do lugar quebra o CRC no
+   fim da linha e o pagamento é recusado na leitura. O QR correspondente vive
+   em /pix-qr.svg, gerado desta mesma string por site/_extras.mjs.
+   ------------------------------------------------------------------ */
+
+export const pix = {
+  chave: contato.cnpj,
+  tipoChave: "CNPJ",
+  favorecido: "ASSOCIACAO ESPORTIVA ESCOLA DA BOLA",
+  cidade: "Belo Horizonte, MG",
+  qr: "/pix-qr.svg",
+  /** BR Code, valor em aberto: quem paga escolhe quanto */
+  payload:
+    "00020126360014br.gov.bcb.pix0114683696890001605204000053039865802BR5925ASSOCIACAO ESPORTIVA ESCO6014BELO HORIZONTE6226052261lmzvo2Ei7GGf7iefYJKv63046885",
+};
+
+export const conta = {
+  banco: "Cora SCD",
+  codigoBanco: "403",
+  titular: contato.razaoSocial,
+  agencia: "0001",
+  conta: "7567099-4",
+  cnpj: contato.cnpj,
 };
 
 /* ------------------------------------------------------------------
@@ -475,6 +648,7 @@ export const navegacao = [
   { href: "/", rotulo: "Home" },
   { href: "/sobre", rotulo: "O projeto" },
   { href: "/modalidades", rotulo: "Modalidades", submenu: true },
+  { href: "/titulos", rotulo: "Títulos" },
   {
     href: "/transparencia",
     rotulo: "Transparência",

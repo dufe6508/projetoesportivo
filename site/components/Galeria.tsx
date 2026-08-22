@@ -6,42 +6,30 @@ import { Icone } from "./Icone";
 import type { Foto } from "@/lib/dados";
 
 /**
- * Uma foto de abertura em largura cheia e o resto numa fita elástica.
+ * Grade de fotos do mesmo tamanho, com ampliação no toque.
  *
- * O mosaico anterior era um grid fixo com o primeiro item ocupando 2x2. Com
- * qualquer contagem ímpar sobrava uma célula vazia, e era o buraco que se via
- * na página. Aqui as miniaturas são itens flex que crescem para preencher a
- * linha, então nenhuma contagem deixa vão: três viram três, duas viram duas
- * mais largas, cinco quebram sozinhas.
+ * A versão anterior dava o dobro de largura aos primeiros itens para fechar a
+ * linha. Fechava, mas criava uma hierarquia que a galeria não tem: nenhuma
+ * foto ali vale mais que a vizinha, e a diferença de tamanho lia como erro de
+ * montagem. Agora todo ladrilho tem a mesma proporção e a mesma área; quem se
+ * ajusta é o número de colunas, escolhido para a última linha não ficar coxa.
  *
  * O modal é <dialog> nativo: foco preso, Esc e backdrop vêm do navegador.
  */
-/**
- * Quantas colunas o item ocupa para a linha fechar sem célula vazia.
- *
- * A grade tem 2 colunas no celular e 4 no monitor. Em vez de deixar buraco
- * quando a contagem não é múltipla, os primeiros itens ganham o dobro de
- * largura, o que fecha a linha e ainda cria hierarquia.
- */
-function vao(total: number, i: number) {
-  const movel = total % 2 === 1 && i === 0 ? 2 : 1;
-  const resto = total % 4;
-  let mesa = 1;
-  if (resto === 2) mesa = i < 2 ? 2 : 1;
-  else if (resto !== 0) mesa = i === 0 ? 2 : 1;
-  return { movel, mesa };
+
+/** Colunas no monitor: a primeira divisão exata entre 4, 3 e 2. */
+function colunas(total: number) {
+  for (const n of [4, 3, 2]) if (total % n === 0) return n;
+  return total > 4 ? 4 : total;
 }
 
-export function Galeria({
-  fotos,
-  rotulo,
-  /** primeira foto em largura cheia acima da grade */
-  abertura = false,
-}: {
-  fotos: Foto[];
-  rotulo: string;
-  abertura?: boolean;
-}) {
+const grades: Record<number, string> = {
+  2: "md:grid-cols-2",
+  3: "md:grid-cols-3",
+  4: "md:grid-cols-4",
+};
+
+export function Galeria({ fotos, rotulo }: { fotos: Foto[]; rotulo: string }) {
   const [aberta, setAberta] = useState<number | null>(null);
   const dialogo = useRef<HTMLDialogElement>(null);
   const gatilhos = useRef<(HTMLButtonElement | null)[]>([]);
@@ -80,9 +68,7 @@ export function Galeria({
   }, [aberta, andar]);
 
   const atual = aberta === null ? null : fotos[aberta];
-  const destaque = abertura ? fotos[0] : null;
-  const grade = abertura ? fotos.slice(1) : fotos;
-  const deslocamento = abertura ? 1 : 0;
+  const cols = colunas(fotos.length);
 
   const botao =
     "group relative block w-full overflow-hidden rounded-[14px] bg-navy-900 " +
@@ -95,81 +81,38 @@ export function Galeria({
 
   return (
     <>
-      <div className="flex flex-col gap-3 md:gap-4">
-        {abertura && destaque && (
-          <button
-            type="button"
-            ref={refBotao(0)}
-            onClick={() => abrir(0)}
-            aria-label={`Ampliar: ${destaque.alt}`}
-            className={botao}
-          >
-            {/* no monitor a proporção fecha: 16:9 em 1320px de largura dava
-                740px de altura, mais que a dobra inteira para uma foto só */}
-            <span className="block aspect-4/3 sm:aspect-16/9 lg:aspect-[2.6/1]">
-              <Image
-                src={destaque.src}
-                alt={destaque.alt}
-                fill
-                loading="lazy"
-                sizes="(max-width: 1320px) 100vw, 1320px"
-                style={{ objectPosition: destaque.posicao ?? "50% 50%" }}
-                className="object-cover transition-transform duration-[700ms]
-                           ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.04]"
-              />
-            </span>
-          </button>
-        )}
-
-        {grade.length > 0 && (
-          <ul
-            role="list"
-            aria-label={rotulo}
-            className="grid list-none grid-cols-2 gap-3 p-0 md:grid-cols-4 md:gap-4"
-          >
-            {grade.map((f, i) => {
-              const v = vao(grade.length, i);
-              const largo = v.movel === 2;
-              return (
-                <li
-                  key={f.src}
-                  className={`${largo ? "col-span-2" : ""} ${
-                    v.mesa === 2 ? "md:col-span-2" : "md:col-span-1"
-                  }`}
-                >
-                  <button
-                    type="button"
-                    ref={refBotao(i + deslocamento)}
-                    onClick={() => abrir(i + deslocamento)}
-                    aria-label={`Ampliar: ${f.alt}`}
-                    className={botao}
-                  >
-                    {/* proporção, não altura fixa: a faixa de 136px de altura
-                        em largura cheia cortava a cabeça de todo mundo, porque
-                        as fotos de origem são retrato */}
-                    <span
-                      className={`block ${largo ? "aspect-16/10" : "aspect-4/3"} ${
-                        v.mesa === 2 ? "md:aspect-16/10" : "md:aspect-4/3"
-                      }`}
-                    >
-                      <Image
-                        src={f.src}
-                        alt={f.alt}
-                        fill
-                        loading="lazy"
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                        style={{ objectPosition: f.posicao ?? "50% 50%" }}
-                        className="object-cover transition-transform duration-[700ms]
-                                   ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.06]"
-                      />
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div>
+      <ul
+        role="list"
+        aria-label={rotulo}
+        className={`grid list-none grid-cols-2 gap-3 p-0 md:gap-4 ${grades[cols] ?? "md:grid-cols-4"}`}
+      >
+        {fotos.map((f, i) => (
+          <li key={f.src}>
+            <button
+              type="button"
+              ref={refBotao(i)}
+              onClick={() => abrir(i)}
+              aria-label={`Ampliar: ${f.alt}`}
+              className={botao}
+            >
+              {/* proporção, não altura fixa: a faixa de altura fixa cortava a
+                  cabeça de todo mundo, porque as fotos de origem são retrato */}
+              <span className="block aspect-4/3">
+                <Image
+                  src={f.src}
+                  alt={f.alt}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  style={{ objectPosition: f.posicao ?? "50% 50%" }}
+                  className="object-cover transition-transform duration-[700ms]
+                             ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.06]"
+                />
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
 
       <dialog
         ref={dialogo}

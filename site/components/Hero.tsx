@@ -30,9 +30,9 @@ type Lamina = {
 };
 
 /**
- * As três lâminas são os três elencos completos do acervo. O hero é o único
- * lugar da home onde eles aparecem: nas páginas de modalidade cada um volta
- * com outra composição, e nas demais seções entram fotos de rotina.
+ * Duas lâminas, os dois elencos em atividade. A foto da quadra vazia saiu:
+ * era a terceira parada de um giro que ninguém espera até o fim, e dizia
+ * menos sobre o projeto do que qualquer elenco diz.
  */
 /**
  * `posicao` tem duas leituras porque o recorte muda de natureza: no celular a
@@ -43,26 +43,18 @@ const laminas: Lamina[] = [
   {
     foto: "/fotos/elenco-volei-feminino.webp",
     fotoMovel: "/fotos/elenco-volei-feminino-movel.webp",
-    posicao: "50% 62%",
-    posicaoMobile: "50% 58%",
+    posicao: "50% 58%",
+    posicaoMobile: "50% 50%",
     titulo: "Esporte que transforma",
     apoio: "Futsal e vôlei no Vale do Jatobá.",
   },
   {
+    // o convite ao patrocínio entra sobre o elenco do futsal: quem sustenta o
+    // material, o uniforme e o transporte sustenta um grupo, não uma quadra
     foto: "/fotos/elenco-futsal-feminino.webp",
     fotoMovel: "/fotos/elenco-futsal-feminino-movel.webp",
     posicao: "50% 68%",
     posicaoMobile: "50% 62%",
-    titulo: "Treino toda semana",
-    apoio: "O ano letivo inteiro, com comissão técnica.",
-  },
-  {
-    // a quadra da escola, vazia: é o lugar que o patrocínio sustenta, e não
-    // depende de qual equipe está em atividade na temporada
-    foto: "/fotos/local-escola-claudio-brandao-amplo.webp",
-    fotoMovel: "/fotos/local-escola-claudio-brandao-amplo-movel.webp",
-    posicao: "50% 54%",
-    posicaoMobile: "50% 50%",
     titulo: "Seja patrocinador",
     apoio: "Material, uniforme e transporte.",
   },

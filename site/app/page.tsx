@@ -6,8 +6,46 @@ import { Galeria } from "@/components/Galeria";
 import { Icone } from "@/components/Icone";
 import { BotaoLink, Acoes } from "@/components/Botao";
 import { Curva } from "@/components/Curva";
+import { QuadroTitulos } from "@/components/QuadroTitulos";
 import { Reveal, TextoScrub } from "@/components/Motion";
-import { modalidadesAtivas, principios, galeria, locais } from "@/lib/dados";
+import { modalidadesAtivas, principios, galeria, locais, titulos } from "@/lib/dados";
+
+/** Um título de três anos conta três vezes: são três temporadas ganhas. */
+const totalTitulos = titulos.reduce((n, t) => n + t.anos.length, 0);
+const temporadas = new Set(titulos.flatMap((t) => t.anos)).size;
+
+/**
+ * A sequência de origem. Fica aqui, e não em dados.ts, porque é a composição
+ * de uma seção específica: trocar uma foto é decisão de layout desta página,
+ * não do acervo. A ordem é cronológica e a legenda diz a etapa, não o que
+ * aparece na imagem, que é o que o alt já faz.
+ */
+const origem = [
+  {
+    src: "/fotos/local-escola-claudio-brandao.webp",
+    alt: "Quadra coberta da Escola Estadual Professor Cláudio Brandão, com o nome da escola grafitado ao fundo",
+    posicao: "50% 48%",
+    etapa: "A quadra da escola",
+  },
+  {
+    src: "/fotos/futsal-feminino-equipe-ginasio.webp",
+    alt: "Equipe de futsal feminino reunida em quadra antes da partida",
+    posicao: "50% 42%",
+    etapa: "O primeiro time",
+  },
+  {
+    src: "/fotos/treinamento-volei-dupla.webp",
+    alt: "Duas atletas conversando durante o treino de vôlei",
+    posicao: "50% 40%",
+    etapa: "A rotina de treino",
+  },
+  {
+    src: "/fotos/local-poliesportivo-vale-do-jatoba.webp",
+    alt: "Ginásio poliesportivo do Vale do Jatobá, onde as equipes treinam hoje",
+    posicao: "50% 52%",
+    etapa: "O ginásio de hoje",
+  },
+];
 
 export default function Home() {
   return (
@@ -45,51 +83,111 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- origem ----------
-           Fundo próprio. Colada em branco sobre branco, a seção parecia
-           continuação da grade de modalidades e a foto grande lia como um
-           quinto card solto. */}
-      <section className="relative u-sec bg-navy-50" aria-labelledby="t-origem">
-        <Curva de="var(--color-ink-0)" forma="arco" />
+      {/* ---------- títulos ----------
+           Vem logo depois das equipes: é a resposta à pergunta que a grade de
+           modalidades levanta. Banda escura porque a conquista é o momento de
+           mais peso da página, e o ouro só aparece aqui e no botão de doação. */}
+      <section className="on-navy relative u-sec bg-navy-950" aria-labelledby="t-titulos">
+        <Curva de="var(--color-ink-0)" forma="dupla" />
         <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
-          <div className="grid items-center gap-7 lg:grid-cols-[0.62fr_1fr] lg:gap-16">
+          <Reveal className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-10">
+            <div>
+              <p className="u-eyebrow flex items-center gap-2 text-gold-300">
+                <Icone nome="Trophy" className="h-4 w-4" />
+                Nós somos
+              </p>
+              <h2
+                id="t-titulos"
+                className="u-display mt-2.5 max-w-[14ch] text-[clamp(1.8rem,7vw,3.8rem)] text-white md:mt-4"
+              >
+                Campeãs em quadra
+              </h2>
+            </div>
+            {/* o número inteiro dito em uma linha vale mais que uma faixa de
+                indicadores soltos: dá a escala antes de o quadro começar */}
+            <p className="max-w-[34ch] text-[0.9375rem] leading-relaxed text-white/60 md:text-[1.0625rem]">
+              <span className="u-tabular font-semibold text-white">{totalTitulos} títulos</span> em{" "}
+              <span className="u-tabular font-semibold text-white">{temporadas} temporadas</span>,
+              entre o intercolegial metropolitano e os Jogos Escolares.
+            </p>
+          </Reveal>
+
+          <Reveal className="mt-9 md:mt-14">
+            <QuadroTitulos tom="escuro" />
+          </Reveal>
+
+          <Reveal className="mt-9 md:mt-14">
+            <BotaoLink href="/titulos" tom="contornoClaro">
+              Ver a estante completa
+            </BotaoLink>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- origem ----------
+           Texto em cima, fotos em faixa larga embaixo.
+
+           Antes as quatro fotos dividiam a linha com o texto, em ladrilho
+           retrato. Duas coisas quebravam ali: a foto da quadra da escola é
+           larga na origem e virava metade dela para caber em pé, ampliada,
+           mole; e a coluna de fotos ficava o dobro da altura do parágrafo ao
+           lado. Na faixa cada foto aparece menor, recortada de leve, e a
+           sequência passa a contar a história na ordem: onde começou, o
+           primeiro time, a rotina, onde se treina hoje. */}
+      <section className="relative u-sec bg-navy-50" aria-labelledby="t-origem">
+        <Curva de="var(--color-navy-950)" forma="arco" />
+        <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
+          <div className="grid gap-5 lg:grid-cols-[0.92fr_1fr] lg:items-end lg:gap-16">
             <Reveal>
-              <div className="relative aspect-4/3 overflow-hidden rounded-[18px] bg-navy-900 lg:aspect-5/4">
-                <Image
-                  src="/fotos/futsal-feminino-equipe-ginasio.webp"
-                  alt="Equipe de futsal feminino reunida em quadra antes da partida"
-                  fill
-                  loading="lazy"
-                  sizes="(max-width: 1024px) 100vw, 34vw"
-                  style={{ objectPosition: "50% 38%" }}
-                  className="object-cover"
-                />
-              </div>
+              <p className="u-eyebrow text-ink-400">Como começou</p>
+              <h2
+                id="t-origem"
+                className="u-titulo mt-2.5 max-w-[16ch] text-[clamp(1.7rem,6vw,3.25rem)] text-navy-800 md:mt-4"
+              >
+                Não veio de cima. Veio da quadra.
+              </h2>
             </Reveal>
 
             <div>
-              <Reveal>
-                <p className="u-eyebrow text-ink-400">Como começou</p>
-                <h2
-                  id="t-origem"
-                  className="u-titulo mt-2.5 max-w-[18ch] text-[clamp(1.6rem,5.6vw,3rem)] text-navy-800 md:mt-4"
-                >
-                  Não veio de cima. Veio da quadra.
-                </h2>
-              </Reveal>
-
               <TextoScrub
-                className="u-measure mt-4 text-[1rem] leading-[1.75] text-ink-700 md:mt-6 md:text-[1.0625rem] md:leading-[1.8]"
+                className="u-measure text-[1rem] leading-[1.75] text-ink-700 md:text-[1.0625rem] md:leading-[1.8]"
                 texto="Um grupo de alunos queria treinar de verdade e não tinha onde. Um professor abriu o ginásio, montou o primeiro time, e o combinado de fim de tarde virou rotina de temporada."
               />
-
-              <Reveal className="mt-6">
+              <Reveal className="mt-5">
                 <BotaoLink href="/sobre" tom="texto">
                   Conheça o projeto
                 </BotaoLink>
               </Reveal>
             </div>
           </div>
+
+          {/* A legenda não descreve a foto, situa a etapa. É ela que faz as
+              quatro imagens virarem uma sequência em vez de uma grade. */}
+          <Reveal stagger className="mt-9 grid grid-cols-2 gap-3 md:mt-14 md:grid-cols-4 md:gap-5">
+            {origem.map((f, i) => (
+              <figure key={f.src} className="js-reveal m-0">
+                <div className="relative aspect-4/3 overflow-hidden rounded-[14px] bg-navy-900">
+                  <Image
+                    src={f.src}
+                    alt={f.alt}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 768px) 46vw, 23vw"
+                    style={{ objectPosition: f.posicao }}
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="mt-2.5 flex items-baseline gap-2">
+                  <span className="u-tabular text-[0.6875rem] font-bold text-navy-600/45">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[0.8125rem] font-semibold leading-snug text-navy-800">
+                    {f.etapa}
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </Reveal>
         </div>
       </section>
 
@@ -237,7 +335,7 @@ export default function Home() {
           </Reveal>
 
           <Reveal className="mt-7 md:mt-12">
-            <Galeria fotos={galeria} rotulo="Galeria do projeto" abertura />
+            <Galeria fotos={galeria} rotulo="Galeria do projeto" />
           </Reveal>
         </div>
       </section>

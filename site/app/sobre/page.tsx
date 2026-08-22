@@ -14,7 +14,11 @@ export const metadata: Metadata = {
     "Como o Projeto Esportivo Cláudio Brandão começou, o que ele defende e como se organiza.",
 };
 
-/** Registros da rotina. Sem legenda: a foto já diz o que é. */
+/**
+ * Registros da rotina. Sem legenda: a foto já diz o que é.
+ * São seis para a grade fechar em três colunas no monitor e duas no celular,
+ * sem sobra de célula na última linha.
+ */
 const rotina = [
   {
     src: "/fotos/treinamento-volei-ginasio.webp",
@@ -22,8 +26,8 @@ const rotina = [
     posicao: "50% 52%",
   },
   {
-    src: "/fotos/treinamento-volei-dupla.webp",
-    alt: "Duas atletas conversando durante o treino de vôlei",
+    src: "/fotos/futsal-feminino-equipe-ginasio.webp",
+    alt: "Equipe de futsal feminino reunida em quadra antes da partida",
     posicao: "50% 38%",
   },
   {
@@ -34,7 +38,17 @@ const rotina = [
   {
     src: "/fotos/elenco-volei-feminino.webp",
     alt: "Elenco completo do vôlei feminino e a comissão técnica no ginásio",
-    posicao: "50% 46%",
+    posicao: "50% 58%",
+  },
+  {
+    src: "/fotos/competicao-volei-premiacao.webp",
+    alt: "Atletas do vôlei feminino com troféu e medalhas depois da partida",
+    posicao: "50% 20%",
+  },
+  {
+    src: "/fotos/competicao-jebh-bandeira-escola.webp",
+    alt: "Atletas e professor com a bandeira da escola na arena dos Jogos Escolares",
+    posicao: "50% 28%",
   },
 ];
 
@@ -80,8 +94,7 @@ export default function Sobre() {
 
       {/* ---------- a rotina, em imagem ----------
            Antes eram três fotos lado a lado com legenda embaixo de cada uma.
-           Virou galeria: uma abertura larga, miniaturas que preenchem a linha
-           e ampliação no toque. */}
+           Virou galeria: ladrilhos do mesmo tamanho, com ampliação no toque. */}
       <section className="bg-white pb-14 md:pb-24" aria-labelledby="t-rotina">
         <div className="mx-auto max-w-[1320px] px-5 md:px-10">
           <Reveal>
@@ -90,7 +103,7 @@ export default function Sobre() {
             </h2>
           </Reveal>
           <Reveal className="mt-4 md:mt-6">
-            <Galeria fotos={rotina} rotulo="Rotina do projeto" abertura />
+            <Galeria fotos={rotina} rotulo="Rotina do projeto" />
           </Reveal>
         </div>
       </section>

@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 
 const B = "http://localhost:3000";
-const rotas = ["/", "/sobre", "/modalidades", "/modalidades/volei-feminino", "/apoie", "/contato"];
+const rotas = ["/", "/sobre", "/modalidades", "/modalidades/volei-feminino", "/titulos", "/apoie", "/contato"];
 const b = await chromium.launch();
 const achados = [];
 
