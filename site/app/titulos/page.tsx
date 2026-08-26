@@ -7,16 +7,18 @@ import { Icone } from "@/components/Icone";
 import { Escudo, QuadroTitulos } from "@/components/QuadroTitulos";
 import { Reveal } from "@/components/Motion";
 import { BotaoLink, Acoes } from "@/components/Botao";
-import { competicoes, titulos, titulosPorEquipe } from "@/lib/dados";
+import {
+  competicoes,
+  titulosPorEquipe,
+} from "@/lib/dados";
 
 export const metadata: Metadata = {
-  title: "Títulos",
+  title: "Competições",
   description:
     "As conquistas das equipes do Projeto Esportivo Cláudio Brandão no intercolegial metropolitano, nos Jogos Escolares de Belo Horizonte e nos Jogos Escolares de Minas Gerais.",
 };
 
-const totalTitulos = titulos.reduce((n, t) => n + t.anos.length, 0);
-const temporadas = new Set(titulos.flatMap((t) => t.anos)).size;
+const lista = Object.values(competicoes);
 
 export default function Titulos() {
   return (
@@ -24,40 +26,73 @@ export default function Titulos() {
       {/* A abertura é o elenco do vôlei, a maior frente do projeto. A foto de
           uma equipe campeã específica dizia que a página era daquela equipe. */}
       <CabecalhoPagina
-        sobretitulo="Títulos"
-        titulo="O que veio da quadra"
-        texto={`${totalTitulos} títulos em ${temporadas} temporadas. Cada um é um ano inteiro de treino.`}
+        sobretitulo="Competições"
+        titulo="Competindo para aprender"
+        texto="Os principais eventos que incentivam o Esporte Escolar."
         foto={{
           src: "/fotos/elenco-volei-feminino.webp",
           movel: "/fotos/elenco-volei-feminino-movel.webp",
-          alt: "Elenco do vôlei feminino reunido no ginásio do Vale do Jatobá",
+          alt: "Elenco do Vôlei feminino reunido no ginásio do Vale do Jatobá",
           posicao: "50% 62%",
           posicaoMobile: "50% 52%",
         }}
       />
 
-      {/* ---------- a estante, por temporada ----------
-           É o conteúdo da página, então abre a página. A faixa de números
-           soltos que estava aqui contava o mesmo três vezes pior: agora o
-           total está na linha de apoio do cabeçalho e o quadro mostra de
-           onde ele sai. */}
-      <section className="u-sec bg-white" aria-labelledby="t-quadro">
-        <div className="mx-auto max-w-[1320px] px-5 md:px-10">
-          <Reveal className="max-w-[46ch]">
-            <p className="u-eyebrow flex items-center gap-2 text-ink-400">
-              <Icone nome="Trophy" className="h-4 w-4" />
-              Temporada a temporada
-            </p>
+      {/* ---------- nossas competições ----------
+           Abre a página: o título só quer dizer alguma coisa depois que se
+           sabe onde ele foi disputado.
+
+           O escudo vive num ladrilho de proporção fixa com `object-contain`.
+           Antes ele era dimensionado pela altura e a marca mais quadrada
+           estourava a caixa e aparecia cortada pela metade. */}
+      <section className="on-navy relative u-sec bg-navy-950" aria-labelledby="t-competicoes">
+        <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
+          <Reveal>
+            <p className="u-eyebrow text-white/50">Eventos</p>
             <h2
-              id="t-quadro"
-              className="u-display mt-2.5 text-[clamp(1.7rem,6.4vw,3.2rem)] text-navy-800 md:mt-4"
+              id="t-competicoes"
+              className="u-display mt-2.5 text-[clamp(1.7rem,6.4vw,3.2rem)] text-white md:mt-4"
             >
-              A estante
+              Nossas competições
             </h2>
           </Reveal>
 
-          <Reveal className="mt-8 md:mt-14">
-            <QuadroTitulos tom="claro" />
+          {/* mesma linha única da home: quatro calendários, quatro colunas */}
+          <Reveal stagger className="mt-7 grid gap-3 md:mt-12 md:grid-cols-4 md:gap-4 lg:gap-5">
+            {lista.map((c) => (
+              <article
+                key={c.sigla}
+                className="js-reveal flex h-full items-center gap-3.5 rounded-[16px] border border-white/12
+                           bg-white/[0.045] p-3 md:flex-col md:items-stretch md:gap-5 md:p-6"
+              >
+                {/* no celular a marca vira selo ao lado do texto: em cima, em
+                    16:9, cada competição sozinha ocupava meia tela de altura */}
+                <span
+                  className={`relative block h-[52px] w-[72px] shrink-0 overflow-hidden rounded-[10px] ring-1
+                              md:aspect-16/9 md:h-auto md:w-full
+                              ${c.fundo === "escuro" ? "bg-navy-900 ring-white/12" : "bg-white ring-white/10"}`}
+                >
+                  <Image
+                    src={c.logo}
+                    alt={`Escudo do ${c.nome}`}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 768px) 72px, 22vw"
+                    className="object-contain p-1.5 md:p-3.5 lg:p-5"
+                  />
+                </span>
+
+                <div className="min-w-0">
+                  <p className="u-eyebrow text-gold-300">{c.sigla}</p>
+                  <h3 className="u-titulo mt-1 text-[0.9375rem] leading-tight text-white md:mt-1.5 md:text-[1.25rem]">
+                    {c.nome}
+                  </h3>
+                  <p className="mt-1 text-[0.75rem] leading-snug text-white/55 md:mt-1.5 md:text-[0.8125rem]">
+                    {c.ambito}
+                  </p>
+                </div>
+              </article>
+            ))}
           </Reveal>
         </div>
       </section>
@@ -67,8 +102,8 @@ export default function Titulos() {
            por régua. Card dentro de card era o problema anterior: a caixa da
            conquista repetia a borda do bloco da equipe e nada dizia quem
            mandava em quem. Régua não tem borda para competir. */}
-      <section className="relative u-sec bg-ink-50" aria-labelledby="t-equipes">
-        <Curva de="var(--color-ink-0)" forma="arco" />
+      <section className="relative u-sec bg-white" aria-labelledby="t-equipes">
+        <Curva de="var(--color-navy-950)" forma="onda" />
         <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
           <Reveal className="max-w-[46ch]">
             <p className="u-eyebrow text-ink-400">Nós somos</p>
@@ -181,61 +216,29 @@ export default function Titulos() {
         </div>
       </section>
 
-      {/* ---------- as competições ----------
-           O escudo vive num ladrilho de proporção fixa com `object-contain`.
-           Antes ele era dimensionado pela altura e a marca mais quadrada das
-           três estourava a caixa e aparecia cortada pela metade. */}
-      <section className="on-navy relative u-sec bg-navy-950" aria-labelledby="t-competicoes">
-        <Curva de="var(--color-ink-50)" forma="onda" />
+      {/* ---------- a estante, por temporada ----------
+           Fecha a página, depois das equipes: quem conquistou vem antes do
+           quadro que soma as temporadas. A faixa de números soltos que estava
+           aqui contava o mesmo três vezes pior: agora o total está na linha de
+           apoio do cabeçalho e o quadro mostra de onde ele sai. */}
+      <section className="relative u-sec bg-ink-50" aria-labelledby="t-quadro">
+        <Curva de="var(--color-ink-0)" forma="arco" />
         <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
-          <Reveal className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-10">
-            <div>
-              <p className="u-eyebrow text-white/50">Onde se joga</p>
-              <h2
-                id="t-competicoes"
-                className="u-display mt-2.5 text-[clamp(1.7rem,6.4vw,3.2rem)] text-white md:mt-4"
-              >
-                As competições
-              </h2>
-            </div>
-            <p className="max-w-[36ch] text-[0.9375rem] leading-relaxed text-white/60">
-              Três calendários, do municipal ao estadual. A escola disputa os três.
+          <Reveal className="max-w-[46ch]">
+            <p className="u-eyebrow flex items-center gap-2 text-ink-400">
+              <Icone nome="Trophy" className="h-4 w-4" />
+              Temporada a temporada
             </p>
+            <h2
+              id="t-quadro"
+              className="u-display mt-2.5 text-[clamp(1.7rem,6.4vw,3.2rem)] text-navy-800 md:mt-4"
+            >
+              A estante
+            </h2>
           </Reveal>
 
-          <Reveal stagger className="mt-7 grid gap-3 md:mt-12 md:grid-cols-3 md:gap-5">
-            {Object.values(competicoes).map((c) => (
-              <article
-                key={c.sigla}
-                className="js-reveal flex h-full items-center gap-4 rounded-[16px] border border-white/12
-                           bg-white/[0.045] p-3.5 md:flex-col md:items-stretch md:gap-5 md:p-6"
-              >
-                {/* no celular a marca vira selo ao lado do texto: em cima, em
-                    16:9, cada competição sozinha ocupava meia tela de altura */}
-                <span
-                  className={`relative block h-[68px] w-[92px] shrink-0 overflow-hidden rounded-[10px] ring-1
-                              md:aspect-16/9 md:h-auto md:w-full
-                              ${c.fundo === "escuro" ? "bg-navy-900 ring-white/12" : "bg-white ring-white/10"}`}
-                >
-                  <Image
-                    src={c.logo}
-                    alt={`Escudo do ${c.nome}`}
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 768px) 92px, 30vw"
-                    className="object-contain p-2 md:p-5"
-                  />
-                </span>
-
-                <div className="min-w-0">
-                  <p className="u-eyebrow text-gold-300">{c.sigla}</p>
-                  <h3 className="u-titulo mt-1.5 text-[1.0625rem] text-white md:text-[1.25rem]">
-                    {c.nome}
-                  </h3>
-                  <p className="mt-1.5 text-[0.8125rem] leading-snug text-white/55">{c.ambito}</p>
-                </div>
-              </article>
-            ))}
+          <Reveal className="mt-8 md:mt-14">
+            <QuadroTitulos tom="claro" />
           </Reveal>
         </div>
       </section>
@@ -245,7 +248,7 @@ export default function Titulos() {
           <Reveal className="flex flex-col items-start gap-5 rounded-[18px] bg-ink-25 p-5 ring-1 ring-ink-200 md:flex-row md:items-center md:justify-between md:p-9">
             <div>
               <h2 className="u-titulo text-[1.25rem] text-navy-800 md:text-[1.5rem]">
-                Quer fazer parte da próxima?
+                Quer fazer parte
               </h2>
               <p className="mt-1.5 max-w-[46ch] text-[0.875rem] leading-relaxed text-ink-500">
                 Conheça as equipes em atividade ou apoie a temporada que vem por aí.

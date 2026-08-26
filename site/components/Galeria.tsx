@@ -23,6 +23,11 @@ function colunas(total: number) {
   return total > 4 ? 4 : total;
 }
 
+/** Última célula de uma grade de duas colunas com total ímpar. */
+function ultimaSozinha(i: number, total: number) {
+  return total % 2 === 1 && i === total - 1;
+}
+
 const grades: Record<number, string> = {
   2: "md:grid-cols-2",
   3: "md:grid-cols-3",
@@ -87,7 +92,11 @@ export function Galeria({ fotos, rotulo }: { fotos: Foto[]; rotulo: string }) {
         className={`grid list-none grid-cols-2 gap-3 p-0 md:gap-4 ${grades[cols] ?? "md:grid-cols-4"}`}
       >
         {fotos.map((f, i) => (
-          <li key={f.src}>
+          // No celular a grade é sempre de duas colunas: com número ímpar de
+          // fotos a última ficava sozinha em meia linha, com um buraco do lado.
+          // Ela passa a ocupar a linha inteira, e fecha a sequência em vez de
+          // parecer que faltou uma foto. No monitor `colunas()` já divide exato.
+          <li key={f.src} className={ultimaSozinha(i, fotos.length) ? "col-span-2 md:col-span-1" : ""}>
             <button
               type="button"
               ref={refBotao(i)}

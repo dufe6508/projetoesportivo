@@ -8,11 +8,16 @@ import { BotaoLink, Acoes } from "@/components/Botao";
 import { Curva } from "@/components/Curva";
 import { QuadroTitulos } from "@/components/QuadroTitulos";
 import { Reveal, TextoScrub } from "@/components/Motion";
-import { modalidadesAtivas, principios, galeria, locais, titulos } from "@/lib/dados";
+import {
+  modalidadesAtivas,
+  principios,
+  galeria,
+  locais,
+  competicoes,
+} from "@/lib/dados";
 
-/** Um título de três anos conta três vezes: são três temporadas ganhas. */
-const totalTitulos = titulos.reduce((n, t) => n + t.anos.length, 0);
-const temporadas = new Set(titulos.flatMap((t) => t.anos)).size;
+/** Os calendários que as equipes disputam, na ordem de dados.ts. */
+const competicoesHome = Object.values(competicoes);
 
 /**
  * A sequência de origem. Fica aqui, e não em dados.ts, porque é a composição
@@ -22,20 +27,20 @@ const temporadas = new Set(titulos.flatMap((t) => t.anos)).size;
  */
 const origem = [
   {
+    src: "/fotos/origem-primeiro-time-volei.webp",
+    alt: "O primeiro time do projeto reunido na quadra da escola, com a comissão técnica",
+    posicao: "50% 46%",
+    etapa: "O primeiro time",
+  },
+  {
     src: "/fotos/local-escola-claudio-brandao.webp",
     alt: "Quadra coberta da Escola Estadual Professor Cláudio Brandão, com o nome da escola grafitado ao fundo",
     posicao: "50% 48%",
     etapa: "A quadra da escola",
   },
   {
-    src: "/fotos/futsal-feminino-equipe-ginasio.webp",
-    alt: "Equipe de futsal feminino reunida em quadra antes da partida",
-    posicao: "50% 42%",
-    etapa: "O primeiro time",
-  },
-  {
     src: "/fotos/treinamento-volei-dupla.webp",
-    alt: "Duas atletas conversando durante o treino de vôlei",
+    alt: "Duas atletas conversando durante o treino de Vôlei",
     posicao: "50% 40%",
     etapa: "A rotina de treino",
   },
@@ -52,21 +57,76 @@ export default function Home() {
     <>
       <Hero />
 
+      {/* ---------- muito além do esporte ----------
+           Abre a página: antes de contar de onde o projeto veio, o site diz
+           para que ele serve. Sem Curva no topo, a passagem do herói para a
+           primeira banda clara é uma linha reta, decisão do cliente. A seção
+           trocou de banda com a de origem, que assumiu a âncora escura. */}
+      <section className="relative u-sec bg-navy-50" aria-labelledby="t-alem">
+        <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1fr] lg:items-center lg:gap-20">
+            <Reveal>
+              <p className="u-eyebrow text-ink-400">Muito além do esporte</p>
+              <h2
+                id="t-alem"
+                className="u-display mt-2.5 max-w-[20ch] text-[clamp(1.7rem,6.4vw,3.4rem)] text-navy-800 md:mt-4"
+              >
+                Esporte contribuindo para a formação integral
+              </h2>
+              <p className="mt-4 max-w-[42ch] text-[0.9375rem] leading-relaxed text-ink-600 md:mt-6 md:text-[1.0625rem]">
+                As equipes treinam, fazem amistosos, competem, fazem amigos e aprendem os valores do
+                esporte escolar.
+              </p>
+            </Reveal>
+
+            {/* mesma altura nas duas: o desalinhamento anterior não tinha função */}
+            <Reveal className="grid grid-cols-2 gap-3 md:gap-5">
+              {[
+                {
+                  src: "/fotos/competicao-jebh-bandeira-escola.webp",
+                  alt: "Atletas e professor com a bandeira da Escola Estadual Professor Cláudio Brandão na arena dos Jogos Escolares",
+                  pos: "50% 38%",
+                },
+                {
+                  src: "/fotos/treinamento-volei-conversa.webp",
+                  alt: "Duas atletas do Vôlei conversando na quadra, ao lado da rede, durante o treino",
+                  pos: "50% 42%",
+                },
+              ].map((f) => (
+                <div
+                  key={f.src}
+                  className="relative aspect-3/4 overflow-hidden rounded-[16px] bg-navy-900"
+                >
+                  <Image
+                    src={f.src}
+                    alt={f.alt}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 1024px) 45vw, 24vw"
+                    style={{ objectPosition: f.pos }}
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       {/* ---------- modalidades ---------- */}
       <section className="u-sec bg-white" aria-labelledby="t-modalidades">
         <div className="mx-auto max-w-[1320px] px-5 md:px-10">
           <Reveal className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8">
             <div>
-              <p className="u-eyebrow text-ink-400">Duas equipes</p>
               <h2
                 id="t-modalidades"
-                className="u-display mt-2.5 max-w-[16ch] text-[clamp(1.8rem,7vw,3.8rem)] text-navy-800 md:mt-4"
+                className="u-display max-w-[16ch] text-[clamp(1.8rem,7vw,3.8rem)] text-navy-800"
               >
                 As modalidades
               </h2>
             </div>
             <p className="max-w-[38ch] text-[0.9375rem] leading-relaxed text-ink-500 md:text-[1.0625rem]">
-              Futsal e voleibol para os alunos da escola, com turmas o ano letivo inteiro.
+              Voleibol e Futsal para os alunos da escola e região, durante todo o ano letivo.
             </p>
           </Reveal>
 
@@ -83,12 +143,80 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- títulos ----------
+      {/* ---------- nossas competições ----------
            Vem logo depois das equipes: é a resposta à pergunta que a grade de
-           modalidades levanta. Banda escura porque a conquista é o momento de
-           mais peso da página, e o ouro só aparece aqui e no botão de doação. */}
+           modalidades levanta, onde essas equipes jogam. Fica em banda clara
+           de propósito, para a estante logo abaixo continuar sendo a única
+           faixa escura da sequência.
+
+           O escudo vive num ladrilho de proporção fixa com `object-contain`:
+           são marcas de terceiro, com proporções diferentes, e dimensionar
+           pela altura fazia a mais quadrada estourar a caixa. */}
+      <section className="relative u-sec bg-ink-50" aria-labelledby="t-competicoes">
+        <Curva de="var(--color-ink-0)" forma="aba" />
+        <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
+          <Reveal className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-10">
+            <div>
+              <h2
+                id="t-competicoes"
+                className="u-display max-w-[14ch] text-[clamp(1.7rem,6.4vw,3.2rem)] text-navy-800"
+              >
+                Nossas competições
+              </h2>
+            </div>
+            <p className="max-w-[34ch] text-[0.9375rem] leading-relaxed text-ink-500 md:text-[1.0625rem]">
+              Os principais eventos que incentivam o Esporte Escolar.
+            </p>
+          </Reveal>
+
+          {/* os quatro calendários cabem numa linha só a partir do tablet: são
+              quatro e formam um conjunto, quebrar em duas linhas sugeria
+              hierarquia que não existe entre eles */}
+          <Reveal stagger className="mt-8 grid gap-3 md:mt-12 md:grid-cols-4 md:gap-4 lg:gap-5">
+            {competicoesHome.map((c) => (
+              <article
+                key={c.sigla}
+                className="js-reveal flex h-full items-center gap-3.5 rounded-[16px] bg-ink-25 p-3
+                           ring-1 ring-ink-200 md:flex-col md:items-stretch md:gap-5 md:p-6"
+              >
+                {/* no celular a marca vira selo ao lado do texto: em cima, em
+                    16:9, cada competição sozinha ocupava meia tela de altura */}
+                <span
+                  className={`relative block h-[52px] w-[72px] shrink-0 overflow-hidden rounded-[10px] ring-1
+                              md:aspect-16/9 md:h-auto md:w-full
+                              ${c.fundo === "escuro" ? "bg-navy-900 ring-black/10" : "bg-white ring-ink-200"}`}
+                >
+                  <Image
+                    src={c.logo}
+                    alt={`Escudo do ${c.nome}`}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 768px) 72px, 22vw"
+                    className="object-contain p-1.5 md:p-3.5 lg:p-5"
+                  />
+                </span>
+
+                <div className="min-w-0">
+                  <p className="u-eyebrow text-navy-600">{c.sigla}</p>
+                  <h3 className="u-titulo mt-1 text-[0.9375rem] leading-tight text-navy-800 md:mt-1.5 md:text-[1.25rem]">
+                    {c.nome}
+                  </h3>
+                  <p className="mt-1 text-[0.75rem] leading-snug text-ink-500 md:mt-1.5 md:text-[0.8125rem]">
+                    {c.ambito}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- títulos ----------
+           Fecha o par que a seção acima abre: primeiro onde se joga, depois o
+           que veio de lá. Banda escura porque a conquista é o momento de mais
+           peso da página, e o ouro só aparece aqui e no botão de doação. */}
       <section className="on-navy relative u-sec bg-navy-950" aria-labelledby="t-titulos">
-        <Curva de="var(--color-ink-0)" forma="dupla" />
+        <Curva de="var(--color-ink-50)" forma="dupla" />
         <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
           <Reveal className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-10">
             <div>
@@ -103,13 +231,6 @@ export default function Home() {
                 Campeãs em quadra
               </h2>
             </div>
-            {/* o número inteiro dito em uma linha vale mais que uma faixa de
-                indicadores soltos: dá a escala antes de o quadro começar */}
-            <p className="max-w-[34ch] text-[0.9375rem] leading-relaxed text-white/60 md:text-[1.0625rem]">
-              <span className="u-tabular font-semibold text-white">{totalTitulos} títulos</span> em{" "}
-              <span className="u-tabular font-semibold text-white">{temporadas} temporadas</span>,
-              entre o intercolegial metropolitano e os Jogos Escolares.
-            </p>
           </Reveal>
 
           <Reveal className="mt-9 md:mt-14">
@@ -124,7 +245,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- origem ----------
+      {/* ---------- origem, âncora escura ----------
            Texto em cima, fotos em faixa larga embaixo.
 
            Antes as quatro fotos dividiam a linha com o texto, em ladrilho
@@ -132,29 +253,32 @@ export default function Home() {
            larga na origem e virava metade dela para caber em pé, ampliada,
            mole; e a coluna de fotos ficava o dobro da altura do parágrafo ao
            lado. Na faixa cada foto aparece menor, recortada de leve, e a
-           sequência passa a contar a história na ordem: onde começou, o
-           primeiro time, a rotina, onde se treina hoje. */}
-      <section className="relative u-sec bg-navy-50" aria-labelledby="t-origem">
-        <Curva de="var(--color-navy-950)" forma="arco" />
+           sequência passa a contar a história na ordem: o primeiro time, a
+           quadra onde começou, a rotina, onde se treina hoje. */}
+      <section className="on-navy relative u-sec bg-navy-800" aria-labelledby="t-origem">
+        <Curva de="var(--color-navy-950)" forma="onda" />
         <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
           <div className="grid gap-5 lg:grid-cols-[0.92fr_1fr] lg:items-end lg:gap-16">
             <Reveal>
-              <p className="u-eyebrow text-ink-400">Como começou</p>
+              <p className="u-eyebrow text-white/50">Como começou</p>
               <h2
                 id="t-origem"
-                className="u-titulo mt-2.5 max-w-[16ch] text-[clamp(1.7rem,6vw,3.25rem)] text-navy-800 md:mt-4"
+                className="u-titulo mt-2.5 max-w-[20ch] text-[clamp(1.55rem,5.4vw,2.85rem)] text-white md:mt-4"
               >
-                Não veio de cima. Veio da quadra.
+                Partindo dos alunos, muita dedicação e trabalho coletivo.
               </h2>
+              <p className="mt-3 max-w-[34ch] text-[0.875rem] font-semibold leading-snug text-white/55 md:text-[0.9375rem]">
+                Aqui o trabalho em equipe importa
+              </p>
             </Reveal>
 
             <div>
               <TextoScrub
-                className="u-measure text-[1rem] leading-[1.75] text-ink-700 md:text-[1.0625rem] md:leading-[1.8]"
-                texto="Um grupo de alunos queria treinar de verdade e não tinha onde. Um professor abriu o ginásio, montou o primeiro time, e o combinado de fim de tarde virou rotina de temporada."
+                className="u-measure text-[1rem] leading-[1.75] text-white/75 md:text-[1.0625rem] md:leading-[1.8]"
+                texto="Um grupo de alunos queria aprender Voleibol e competir. Os professores viram a necessidade de organização e começaram a auxiliar o projeto em seu desenvolvimento."
               />
               <Reveal className="mt-5">
-                <BotaoLink href="/sobre" tom="texto">
+                <BotaoLink href="/sobre" tom="contornoClaro">
                   Conheça o projeto
                 </BotaoLink>
               </Reveal>
@@ -178,10 +302,10 @@ export default function Home() {
                   />
                 </div>
                 <figcaption className="mt-2.5 flex items-baseline gap-2">
-                  <span className="u-tabular text-[0.6875rem] font-bold text-navy-600/45">
+                  <span className="u-tabular text-[0.6875rem] font-bold text-white/40">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-[0.8125rem] font-semibold leading-snug text-navy-800">
+                  <span className="text-[0.8125rem] font-semibold leading-snug text-white">
                     {f.etapa}
                   </span>
                 </figcaption>
@@ -191,65 +315,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- âncora escura: muito além do esporte ---------- */}
-      <section className="on-navy relative u-sec bg-navy-950" aria-labelledby="t-alem">
-        <Curva de="var(--color-navy-50)" forma="onda" />
-        <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1fr] lg:items-center lg:gap-20">
-            <Reveal>
-              <p className="u-eyebrow text-white/50">Muito além do esporte</p>
-              <h2
-                id="t-alem"
-                className="u-display mt-2.5 max-w-[14ch] text-[clamp(1.7rem,6.4vw,3.4rem)] text-white md:mt-4"
-              >
-                A camisa sai da quadra junto
-              </h2>
-              <p className="mt-4 max-w-[42ch] text-[0.9375rem] leading-relaxed text-white/70 md:mt-6 md:text-[1.0625rem]">
-                As equipes viajam para competir, carregam a bandeira da escola e voltam com o que
-                aprenderam no caminho.
-              </p>
-            </Reveal>
-
-            {/* mesma altura nas duas: o desalinhamento anterior não tinha função */}
-            <Reveal className="grid grid-cols-2 gap-3 md:gap-5">
-              {[
-                {
-                  src: "/fotos/competicao-jebh-bandeira-escola.webp",
-                  alt: "Atletas e professor com a bandeira da Escola Estadual Professor Cláudio Brandão na arena dos Jogos Escolares",
-                  pos: "50% 38%",
-                },
-                {
-                  src: "/fotos/treinamento-volei-dupla.webp",
-                  alt: "Duas atletas conversando durante o treino de vôlei",
-                  pos: "50% 40%",
-                },
-              ].map((f) => (
-                <div
-                  key={f.src}
-                  className="relative aspect-3/4 overflow-hidden rounded-[16px] bg-navy-900"
-                >
-                  <Image
-                    src={f.src}
-                    alt={f.alt}
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 1024px) 45vw, 24vw"
-                    style={{ objectPosition: f.pos }}
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
       {/* ---------- princípios ---------- */}
       <section className="relative u-sec bg-ink-50" aria-labelledby="t-principios">
-        <Curva de="var(--color-navy-950)" forma="dupla" />
+        <Curva de="var(--color-navy-800)" forma="dupla" />
         <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
           <Reveal className="max-w-[52ch]">
-            <p className="u-eyebrow text-ink-400">Como se joga aqui</p>
+            <p className="u-eyebrow text-ink-400">Valores e princípios</p>
             <h2
               id="t-principios"
               className="u-display mt-2.5 text-[clamp(1.7rem,6.4vw,3.2rem)] text-navy-800 md:mt-4"
@@ -327,11 +398,8 @@ export default function Home() {
               id="t-galeria"
               className="u-display max-w-[15ch] text-[clamp(1.7rem,6.4vw,3.2rem)] text-white"
             >
-              A quadra, todo dia
+              Nossa rotina
             </h2>
-            <p className="max-w-[30ch] text-[0.9375rem] leading-relaxed text-white/55">
-              Jogo, treino e o que vem junto.
-            </p>
           </Reveal>
 
           <Reveal className="mt-7 md:mt-12">
@@ -370,13 +438,13 @@ export default function Home() {
                 Mude uma história
               </h2>
               <p className="mt-4 max-w-[42ch] text-[0.9375rem] leading-relaxed text-white/70 md:mt-6 md:text-[1.0625rem]">
-                Material, uniforme e transporte. É disso que o projeto precisa para continuar
-                recebendo quem chega.
+                Materiais, uniformes e transporte. É disso que nosso projeto precisa para continuar
+                mudando a vida dos nossos atletas.
               </p>
             </div>
             <Acoes className="w-full lg:w-auto lg:shrink-0">
               <BotaoLink href="/apoie" tom="ouro">
-                Quero apoiar
+                Apoiar
               </BotaoLink>
               <BotaoLink href="/contato" tom="contornoClaro">
                 Fale com a gente

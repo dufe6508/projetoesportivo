@@ -41,7 +41,11 @@ export default async function Pagina({ params }: Params) {
       {/* ---------- destaque + texto ----------
            No celular a foto abre a página inteira e o texto vem embaixo. No
            monitor os dois dividem a linha: a mesma foto em largura cheia
-           passava de 500px de altura e engolia a dobra. */}
+           passava de 500px de altura e engolia a dobra.
+
+           16:9 em toda largura de tela: os destaques são elencos perfilados de
+           ponta a ponta do quadro, e o recorte 4:3 que estava aqui comia um
+           quarto da largura de cada lado, cortando quem ficava nas pontas. */}
       <section className="u-sec bg-white" aria-labelledby="t-sobre">
         <div className="mx-auto max-w-[1320px] px-5 md:px-10">
           <div
@@ -54,7 +58,7 @@ export default async function Pagina({ params }: Params) {
             {m.destaque && (
               <Reveal>
                 <figure className="relative m-0 overflow-hidden rounded-[18px] bg-navy-900">
-                  <div className="relative aspect-4/3 sm:aspect-16/9 lg:aspect-4/3">
+                  <div className="relative aspect-16/9">
                     <Image
                       src={m.destaque.src}
                       alt={m.destaque.alt}
@@ -102,6 +106,37 @@ export default async function Pagina({ params }: Params) {
                   <p key={i}>{p}</p>
                 ))}
               </div>
+              {/* ---------- o que e trabalhado ----------
+                  Mesma estrutura da formacao dos responsaveis, na Gestao: os
+                  fundamentos saiam enfileirados dentro do paragrafo e o leitor
+                  tinha que garimpar a lista numa virgula. Fio no topo de cada
+                  linha, duas colunas a partir do tablet, sem card. */}
+              {m.trabalhado && m.trabalhado.length > 0 && (
+                <div className="mt-8 max-w-[52ch] md:mt-10">
+                  <h3 className="u-eyebrow flex items-center gap-2 text-ink-400">
+                    <Icone
+                      nome={m.esporte === "Voleibol" ? "Volleyball" : "SoccerBall"}
+                      className="h-4 w-4"
+                    />
+                    O que é trabalhado
+                  </h3>
+                  <ul
+                    role="list"
+                    className="mt-4 grid list-none gap-x-10 p-0 md:mt-5 md:grid-cols-2"
+                  >
+                    {m.trabalhado.map((f) => (
+                      <li
+                        key={f}
+                        className="border-t border-ink-200 py-2 text-[0.8125rem] leading-snug
+                                   text-navy-800 md:py-2.5 md:text-[0.875rem]"
+                      >
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               <Acoes className="mt-7">
                 <BotaoLink href="/contato">Quero participar</BotaoLink>
                 <BotaoLink href="/apoie" tom="contorno">

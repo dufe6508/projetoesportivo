@@ -3,25 +3,25 @@ import { CabecalhoPagina } from "@/components/CabecalhoPagina";
 import { Curva } from "@/components/Curva";
 import { Icone } from "@/components/Icone";
 import { Reveal } from "@/components/Motion";
-import { BotaoLink, Acoes } from "@/components/Botao";
+import { Responsaveis } from "@/components/Responsaveis";
+import { BotaoLink } from "@/components/Botao";
 import {
   contato,
   destinoRecursos,
-  diretoria,
   documentos,
   institucional,
   mandatoDiretoria,
+  responsaveis,
 } from "@/lib/dados";
 
 export const metadata: Metadata = {
-  title: "Transparência",
+  title: "Gestão",
   description:
-    "Dados institucionais, diretoria, documentos e destino dos recursos do Projeto Esportivo Cláudio Brandão.",
+    "Quem responde pelo projeto, documentos e destino dos recursos do Projeto Esportivo Cláudio Brandão.",
 };
 
 /** Ficha da associação. Só o que já existe registrado, com a fonte declarada. */
 const ficha = [
-  { rotulo: "Razão social", valor: contato.razaoSocial },
   { rotulo: "CNPJ", valor: contato.cnpj },
   { rotulo: "Natureza", valor: institucional.natureza },
   { rotulo: "Fundação", valor: institucional.fundacao },
@@ -32,26 +32,50 @@ export default function Transparencia() {
   return (
     <>
       <CabecalhoPagina
-        sobretitulo="Transparência"
-        titulo="Contas à vista"
-        texto="Quem responde pelo projeto, o que já está registrado e o que ainda falta publicar."
+        sobretitulo="Gestão"
+        titulo="Transparência"
+        texto="Quem responde pelo projeto, documentos e destino dos recursos."
       />
+
+      {/* ---------- responsáveis ----------
+           Abre a página: antes de estatuto e documento vem o rosto de quem
+           assina. Retrato em 4:5 e num tamanho de coluna, não de capa: é
+           credencial, não galeria. */}
+      <section className="u-sec bg-white" aria-labelledby="t-responsaveis">
+        <div className="mx-auto max-w-[1320px] px-5 md:px-10">
+          <Reveal>
+            <p className="u-eyebrow flex items-center gap-2 text-ink-400">
+              <Icone nome="UsersThree" className="h-4 w-4" />
+              {mandatoDiretoria}
+            </p>
+            <h2
+              id="t-responsaveis"
+              className="u-display mt-2.5 max-w-[16ch] text-[clamp(1.8rem,7vw,3.2rem)] text-navy-800 md:mt-4"
+            >
+              Responsáveis
+            </h2>
+          </Reveal>
+
+          <Responsaveis lista={responsaveis} />
+        </div>
+      </section>
 
       {/* ---------- ficha da associação ----------
            Abre pelo que é verificável: quem assina, sob qual CNPJ e desde
            quando. Numa associação nova, esse bloco é a credencial. */}
-      <section className="u-sec bg-white" aria-labelledby="t-ficha">
-        <div className="mx-auto max-w-[1320px] px-5 md:px-10">
+      <section className="relative u-sec bg-navy-50" aria-labelledby="t-ficha">
+        <Curva de="var(--color-ink-0)" forma="arco" />
+        <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
           <Reveal>
             <p className="u-eyebrow flex items-center gap-2 text-ink-400">
               <Icone nome="SealCheck" className="h-4 w-4" />
-              A associação
+              O projeto
             </p>
             <h2
               id="t-ficha"
-              className="u-display mt-2.5 max-w-[16ch] text-[clamp(1.8rem,7vw,3.2rem)] text-navy-800 md:mt-4"
+              className="u-display mt-2.5 max-w-[20ch] text-[clamp(1.6rem,6vw,2.9rem)] text-navy-800 md:mt-4"
             >
-              Quem assina o projeto
+              {contato.razaoSocial}
             </h2>
           </Reveal>
 
@@ -64,37 +88,6 @@ export default function Transparencia() {
                 </p>
               </div>
             ))}
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ---------- diretoria ----------
-           Um convite, não a lista: a lista tem página própria, com cargo e
-           atribuição de cada pessoa. */}
-      <section className="relative u-sec bg-navy-50" aria-labelledby="t-diretoria">
-        <Curva de="var(--color-ink-0)" forma="arco" />
-        <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
-          <Reveal className="flex flex-col items-start gap-6 rounded-[18px] bg-white p-5 ring-1 ring-ink-200 md:flex-row md:items-center md:justify-between md:gap-10 md:p-9">
-            <div>
-              <p className="u-eyebrow flex items-center gap-2 text-ink-400">
-                <Icone nome="UsersThree" className="h-4 w-4" />
-                {mandatoDiretoria}
-              </p>
-              <h2
-                id="t-diretoria"
-                className="u-titulo mt-2.5 text-[1.35rem] text-navy-800 md:text-[1.75rem]"
-              >
-                Quem responde por cada coisa
-              </h2>
-              <p className="mt-2 max-w-[52ch] text-[0.9375rem] leading-relaxed text-ink-500">
-                {diretoria.length > 0
-                  ? "Cargo, nome e o que cada pessoa da diretoria responde no dia a dia do projeto."
-                  : "A composição da diretoria será publicada assim que a ata de eleição estiver registrada."}
-              </p>
-            </div>
-            <BotaoLink href="/transparencia/diretoria" className="shrink-0">
-              Ver a diretoria
-            </BotaoLink>
           </Reveal>
         </div>
       </section>
@@ -177,15 +170,6 @@ export default function Transparencia() {
             })}
           </ul>
 
-          <Reveal className="mt-6 md:mt-8">
-            <p className="u-measure text-[0.875rem] leading-relaxed text-ink-500">
-              O exercício de {institucional.exercicio} é o primeiro da associação e ainda está em
-              curso. A prestação de contas é publicada nesta página depois do fechamento, e
-              qualquer documento pode ser pedido antes disso pelo contato. Se algo aqui estiver
-              desatualizado, escreva para a gente: corrigir rápido faz parte do que se promete
-              nesta página.
-            </p>
-          </Reveal>
         </div>
       </section>
 
@@ -222,12 +206,7 @@ export default function Transparencia() {
           </ul>
 
           <Reveal className="mt-8 md:mt-10">
-            <Acoes>
-              <BotaoLink href="/apoie">Como apoiar</BotaoLink>
-              <BotaoLink href="/contato" tom="contorno">
-                Pedir um documento
-              </BotaoLink>
-            </Acoes>
+            <BotaoLink href="/apoie">Apoiar</BotaoLink>
           </Reveal>
         </div>
       </section>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CabecalhoPagina } from "@/components/CabecalhoPagina";
 import { Formulario } from "@/components/Formulario";
 import { Reveal } from "@/components/Motion";
-import { contato } from "@/lib/dados";
+import { contato, locais } from "@/lib/dados";
 
 export const metadata: Metadata = {
   title: "Contato",
@@ -28,17 +28,33 @@ export default function Contato() {
 
             <Reveal>
               <div className="flex flex-col gap-10">
+                {/* dois endereços: a quadra da escola e o ginásio. Vinham da
+                    lista de locais para não haver dois registros do mesmo
+                    endereço no site. Nome em corpo menor que antes: em
+                    "Escola Estadual Professor Cláudio Brandão" o 1.0625rem
+                    quebrava o nome em três linhas na coluna estreita. */}
                 <div className="u-courtrule pt-7 text-navy-800">
-                  <h2 className="u-eyebrow text-ink-400">Onde treinamos</h2>
-                  <address className="mt-4 not-italic text-[1.0625rem] leading-relaxed text-navy-800">
-                    {contato.local}
-                    <br />
-                    {contato.endereco}
-                    <br />
-                    {contato.bairro}
-                    <br />
-                    <span className="text-ink-500">{contato.cep}</span>
-                  </address>
+                  <h2 className="u-eyebrow whitespace-nowrap text-ink-400">Onde treinamos</h2>
+                  <div className="mt-4 flex flex-col gap-5">
+                    {locais.map((l) => (
+                      <address key={l.nome} className="not-italic">
+                        <p className="u-titulo text-[0.9375rem] leading-snug text-navy-800">
+                          {l.nome}
+                        </p>
+                        <p className="mt-1 text-[0.9375rem] leading-relaxed text-ink-500">
+                          {l.endereco}
+                          <br />
+                          {l.bairro}
+                          {l.cep && (
+                            <>
+                              <br />
+                              {l.cep}
+                            </>
+                          )}
+                        </p>
+                      </address>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="u-courtrule pt-7 text-navy-800">

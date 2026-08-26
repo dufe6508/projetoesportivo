@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Projeto Esportivo Cláudio Brandão",
   },
   description:
-    "Esporte educacional gratuito para os alunos da escola, no Vale do Jatobá, em Belo Horizonte. Futsal e voleibol, treino toda semana.",
+    "Esporte educacional gratuito para os alunos da escola, no Vale do Jatobá, em Belo Horizonte. Futsal e Voleibol, treino toda semana.",
   icons: { icon: "/escudo-sm.png", apple: "/escudo.png" },
   openGraph: {
     type: "website",

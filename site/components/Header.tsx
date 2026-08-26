@@ -74,7 +74,7 @@ export function Header() {
         className={`w-auto transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]
                     ${rolou ? "h-9 md:h-10" : "h-10 md:h-12"}`}
       />
-      <span className="hidden flex-col gap-[3px] sm:flex">
+      <span className="hidden flex-col gap-[3px] xs:flex">
         <span className="text-[0.95rem] font-extrabold leading-none tracking-[-0.01em] text-white">
           Cláudio Brandão
         </span>
@@ -110,9 +110,24 @@ export function Header() {
             : undefined
         }
       >
+        {/* No celular a barra flutua sobre a foto sem fundo próprio, e escudo
+            e menu sumiam quando o topo da imagem era claro. Esta sombra curta
+            só existe antes da rolagem e só abaixo do desktop, onde o hero já
+            tem escurecimento suficiente. */}
+        {!rolou && (
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-[280%] lg:hidden"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(0,14,34,.6) 0%, rgba(0,14,34,.3) 42%, rgba(0,14,34,0) 100%)",
+            }}
+          />
+        )}
+
         <div
-          className={`mx-auto flex max-w-[1320px] items-center justify-between gap-5 px-5 transition-all
-                      duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] md:px-10
+          className={`relative mx-auto flex max-w-[1320px] items-center justify-between gap-5 px-5
+                      transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] md:px-10
                       ${rolou ? "h-[58px] md:h-[70px]" : "h-[66px] md:h-[88px]"}`}
         >
           {Marca}
@@ -240,23 +255,6 @@ export function Header() {
                         </li>
                       ))}
 
-                      {/* só o painel das equipes precisa desta linha: nos
-                          submenus de links o próprio rótulo já é o caminho
-                          para a página, e repeti-lo era uma opção a mais sem
-                          destino novo */}
-                      {item.submenu && (
-                        <li className="mt-1 border-t border-ink-100 pt-1">
-                          <Link
-                            href={item.href}
-                            className="flex items-center justify-between rounded-[11px] px-3 py-2.5
-                                       text-[0.8125rem] font-semibold text-navy-700 transition-colors
-                                       duration-150 hover:bg-navy-50"
-                          >
-                            Ver as equipes
-                            <Icone nome="CaretRight" className="h-3.5 w-3.5 opacity-55" />
-                          </Link>
-                        </li>
-                      )}
                     </ul>
                   </div>
                 </div>
@@ -284,7 +282,7 @@ export function Header() {
                 tom="claro"
                 className="px-5 py-3 text-[0.875rem]"
               >
-                Apoie
+                Seja um patrocinador
               </BotaoLink>
             </span>
 
@@ -294,7 +292,7 @@ export function Header() {
               aria-expanded={aberto}
               aria-controls="menu-movel"
               className="flex h-12 w-12 flex-col items-center justify-center gap-[5px] rounded-full
-                         border border-white/22 transition-colors duration-150 hover:bg-white/10 lg:hidden"
+                         border border-white/30 bg-white/[0.06] transition-colors duration-150 hover:bg-white/15 lg:hidden"
             >
               <span className="sr-only">{aberto ? "Fechar menu" : "Abrir menu"}</span>
               <span className={`block h-[1.5px] w-5 rounded-full bg-white transition-transform duration-200 ease-out ${aberto ? "translate-y-[6.5px] rotate-45" : ""}`} />
@@ -446,7 +444,7 @@ export function Header() {
               Instagram
             </a>
             <BotaoLink href="/apoie" tom="ouro" className="shrink-0">
-              Apoie
+              Seja um patrocinador
             </BotaoLink>
           </div>
         </div>

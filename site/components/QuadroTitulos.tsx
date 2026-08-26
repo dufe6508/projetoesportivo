@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { competicoes, titulos, type Titulo } from "@/lib/dados";
+import { competicoes, titulos, type Competicao, type Titulo } from "@/lib/dados";
 
 /**
  * Quadro de conquistas, uma linha por temporada.
@@ -20,6 +20,8 @@ type Entrada = {
   equipe: string;
   slug: string;
   competicao: Titulo["competicao"];
+  conquista: string;
+  campeao: boolean;
 };
 
 /** Explode cada título em uma entrada por ano e agrupa por temporada. */
@@ -27,11 +29,28 @@ function porTemporada(lista: Titulo[]) {
   const mapa = new Map<string, Entrada[]>();
   for (const t of lista) {
     for (const ano of t.anos) {
-      mapa.set(ano, [...(mapa.get(ano) ?? []), { equipe: t.equipe, slug: t.slug, competicao: t.competicao }]);
+      mapa.set(ano, [
+        ...(mapa.get(ano) ?? []),
+        { equipe: t.equipe, slug: t.slug, competicao: t.competicao, conquista: t.conquista, campeao: t.campeao },
+      ]);
     }
   }
   return [...mapa.entries()].sort(([a], [b]) => a.localeCompare(b));
 }
+
+/**
+ * Campeonato e colocação dividem a mesma linha da temporada, mas não a mesma
+ * frase: chamar de "campeãs" um 7º lugar seria mentira, e deixá-lo fora da
+ * linha do tempo esconderia a única estadual que a escola já jogou.
+ */
+const dizer = (e: Entrada) => {
+  // `satisfies` preserva o literal de cada competição, e nele `plural` só
+  // existe onde foi escrito; a anotação devolve o tipo comum
+  const c: Competicao = competicoes[e.competicao];
+  return e.campeao
+    ? `campeãs ${c.plural ? "dos" : "do"} ${c.sigla}`
+    : `${e.conquista} ${c.plural ? "nos" : "no"} ${c.sigla}`;
+};
 
 /** Conquistas sem ano confirmado. Não entram na linha do tempo, mas existem. */
 const semAno = titulos.filter((t) => t.anos.length === 0);
@@ -72,6 +91,12 @@ export function Escudo({
   );
 }
 
+/** "no JEBH", "nos Metropolitanos": mesma concordância, sem a conquista junto. */
+const dizerLugar = (t: Titulo) => {
+  const c: Competicao = competicoes[t.competicao];
+  return `${c.plural ? "nos" : "no"} ${c.sigla}`;
+};
+
 export function QuadroTitulos({ tom = "escuro" }: { tom?: "claro" | "escuro" }) {
   const temporadas = porTemporada(titulos);
   const escuro = tom === "escuro";
@@ -100,12 +125,16 @@ export function QuadroTitulos({ tom = "escuro" }: { tom?: "claro" | "escuro" }) 
                     className={`group -mx-1.5 flex items-center gap-2.5 rounded-[9px] px-1.5 py-1
                                 transition-colors duration-[160ms] ${realce}`}
                   >
-                    <Escudo competicao={e.competicao} />
-                    <span className={`text-[0.875rem] font-semibold leading-tight ${forte} md:text-[0.9375rem]`}>
-                      {e.equipe}
-                    </span>
-                    <span className={`text-[0.75rem] leading-tight ${apoio}`}>
-                      campeãs do {competicoes[e.competicao].sigla}
+                    <Escudo competicao={e.competicao} className="h-7 w-9 md:h-8 md:w-10" />
+                    {/* no celular equipe e conquista empilham: lado a lado, as
+                        duas frases dividiam 250px e cada uma quebrava no meio */}
+                    <span className="flex min-w-0 flex-col md:flex-row md:items-baseline md:gap-2.5">
+                      <span className={`text-[0.875rem] font-semibold leading-tight ${forte} md:text-[0.9375rem]`}>
+                        {e.equipe}
+                      </span>
+                      <span className={`text-[0.75rem] leading-tight ${apoio}`}>
+                        {dizer(e)}
+                      </span>
                     </span>
                   </Link>
                 </li>
@@ -126,8 +155,8 @@ export function QuadroTitulos({ tom = "escuro" }: { tom?: "claro" | "escuro" }) 
               {/* sigla no lugar do nome por extenso: "no Jogos Escolares" não
                   concorda em gênero */}
               <span className={`text-[0.8125rem] leading-tight ${apoio} md:text-[0.875rem]`}>
-                <span className={`font-semibold ${forte}`}>{t.conquista}</span> no{" "}
-                {competicoes[t.competicao].sigla}, com o {t.equipe}
+                <span className={`font-semibold ${forte}`}>{t.conquista}</span>{" "}
+                {dizerLugar(t)}, com o {t.equipe}
               </span>
             </span>
           </li>

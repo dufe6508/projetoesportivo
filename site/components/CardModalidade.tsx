@@ -63,13 +63,17 @@ export function CardModalidade({
           }}
         />
 
-        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-3.5 md:p-4">
-          <Titulo className="u-titulo text-[0.9375rem] leading-tight text-white md:text-[1.0625rem]">
+        {/* "Futsal Feminino" não cabe em uma linha ao lado do disco no card de
+            meia tela: o disco é decorativo e some no celular, o nome fica
+            inteiro e a fonte desce um ponto */}
+        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-3 md:p-4">
+          <Titulo className="u-titulo text-[0.875rem] leading-tight text-balance text-white md:text-[1.0625rem]">
             {m.nome}
           </Titulo>
           <span
             aria-hidden
-            className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/12 text-white
+            className="hidden h-7 w-7 shrink-0 place-items-center rounded-full bg-white/12 text-white
+                       sm:grid
                        transition-[background-color,transform] duration-300
                        ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:bg-white group-hover:text-navy-800"
           >

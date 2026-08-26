@@ -7,7 +7,7 @@ import { modalidadesAtivas } from "@/lib/dados";
 
 export const metadata: Metadata = {
   title: "Modalidades",
-  description: "Futsal e vôlei para os alunos da escola. Duas equipes em atividade, gratuitas.",
+  description: "Futsal e Vôlei para os alunos da escola. Duas equipes em atividade, gratuitas.",
 };
 
 export default function Modalidades() {
@@ -59,7 +59,7 @@ export default function Modalidades() {
                 Quer participar?
               </h2>
               <p className="mt-1.5 max-w-[44ch] text-[0.875rem] leading-relaxed text-ink-500">
-                Fale com a gente para saber horários, faixa etária e como funciona a seleção.
+                Fale conosco para obter mais informações.
               </p>
             </div>
             <BotaoLink href="/contato" className="shrink-0">

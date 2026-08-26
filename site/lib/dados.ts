@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Conteúdo do site em um só lugar.
  * Trocar texto e foto aqui, sem tocar em componente.
  *
@@ -46,6 +46,8 @@ export type Modalidade = {
   destaque?: Foto;
   /** legenda curta do destaque; é o único texto sobre foto que sobrou */
   destaqueTitulo?: string;
+  /** fundamentos e conteúdos trabalhados no treino, um por linha */
+  trabalhado?: string[];
   /** registros de competição, treino e bastidor daquela equipe */
   registros: Foto[];
   /**
@@ -62,15 +64,22 @@ export const modalidades: Modalidade[] = [
     nome: "Vôlei Feminino",
     naipe: "Feminino",
     esporte: "Voleibol",
-    resumo: "Do primeiro toque ao jogo de seis.",
+    resumo: "Regras, fundamentos técnicos e táticos e muita diversão.",
     descricao: [
-      "A maior frente do projeto em número de atletas, com elenco dividido por categoria e comissão técnica própria.",
-      "Saque, passe, levantamento e ataque na ordem, sem pular etapa. A entrada passa por seleção.",
+      "Com comissão técnica própria, nossas atletas aprendem o Voleibol do início ao fim: cada fundamento entra no treino em sua vez, e a competição vira rotina.",
+    ],
+    trabalhado: [
+      "Saques",
+      "Manchete",
+      "Ataque",
+      "Bloqueio e defesa",
+      "Levantamento",
+      "Sistemas táticos",
     ],
     elenco: {
       src: "/fotos/elenco-volei-feminino.webp",
       movel: "/fotos/elenco-volei-feminino-movel.webp",
-      alt: "Elenco completo do vôlei feminino e a comissão técnica diante da rede, no ginásio do Vale do Jatobá",
+      alt: "Elenco completo do Vôlei feminino e a comissão técnica diante da rede, no ginásio do Vale do Jatobá",
       posicao: "50% 58%",
       posicaoMobile: "50% 50%",
     },
@@ -107,28 +116,32 @@ export const modalidades: Modalidade[] = [
       },
     ],
     destaque: {
-      src: "/fotos/competicao-jebh-atletas-bandeira.webp",
-      alt: "Atletas com a bandeira da escola diante do painel dos Jogos Escolares de Belo Horizonte",
-      posicao: "50% 32%",
-      posicaoMobile: "50% 30%",
+      src: "/fotos/destaque-volei-feminino.webp",
+      alt: "Elenco do Vôlei feminino em duas fileiras diante da rede, com a comissão técnica",
+      posicao: "50% 50%",
+      posicaoMobile: "50% 50%",
     },
-    destaqueTitulo: "Nos Jogos Escolares de Belo Horizonte",
     registros: [
       {
+        src: "/fotos/competicao-jebh-atletas-bandeira.webp",
+        alt: "Atletas com a bandeira da escola diante do painel dos Jogos Escolares de Belo Horizonte",
+        posicao: "50% 32%",
+      },
+      {
         src: "/fotos/competicao-volei-premiacao.webp",
-        alt: "Duas atletas do vôlei feminino com troféu e medalhas depois da partida",
+        alt: "Duas atletas do Vôlei feminino com troféu e medalhas depois da partida",
         // origem em retrato dentro de recorte largo: o eixo Y é o que decide
         // se os rostos entram, e eles estão no primeiro quinto da foto
         posicao: "50% 20%",
       },
       {
         src: "/fotos/treinamento-volei-dupla.webp",
-        alt: "Duas atletas conversando durante o treino de vôlei",
+        alt: "Duas atletas conversando durante o treino de Vôlei",
         posicao: "50% 34%",
       },
       {
         src: "/fotos/treinamento-volei-ginasio.webp",
-        alt: "Ginásio poliesportivo durante o treino de vôlei feminino",
+        alt: "Ginásio poliesportivo durante o treino de Vôlei feminino",
         posicao: "50% 50%",
       },
     ],
@@ -138,22 +151,31 @@ export const modalidades: Modalidade[] = [
     nome: "Futsal Feminino",
     naipe: "Feminino",
     esporte: "Futsal",
-    resumo: "Fundamento, coletivo e leitura de jogo.",
+    resumo: "Regras, fundamentos técnicos e táticos e muita diversão.",
     descricao: [
-      "Treina em quadra coberta, com material próprio e comissão técnica acompanhando de perto.",
-      "A entrada passa por seleção. Quem não fica em uma temporada continua treinando e tenta na próxima.",
+      "Com comissão técnica própria, nossas atletas aprendem o Futsal do início ao fim: cada fundamento entra no treino em sua vez, e a competição vira rotina.",
+    ],
+    trabalhado: [
+      "Controle de bola",
+      "Finta e drible",
+      "Condução",
+      "Passe e recepção",
+      "Chute e cabeceio",
+      "Sistemas táticos",
     ],
     elenco: {
       src: "/fotos/elenco-futsal-feminino.webp",
       movel: "/fotos/elenco-futsal-feminino-movel.webp",
-      alt: "Elenco completo do futsal feminino na quadra externa da escola",
-      posicao: "50% 50%",
-      posicaoMobile: "50% 62%",
+      alt: "Elenco completo do Futsal feminino e a comissão técnica na quadra coberta, diante do gol",
+      posicao: "50% 49%",
+      posicaoMobile: "50% 49%",
     },
     capa: {
-      src: "/fotos/elenco-futsal-feminino.webp",
+      // recorte próprio, fechado no grupo: o quadro inteiro do elenco vira um
+      // risco de azul quando cai na miniatura de 48px do menu
+      src: "/fotos/capa-futsal-feminino.webp",
       alt: "",
-      posicao: "50% 55%",
+      posicao: "50% 45%",
     },
     atletas: [],
     comissao: [
@@ -177,16 +199,25 @@ export const modalidades: Modalidade[] = [
       },
     ],
     destaque: {
-      src: "/fotos/competicao-futsal-feminino-campeas-jebh.webp",
-      alt: "Equipe de futsal feminino campeã dos Jogos Escolares de Belo Horizonte de 2026",
-      posicao: "50% 42%",
-      posicaoMobile: "50% 40%",
+      src: "/fotos/destaque-futsal-feminino.webp",
+      alt: "Elenco do Futsal feminino perfilado na quadra da escola, diante do gol e do grafite",
+      posicao: "50% 50%",
+      posicaoMobile: "50% 50%",
     },
-    destaqueTitulo: "Campeãs do JEBH 2026",
     registros: [
       {
+        src: "/fotos/competicao-futsal-feminino-campeas-jebh.webp",
+        alt: "Equipe de Futsal feminino campeã dos Jogos Escolares de Belo Horizonte de 2026",
+        posicao: "50% 42%",
+      },
+      {
+        src: "/fotos/competicao-futsal-feminino-comemoracao-medalhas.webp",
+        alt: "Atletas do Futsal feminino comemorando com as medalhas e o troféu erguido na quadra",
+        posicao: "50% 62%",
+      },
+      {
         src: "/fotos/futsal-feminino-equipe-ginasio.webp",
-        alt: "Equipe de futsal feminino reunida em quadra de ginásio antes da partida",
+        alt: "Equipe de Futsal feminino reunida em quadra de ginásio antes da partida",
         posicao: "50% 38%",
       },
       {
@@ -209,7 +240,7 @@ export const modalidades: Modalidade[] = [
     elenco: {
       src: "/fotos/elenco-futsal-masculino.webp",
       movel: "/fotos/elenco-futsal-masculino-movel.webp",
-      alt: "Elenco completo do futsal masculino diante de parede azul, com uniforme preto e dourado",
+      alt: "Elenco completo do Futsal masculino diante de parede azul, com uniforme preto e dourado",
       posicao: "50% 74%",
       posicaoMobile: "50% 78%",
     },
@@ -331,6 +362,8 @@ export type Local = {
   nome: string;
   endereco: string;
   bairro: string;
+  /** só onde é conhecido; a página de contato o exibe quando existe */
+  cep?: string;
   modalidades: string[];
   descricao: string;
   foto: Foto | null;
@@ -339,8 +372,9 @@ export type Local = {
 export const locais: Local[] = [
   {
     nome: "Poliesportivo Vale do Jatobá",
-    endereco: "Vale do Jatobá",
-    bairro: "Belo Horizonte, MG",
+    endereco: "Av. Senador Levindo Coelho, 2280",
+    bairro: "Mangueiras, Belo Horizonte, MG",
+    cep: "CEP 30666-420",
     modalidades: ["Vôlei Feminino"],
     descricao: "Ginásio coberto, quadra oficial e arquibancada.",
     foto: {
@@ -353,6 +387,7 @@ export const locais: Local[] = [
     nome: "Escola Estadual Professor Cláudio Brandão",
     endereco: "Av. Senador Levindo Coelho, 250",
     bairro: "Vale do Jatobá, Belo Horizonte, MG",
+    cep: "CEP 30662-290",
     modalidades: ["Futsal Feminino"],
     descricao: "A quadra da escola, onde o projeto começou.",
     foto: {
@@ -368,7 +403,7 @@ export const principios = [
   {
     icone: "Alarm",
     titulo: "Disciplina",
-    texto: "O treino começa na hora marcada, chova ou faça sol.",
+    texto: "O treino começa na hora marcada.",
   },
   {
     icone: "Handshake",
@@ -378,22 +413,22 @@ export const principios = [
   {
     icone: "SneakerMove",
     titulo: "Superação",
-    texto: "A comparação é com o próprio ontem, não com o colega.",
+    texto: "A comparação é consigo mesmo, não com o colega.",
   },
   {
     icone: "GraduationCap",
     titulo: "Escola primeiro",
-    texto: "Quadra não substitui sala de aula.",
+    texto: "Os treinos não substituem a sala de aula.",
   },
   {
     icone: "UsersThree",
     titulo: "Coletivo",
-    texto: "O grupo puxa quem está atrás e segura quem quer atropelar.",
+    texto: "É importante entender que somos um time só.",
   },
   {
     icone: "SealCheck",
     titulo: "Gratuidade",
-    texto: "Sem mensalidade, taxa ou cobrança de uniforme.",
+    texto: "Sem mensalidade.",
   },
 ];
 
@@ -404,19 +439,19 @@ export const principios = [
  */
 export const galeria: Foto[] = [
   {
-    src: "/fotos/competicao-futsal-feminino-campeas-jebh.webp",
-    alt: "Equipe de futsal feminino campeã dos Jogos Escolares de Belo Horizonte de 2026",
-    posicao: "50% 45%",
+    src: "/fotos/treinamento-volei-ginasio.webp",
+    alt: "Ginásio poliesportivo durante o treino de Vôlei feminino",
+    posicao: "50% 52%",
   },
   {
     src: "/fotos/competicao-volei-premiacao.webp",
-    alt: "Atletas do vôlei feminino com troféu e medalhas depois da partida",
+    alt: "Atletas do Vôlei feminino com troféu e medalhas depois da partida",
     posicao: "50% 20%",
   },
   {
-    src: "/fotos/treinamento-volei-ginasio.webp",
-    alt: "Ginásio poliesportivo durante o treino de vôlei feminino",
-    posicao: "50% 52%",
+    src: "/fotos/treinamento-volei-dupla.webp",
+    alt: "Duas atletas conversando durante o treino de Vôlei",
+    posicao: "50% 40%",
   },
   {
     src: "/fotos/competicao-jebh-atletas-bandeira.webp",
@@ -426,7 +461,7 @@ export const galeria: Foto[] = [
 ];
 
 /* ------------------------------------------------------------------
-   Títulos.
+   Competições.
 
    Uma competição é uma marca de terceiro: entra pelo escudo oficial, nunca
    redesenhada. Cada uma tem PNG (a versão em cor, que a interface usa) e SVG
@@ -448,17 +483,19 @@ export type Competicao = {
    * ladrilho escuro. É informação da marca, não preferência de layout.
    */
   fundo: "claro" | "escuro";
+  /**
+   * Sigla no plural. "Campeãs do Metropolitanos" não concorda; quem escreve a
+   * frase é o quadro de títulos, e ele só sabe disso se a competição disser.
+   */
+  plural?: boolean;
 };
 
+/**
+ * A ordem aqui é a ordem em que o site lista: do calendário de maior alcance
+ * para o de menor. Toda listagem lê deste objeto, então mudar a ordem aqui
+ * muda a página, não o contrário.
+ */
 export const competicoes = {
-  jime: {
-    sigla: "JIME",
-    nome: "Jogos Intercolegiais Metropolitanos",
-    ambito: "Região metropolitana de Belo Horizonte",
-    logo: "/competicoes/jime.png",
-    vetor: "/competicoes/jime.svg",
-    fundo: "claro",
-  },
   jebh: {
     sigla: "JEBH",
     nome: "Jogos Escolares de Belo Horizonte",
@@ -466,6 +503,7 @@ export const competicoes = {
     logo: "/competicoes/jebh.png",
     vetor: "/competicoes/jebh.svg",
     fundo: "escuro",
+    plural: false,
   },
   jemg: {
     sigla: "JEMG",
@@ -474,6 +512,25 @@ export const competicoes = {
     logo: "/competicoes/jemg.png",
     vetor: "/competicoes/jemg.svg",
     fundo: "claro",
+    plural: false,
+  },
+  metropolitano: {
+    sigla: "Metropolitanos",
+    nome: "Campeonatos Metropolitanos Escolares de Escolas Públicas",
+    ambito: "Escolas públicas da região metropolitana",
+    logo: "/competicoes/metropolitano.png",
+    vetor: "/competicoes/metropolitano.svg",
+    fundo: "claro",
+    plural: true,
+  },
+  jime: {
+    sigla: "JIME",
+    nome: "Jogos Intercolegiais Metropolitanos",
+    ambito: "Escolas públicas da região metropolitana",
+    logo: "/competicoes/jime.png",
+    vetor: "/competicoes/jime.svg",
+    fundo: "claro",
+    plural: false,
   },
 } satisfies Record<string, Competicao>;
 
@@ -498,7 +555,7 @@ export const titulos: Titulo[] = [
     slug: "volei-feminino",
     competicao: "jime",
     conquista: "Bicampeãs",
-    anos: ["2023", "2025"],
+    anos: ["2023", "2024"],
     campeao: true,
   },
   {
@@ -518,14 +575,25 @@ export const titulos: Titulo[] = [
     campeao: true,
   },
   {
+    // a estadual saiu na mesma temporada do título municipal: o JEMG de 2026
+    // veio junto com o JEBH, e é a única vez que uma equipe da escola jogou
+    // esse nível
     equipe: "Futsal Feminino",
     slug: "futsal-feminino",
     competicao: "jemg",
     conquista: "7º lugar",
-    anos: [],
+    anos: ["2026"],
     campeao: false,
   },
 ];
+
+/** Só o que é campeonato conta como título; colocação entra na estante, não na conta. */
+export const totalTitulos = titulos.reduce((n, t) => (t.campeao ? n + t.anos.length : n), 0);
+
+/** Uma temporada com dois títulos continua sendo uma temporada. */
+export const temporadasComTitulo = new Set(
+  titulos.filter((t) => t.campeao).flatMap((t) => t.anos),
+).size;
 
 /** Equipes na ordem do site, cada uma com os títulos que já tem. */
 export const titulosPorEquipe = modalidadesAtivas
@@ -581,23 +649,46 @@ export const conta = {
    número inventado ou linha vazia.
    ------------------------------------------------------------------ */
 
-export type MembroDiretoria = {
+export type Responsavel = {
   nome: string;
-  cargo: string;
-  /** o que a pessoa responde na prática, em uma linha */
-  atribuicao?: string;
-  /** retrato 3:4; sem foto o card usa o bloco-marca */
-  foto?: string;
+  /** retrato 4:5 */
+  foto: string;
+  /** trajetória em um parágrafo */
+  resumo?: string;
+  /** formação e certificações, uma por linha */
+  formacao?: string[];
 };
 
-/**
- * Diretoria eleita da associação.
- * Lista vazia rende o estado de espera desenhado em /transparencia/diretoria.
- */
-export const diretoria: MembroDiretoria[] = [];
+/** Quem responde pelo projeto, com nome e rosto. */
+export const responsaveis: Responsavel[] = [
+  {
+    nome: "Felipe Silvestre",
+    foto: "/fotos/diretor-felipe-silvestre.webp",
+    resumo:
+      "Experiência na área de Educação Física escolar (Educação Infantil, Ensino Fundamental e Médio), com atuação em escolas da rede particular e pública há mais de 10 anos. Experiência como coordenador e treinador de Escolas de Esportes, modalidades Futebol/Futsal e Voleibol.",
+    formacao: [
+      "Graduado em Licenciatura em Educação Física",
+      "Graduado em Bacharel em Educação Física",
+      "Pós-graduado em Educação Física Escolar",
+      "Pós-graduado em Esporte Escolar",
+      "FIVB Coaches Course, Volleyball, Level I e II",
+      "CBF Academy, Treinador de Futebol, Licença C",
+    ],
+  },
+  {
+    nome: "Hevelin Mesquita",
+    foto: "/fotos/diretora-hevelin-mesquita.webp",
+    resumo:
+      "Experiência na área de Educação Física escolar (Educação Infantil, Ensino Fundamental e Médio), com atuação em escolas da rede particular e pública há mais de 10 anos. Experiência como coordenadora escolar e treinadora de Escolas de Esportes, modalidade Voleibol.",
+    formacao: [
+      "Graduada em Licenciatura em Educação Física",
+      "Pós-graduada em Educação Física Escolar",
+    ],
+  },
+];
 
-/** Vigência do mandato desta diretoria. */
-export const mandatoDiretoria = "Gestão 2026 a 2028";
+/** Rótulo da seção de responsáveis. */
+export const mandatoDiretoria = "Gestão";
 
 export const institucional = {
   natureza: "Associação civil sem fins lucrativos",
@@ -615,20 +706,13 @@ export type Documento = {
 
 export const documentos: Documento[] = [
   {
-    nome: "Estatuto social",
-    descricao: "Finalidade, estrutura de governança e regras de funcionamento da associação.",
-  },
-  {
     nome: "Ata de fundação",
     descricao: "Assembleia que criou a associação e elegeu a primeira diretoria.",
+    arquivo: "/documentos/ata-de-fundacao.pdf",
   },
   {
-    nome: "Cartão CNPJ",
-    descricao: "Inscrição na Receita Federal, com natureza jurídica e atividade registrada.",
-  },
-  {
-    nome: "Prestação de contas",
-    descricao: "Entradas, saídas e destino dos recursos do exercício, publicada ao fim de cada ano.",
+    nome: "Estatuto social",
+    descricao: "Finalidade, estrutura de governança e regras de funcionamento da associação.",
   },
 ];
 
@@ -638,22 +722,27 @@ export const documentos: Documento[] = [
  * pode existir em duas versões que divergem com o tempo.
  */
 export const destinoRecursos = [
-  { item: "Material esportivo", nota: "Bolas, redes, cones e reposição de desgaste" },
-  { item: "Uniforme", nota: "Jogo e treino, para as equipes em atividade" },
-  { item: "Transporte", nota: "Deslocamento das equipes para festivais e amistosos" },
-  { item: "Estrutura de treino", nota: "Manutenção do que é usado toda semana" },
+  {
+    item: "Estrutura de treino",
+    nota: "Material esportivo, bolas, redes e cones, e a manutenção do que é usado toda semana",
+  },
+  { item: "Uniforme", nota: "Jogo e treino, para as equipes escolares e competitivas" },
+  {
+    item: "Transporte",
+    nota: "Deslocamento das equipes para amistosos, festivais e campeonatos",
+  },
+  {
+    item: "Profissionais",
+    nota: "Folha salarial dos profissionais e do projeto",
+  },
 ];
 
 export const navegacao = [
   { href: "/", rotulo: "Home" },
   { href: "/sobre", rotulo: "O projeto" },
   { href: "/modalidades", rotulo: "Modalidades", submenu: true },
-  { href: "/titulos", rotulo: "Títulos" },
-  {
-    href: "/transparencia",
-    rotulo: "Transparência",
-    filhos: [{ href: "/transparencia/diretoria", rotulo: "Diretoria" }],
-  },
+  { href: "/titulos", rotulo: "Competições" },
+  { href: "/transparencia", rotulo: "Gestão" },
   { href: "/apoie", rotulo: "Apoie" },
   { href: "/contato", rotulo: "Contato" },
 ] as {

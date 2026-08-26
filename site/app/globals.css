@@ -81,8 +81,15 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4 { text-wrap: balance; margin: 0; }
-p { text-wrap: pretty; margin: 0; }
+/* Dentro de `@layer base` de propósito. Solto, fora de camada, este bloco
+   ganhava de qualquer utilitário do Tailwind (camada perde para regra sem
+   camada), e todo `mt-*` escrito num parágrafo ou título do site era
+   silenciosamente descartado. Era daí que vinha o texto de apoio colado no
+   título em quase toda seção. */
+@layer base {
+  h1, h2, h3, h4 { text-wrap: balance; margin: 0; }
+  p { text-wrap: pretty; margin: 0; }
+}
 
 :focus-visible {
   outline: none;
@@ -211,6 +218,15 @@ p { text-wrap: pretty; margin: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .carrossel-trilho { scroll-behavior: auto; }
+}
+
+/* ---------- régua da troca de responsável ----------
+   Preenche o fio embaixo do nome ativo na Gestão, no ritmo do revezamento das
+   fichas. Só transform, e sob `prefers-reduced-motion` a regra geral encurta a
+   duração: o fio aparece cheio de uma vez, sem varredura. */
+@keyframes pecb-regua {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 
 /* ---------- estados de entrada ----------

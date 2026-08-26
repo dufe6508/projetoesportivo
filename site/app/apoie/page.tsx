@@ -57,11 +57,11 @@ export default function Apoie() {
     <>
       <CabecalhoPagina
         sobretitulo="Apoie"
-        titulo="Mude uma história"
+        titulo="Auxilie a mudar mais histórias"
         texto={
           TELA_COMPLETA
             ? "Gratuito para quem participa. Há quatro formas de estar junto."
-            : "Gratuito para quem participa, sustentado por quem apoia."
+            : "Sua contribuição transformando vida por meio do esporte."
         }
       />
 

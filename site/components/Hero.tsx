@@ -46,17 +46,19 @@ const laminas: Lamina[] = [
     posicao: "50% 58%",
     posicaoMobile: "50% 50%",
     titulo: "Esporte que transforma",
-    apoio: "Futsal e vôlei no Vale do Jatobá.",
+    apoio: "Voleibol e Futsal para adolescentes e jovens.",
   },
   {
     // o convite ao patrocínio entra sobre o elenco do futsal: quem sustenta o
     // material, o uniforme e o transporte sustenta um grupo, não uma quadra
-    foto: "/fotos/elenco-futsal-feminino.webp",
+    // recorte 16:9 fechado no grupo (ver _novas.mjs): no quadro largo do
+    // elenco o time saía do tamanho de um rodapé na tela do monitor
+    foto: "/fotos/hero-futsal-feminino.webp",
     fotoMovel: "/fotos/elenco-futsal-feminino-movel.webp",
-    posicao: "50% 68%",
-    posicaoMobile: "50% 62%",
-    titulo: "Seja patrocinador",
-    apoio: "Material, uniforme e transporte.",
+    posicao: "50% 50%",
+    posicaoMobile: "50% 50%",
+    titulo: "Seja um patrocinador",
+    apoio: "Ajude o desenvolvimento do projeto.",
   },
 ];
 
@@ -92,7 +94,7 @@ export function Hero() {
   return (
     <section
       ref={raiz}
-      className="relative isolate h-[70svh] min-h-[440px] w-full overflow-hidden
+      className="relative isolate h-[68svh] min-h-[420px] w-full overflow-hidden
                  bg-navy-950 md:h-[90svh] md:min-h-[560px]"
       aria-roledescription="carrossel"
       aria-label="Destaques do projeto"
@@ -120,13 +122,21 @@ export function Hero() {
                         ${i === atual ? "scale-[1.06]" : "scale-100"}`}
           />
 
-          {/* O texto foi para o alto, então o escurecimento também.
-              As três fotos de elenco têm arquitetura em cima (parede, rede,
-              muro) e gente embaixo: escrever no topo é escrever sobre parede,
-              não sobre rosto, que era o problema da versão ancorada no pé. */}
+          {/* No monitor o texto abre no alto da foto e o escurecimento
+              acompanha. No celular o recorte 3:4 fecha no grupo e sobra pouca
+              parede: ali o texto desce para o pé, o miolo da foto fica limpo e
+              só o topo mantém a sombra que a barra de navegação precisa. */}
           <div
             aria-hidden
-            className="absolute inset-0"
+            className="absolute inset-0 md:hidden"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(0,14,34,.5) 0%, rgba(0,14,34,.18) 26%, rgba(0,14,34,.03) 46%, rgba(0,14,34,.55) 76%, rgba(0,14,34,.94) 100%)",
+            }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 hidden md:block"
             style={{
               background:
                 "linear-gradient(180deg, rgba(0,14,34,.9) 0%, rgba(0,14,34,.72) 26%, rgba(0,14,34,.28) 52%, rgba(0,14,34,.5) 100%)",
@@ -141,22 +151,22 @@ export function Hero() {
             }}
           />
 
-          <div className="relative flex h-full items-start">
-            <div className="mx-auto w-full max-w-[1320px] px-5 pt-[4.75rem] md:px-10 md:pt-[7.75rem]">
+          <div className="relative flex h-full items-end pb-14 md:items-start md:pb-0">
+            <div className="mx-auto w-full max-w-[1320px] px-5 md:px-10 md:pt-[7.75rem]">
               {/* Sem a linha de localização e com título curto: o bairro já
                   aparece no apoio, no rodapé e na página de contato, e era o
                   terceiro nível de texto competindo dentro do mesmo bloco. */}
               <div className="max-w-[58ch]">
                 <h1
                   data-anima
-                  className="u-display max-w-[20ch] text-[clamp(1.75rem,6.6vw,4.25rem)] text-white"
+                  className="u-display max-w-[15ch] text-[clamp(1.7rem,7.6vw,4.25rem)] text-white md:max-w-[20ch]"
                 >
                   {l.titulo}
                 </h1>
                 <p
                   data-anima
-                  className="mt-2.5 max-w-[32ch] text-[0.875rem] leading-relaxed text-white/70
-                             md:mt-4 md:max-w-[38ch] md:text-[1.0625rem]"
+                  className="mt-2 max-w-[34ch] text-[0.9375rem] leading-snug text-white/75
+                             md:mt-4 md:max-w-[38ch] md:text-[1.0625rem] md:leading-relaxed"
                 >
                   {l.apoio}
                 </p>
@@ -190,7 +200,7 @@ export function Hero() {
       </div>
 
       {/* posição, centralizada no pé */}
-      <div className="absolute inset-x-0 bottom-5 z-10 md:bottom-8">
+      <div className="absolute inset-x-0 bottom-3 z-10 md:bottom-8">
         <div className="flex items-center justify-center gap-2">
           {laminas.map((l, i) => (
             <button
