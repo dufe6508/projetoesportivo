@@ -423,7 +423,7 @@ export const principios = [
   {
     icone: "UsersThree",
     titulo: "Coletivo",
-    texto: "É importante entender que somos um time só.",
+    texto: "Aqui o coletivo importa.",
   },
   {
     icone: "SealCheck",
