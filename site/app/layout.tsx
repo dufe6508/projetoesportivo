@@ -16,7 +16,7 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pecb.org.br"),
+  metadataBase: new URL("https://claudiobrandaoesportes.com.br"),
   title: {
     default: "Projeto Esportivo Cláudio Brandão",
     template: "%s | Projeto Esportivo Cláudio Brandão",

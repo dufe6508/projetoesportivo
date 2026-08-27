@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { Botao } from "./Botao";
+import { enviarContato } from "@/lib/enviar-contato";
 
 type Estado = "parado" | "enviando" | "ok" | "erro";
 type Erros = Partial<Record<"nome" | "email" | "mensagem", string>>;
@@ -21,6 +22,18 @@ const campo =
   "focus:border-navy-600 focus-visible:shadow-[0_0_0_3px_rgb(0_61_149/0.22)]";
 
 const rotulo = "block text-[0.875rem] font-semibold text-navy-800";
+
+/** Formata dígitos como (00) 00000-0000 conforme digita; limita a 11 dígitos. */
+function mascaraTelefone(valor: string) {
+  const digitos = valor.replace(/\D/g, "").slice(0, 11);
+  const ddd = digitos.slice(0, 2);
+  const meio = digitos.slice(2, digitos.length > 10 ? 7 : 6);
+  const fim = digitos.slice(digitos.length > 10 ? 7 : 6, 11);
+  if (!ddd) return "";
+  if (!meio) return `(${ddd}`;
+  if (!fim) return `(${ddd}) ${meio}`;
+  return `(${ddd}) ${meio}-${fim}`;
+}
 
 export function Formulario() {
   const [estado, setEstado] = useState<Estado>("parado");
@@ -53,12 +66,11 @@ export function Formulario() {
     }
 
     setEstado("enviando");
-    try {
-      // ponytail: sem backend ainda. Trocar por Server Action ou serviço de e-mail.
-      await new Promise((r) => setTimeout(r, 900));
+    const resultado = await enviarContato(dados);
+    if (resultado.ok) {
       setEstado("ok");
       form.current?.reset();
-    } catch {
+    } else {
       setEstado("erro");
     }
   }
@@ -149,6 +161,10 @@ export function Formulario() {
             autoComplete="tel"
             className={`${campo} mt-2`}
             placeholder="(31) 90000-0000"
+            maxLength={16}
+            onChange={(e) => {
+              e.currentTarget.value = mascaraTelefone(e.currentTarget.value);
+            }}
           />
         </div>
 
