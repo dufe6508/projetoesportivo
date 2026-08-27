@@ -713,6 +713,7 @@ export const documentos: Documento[] = [
   {
     nome: "Estatuto social",
     descricao: "Finalidade, estrutura de governança e regras de funcionamento da associação.",
+    arquivo: "/documentos/estatuto-social.pdf",
   },
 ];
 

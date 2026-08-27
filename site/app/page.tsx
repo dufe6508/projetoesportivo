@@ -113,9 +113,127 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------- origem, âncora escura ----------
+           Texto em cima, fotos em faixa larga embaixo.
+
+           Antes as quatro fotos dividiam a linha com o texto, em ladrilho
+           retrato. Duas coisas quebravam ali: a foto da quadra da escola é
+           larga na origem e virava metade dela para caber em pé, ampliada,
+           mole; e a coluna de fotos ficava o dobro da altura do parágrafo ao
+           lado. Na faixa cada foto aparece menor, recortada de leve, e a
+           sequência passa a contar a história na ordem: o primeiro time, a
+           quadra onde começou, a rotina, onde se treina hoje. */}
+      <section className="on-navy relative u-sec bg-navy-800" aria-labelledby="t-origem">
+        <Curva de="var(--color-navy-50)" forma="onda" />
+        <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
+          <div className="grid gap-5 lg:grid-cols-[0.92fr_1fr] lg:items-end lg:gap-16">
+            <Reveal>
+              <p className="u-eyebrow text-white/50">Como começou</p>
+              <h2
+                id="t-origem"
+                className="u-titulo mt-2.5 max-w-[20ch] text-[clamp(1.55rem,5.4vw,2.85rem)] text-white md:mt-4"
+              >
+                Partindo dos alunos, muita dedicação e trabalho coletivo.
+              </h2>
+              <p className="mt-3 max-w-[34ch] text-[0.875rem] font-semibold leading-snug text-white/55 md:text-[0.9375rem]">
+                Aqui o trabalho em equipe importa
+              </p>
+            </Reveal>
+
+            <div>
+              <TextoScrub
+                className="u-measure text-[1rem] leading-[1.75] text-white/75 md:text-[1.0625rem] md:leading-[1.8]"
+                texto="Um grupo de alunos queria aprender Voleibol e competir. Os professores viram a necessidade de organização e começaram a auxiliar o projeto em seu desenvolvimento."
+              />
+              <Reveal className="mt-5">
+                <BotaoLink href="/sobre" tom="contornoClaro">
+                  Conheça o projeto
+                </BotaoLink>
+              </Reveal>
+            </div>
+          </div>
+
+          {/* A legenda não descreve a foto, situa a etapa. É ela que faz as
+              quatro imagens virarem uma sequência em vez de uma grade. */}
+          <Reveal stagger className="mt-9 grid grid-cols-2 gap-3 md:mt-14 md:grid-cols-4 md:gap-5">
+            {origem.map((f, i) => (
+              <figure key={f.src} className="js-reveal m-0">
+                <div className="relative aspect-4/3 overflow-hidden rounded-[14px] bg-navy-900">
+                  <Image
+                    src={f.src}
+                    alt={f.alt}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 768px) 46vw, 23vw"
+                    style={{ objectPosition: f.posicao }}
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="mt-2.5 flex items-baseline gap-2">
+                  <span className="u-tabular text-[0.6875rem] font-bold text-white/40">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[0.8125rem] font-semibold leading-snug text-white">
+                    {f.etapa}
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- princípios ---------- */}
+      <section className="relative u-sec bg-ink-50" aria-labelledby="t-principios">
+        <Curva de="var(--color-navy-950)" forma="dupla" />
+        <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
+          <Reveal className="max-w-[52ch]">
+            <p className="u-eyebrow text-ink-400">Valores e princípios</p>
+            <h2
+              id="t-principios"
+              className="u-display mt-2.5 text-[clamp(1.7rem,6.4vw,3.2rem)] text-navy-800 md:mt-4"
+            >
+              Seis combinados que valem mais que o placar
+            </h2>
+          </Reveal>
+
+          {/* Sem card: ícone, título e frase numa linha, separados por régua.
+              Seis caixas com borda e sombra viravam uma pilha no celular e o
+              contorno não carregava informação nenhuma. */}
+          <Reveal stagger className="mt-6 grid gap-x-8 md:mt-10 md:grid-cols-2 lg:grid-cols-3">
+            {principios.map((p) => (
+              <article
+                key={p.titulo}
+                className="js-reveal group flex items-start gap-3 border-t border-ink-200 py-3.5
+                           md:gap-4 md:py-5"
+              >
+                <span
+                  aria-hidden
+                  className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full
+                             bg-white text-navy-700 ring-1 ring-ink-200 transition-colors
+                             duration-300 group-hover:bg-navy-800 group-hover:text-white
+                             group-hover:ring-navy-800 md:h-9 md:w-9"
+                >
+                  <Icone nome={p.icone} className="h-[17px] w-[17px] md:h-[19px] md:w-[19px]" />
+                </span>
+                <div className="min-w-0">
+                  <h3 className="u-titulo text-[0.9375rem] text-navy-800 md:text-[1.0625rem]">
+                    {p.titulo}
+                  </h3>
+                  <p className="mt-0.5 text-[0.8125rem] leading-snug text-ink-500 md:text-[0.875rem]">
+                    {p.texto}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
       {/* ---------- modalidades ---------- */}
-      <section className="u-sec bg-white" aria-labelledby="t-modalidades">
-        <div className="mx-auto max-w-[1320px] px-5 md:px-10">
+      <section className="relative u-sec bg-white" aria-labelledby="t-modalidades">
+        <Curva de="var(--color-navy-800)" forma="onda" />
+        <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
           <Reveal className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8">
             <div>
               <h2
@@ -245,126 +363,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- origem, âncora escura ----------
-           Texto em cima, fotos em faixa larga embaixo.
-
-           Antes as quatro fotos dividiam a linha com o texto, em ladrilho
-           retrato. Duas coisas quebravam ali: a foto da quadra da escola é
-           larga na origem e virava metade dela para caber em pé, ampliada,
-           mole; e a coluna de fotos ficava o dobro da altura do parágrafo ao
-           lado. Na faixa cada foto aparece menor, recortada de leve, e a
-           sequência passa a contar a história na ordem: o primeiro time, a
-           quadra onde começou, a rotina, onde se treina hoje. */}
-      <section className="on-navy relative u-sec bg-navy-800" aria-labelledby="t-origem">
-        <Curva de="var(--color-navy-950)" forma="onda" />
+      {/* ---------- âncora escura: galeria ---------- */}
+      <section className="on-navy relative u-sec bg-navy-950" aria-labelledby="t-galeria">
         <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
-          <div className="grid gap-5 lg:grid-cols-[0.92fr_1fr] lg:items-end lg:gap-16">
-            <Reveal>
-              <p className="u-eyebrow text-white/50">Como começou</p>
-              <h2
-                id="t-origem"
-                className="u-titulo mt-2.5 max-w-[20ch] text-[clamp(1.55rem,5.4vw,2.85rem)] text-white md:mt-4"
-              >
-                Partindo dos alunos, muita dedicação e trabalho coletivo.
-              </h2>
-              <p className="mt-3 max-w-[34ch] text-[0.875rem] font-semibold leading-snug text-white/55 md:text-[0.9375rem]">
-                Aqui o trabalho em equipe importa
-              </p>
-            </Reveal>
-
-            <div>
-              <TextoScrub
-                className="u-measure text-[1rem] leading-[1.75] text-white/75 md:text-[1.0625rem] md:leading-[1.8]"
-                texto="Um grupo de alunos queria aprender Voleibol e competir. Os professores viram a necessidade de organização e começaram a auxiliar o projeto em seu desenvolvimento."
-              />
-              <Reveal className="mt-5">
-                <BotaoLink href="/sobre" tom="contornoClaro">
-                  Conheça o projeto
-                </BotaoLink>
-              </Reveal>
-            </div>
-          </div>
-
-          {/* A legenda não descreve a foto, situa a etapa. É ela que faz as
-              quatro imagens virarem uma sequência em vez de uma grade. */}
-          <Reveal stagger className="mt-9 grid grid-cols-2 gap-3 md:mt-14 md:grid-cols-4 md:gap-5">
-            {origem.map((f, i) => (
-              <figure key={f.src} className="js-reveal m-0">
-                <div className="relative aspect-4/3 overflow-hidden rounded-[14px] bg-navy-900">
-                  <Image
-                    src={f.src}
-                    alt={f.alt}
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 768px) 46vw, 23vw"
-                    style={{ objectPosition: f.posicao }}
-                    className="object-cover"
-                  />
-                </div>
-                <figcaption className="mt-2.5 flex items-baseline gap-2">
-                  <span className="u-tabular text-[0.6875rem] font-bold text-white/40">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-[0.8125rem] font-semibold leading-snug text-white">
-                    {f.etapa}
-                  </span>
-                </figcaption>
-              </figure>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ---------- princípios ---------- */}
-      <section className="relative u-sec bg-ink-50" aria-labelledby="t-principios">
-        <Curva de="var(--color-navy-800)" forma="dupla" />
-        <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
-          <Reveal className="max-w-[52ch]">
-            <p className="u-eyebrow text-ink-400">Valores e princípios</p>
+          <Reveal className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-8">
             <h2
-              id="t-principios"
-              className="u-display mt-2.5 text-[clamp(1.7rem,6.4vw,3.2rem)] text-navy-800 md:mt-4"
+              id="t-galeria"
+              className="u-display max-w-[15ch] text-[clamp(1.7rem,6.4vw,3.2rem)] text-white"
             >
-              Seis combinados que valem mais que o placar
+              Nossa rotina
             </h2>
           </Reveal>
 
-          {/* Sem card: ícone, título e frase numa linha, separados por régua.
-              Seis caixas com borda e sombra viravam uma pilha no celular e o
-              contorno não carregava informação nenhuma. */}
-          <Reveal stagger className="mt-6 grid gap-x-8 md:mt-10 md:grid-cols-2 lg:grid-cols-3">
-            {principios.map((p) => (
-              <article
-                key={p.titulo}
-                className="js-reveal group flex items-start gap-3 border-t border-ink-200 py-3.5
-                           md:gap-4 md:py-5"
-              >
-                <span
-                  aria-hidden
-                  className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full
-                             bg-white text-navy-700 ring-1 ring-ink-200 transition-colors
-                             duration-300 group-hover:bg-navy-800 group-hover:text-white
-                             group-hover:ring-navy-800 md:h-9 md:w-9"
-                >
-                  <Icone nome={p.icone} className="h-[17px] w-[17px] md:h-[19px] md:w-[19px]" />
-                </span>
-                <div className="min-w-0">
-                  <h3 className="u-titulo text-[0.9375rem] text-navy-800 md:text-[1.0625rem]">
-                    {p.titulo}
-                  </h3>
-                  <p className="mt-0.5 text-[0.8125rem] leading-snug text-ink-500 md:text-[0.875rem]">
-                    {p.texto}
-                  </p>
-                </div>
-              </article>
-            ))}
+          <Reveal className="mt-7 md:mt-12">
+            <Galeria fotos={galeria} rotulo="Galeria do projeto" />
           </Reveal>
         </div>
       </section>
 
       {/* ---------- locais de treinamento ---------- */}
       <section className="relative u-sec bg-white" aria-labelledby="t-locais">
-        <Curva de="var(--color-ink-50)" forma="domo" virada />
+        <Curva de="var(--color-navy-950)" forma="domo" virada />
         <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
           <Reveal>
             <p className="u-eyebrow flex items-center gap-2 text-ink-400">
@@ -386,25 +405,6 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ---------- âncora escura: galeria ---------- */}
-      <section className="on-navy relative u-sec bg-navy-950" aria-labelledby="t-galeria">
-        <Curva de="var(--color-ink-0)" forma="aba" />
-        <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
-          <Reveal className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-8">
-            <h2
-              id="t-galeria"
-              className="u-display max-w-[15ch] text-[clamp(1.7rem,6.4vw,3.2rem)] text-white"
-            >
-              Nossa rotina
-            </h2>
-          </Reveal>
-
-          <Reveal className="mt-7 md:mt-12">
-            <Galeria fotos={galeria} rotulo="Galeria do projeto" />
-          </Reveal>
         </div>
       </section>
 

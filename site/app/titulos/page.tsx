@@ -248,10 +248,10 @@ export default function Titulos() {
           <Reveal className="flex flex-col items-start gap-5 rounded-[18px] bg-ink-25 p-5 ring-1 ring-ink-200 md:flex-row md:items-center md:justify-between md:p-9">
             <div>
               <h2 className="u-titulo text-[1.25rem] text-navy-800 md:text-[1.5rem]">
-                Quer fazer parte
+                Quer participar?
               </h2>
               <p className="mt-1.5 max-w-[46ch] text-[0.875rem] leading-relaxed text-ink-500">
-                Conheça as equipes em atividade ou apoie a temporada que vem por aí.
+                Fale conosco para obter mais informações.
               </p>
             </div>
             <Acoes className="shrink-0">

@@ -138,7 +138,7 @@ export default function Transparencia() {
                         aria-hidden
                         className={`h-1.5 w-1.5 rounded-full ${publicado ? "bg-success" : "bg-ink-300"}`}
                       />
-                      {publicado ? "Disponível para download" : "Em preparação"}
+                      {publicado ? "Disponível para visualização" : "Em preparação"}
                     </span>
                   </span>
                 </>
