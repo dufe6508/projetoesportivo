@@ -317,6 +317,7 @@ const futsalFeminino: Pessoa[] = [
 ];
 
 const voleiFeminino: Pessoa[] = [
+  { nome: "Lívia Marcelle", numero: "7", foto: "/fotos/volei-feminino-atleta-livia-marcelle.webp" },
   { nome: "Giovanna Monteiro", numero: "12", foto: "/fotos/volei-feminino-atleta-giovanna-monteiro.webp" },
   { nome: "Sibele Santos", numero: "26", foto: "/fotos/volei-feminino-atleta-sibele-santos.webp" },
   { nome: "Ana Cassiano", numero: "10", foto: "/fotos/volei-feminino-atleta-ana-cassiano.webp" },
@@ -342,6 +343,7 @@ const voleiFeminino: Pessoa[] = [
   { nome: "Iza Alves", numero: "8", foto: "/fotos/volei-feminino-atleta-iza-alves.webp" },
   { nome: "Maria Clara", numero: "28", foto: "/fotos/volei-feminino-atleta-maria-clara.webp" },
   { nome: "Nathaly Izidório", numero: "18", foto: "/fotos/volei-feminino-atleta-nathaly-izidorio.webp" },
+  { nome: "Lívia Tavares", numero: "5", foto: "/fotos/volei-feminino-atleta-livia-tavares.webp" },
   { nome: "Gabriele Ferreira", numero: "43", foto: "/fotos/volei-feminino-atleta-gabriele-ferreira.webp" },
   { nome: "Nicolle Souza", numero: "3", foto: "/fotos/volei-feminino-atleta-nicolle-souza.webp" },
   { nome: "Ana Prates", numero: "00", foto: "/fotos/volei-feminino-atleta-ana-prates.webp" },
@@ -734,7 +736,7 @@ export const destinoRecursos = [
   },
   {
     item: "Profissionais",
-    nota: "Folha salarial dos profissionais e do projeto",
+    nota: "Folha salarial dos profissionais que apoiam o projeto",
   },
 ];
 
