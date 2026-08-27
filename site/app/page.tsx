@@ -123,29 +123,32 @@ export default function Home() {
            lado. Na faixa cada foto aparece menor, recortada de leve, e a
            sequência passa a contar a história na ordem: o primeiro time, a
            quadra onde começou, a rotina, onde se treina hoje. */}
-      <section className="on-navy relative u-sec bg-navy-800" aria-labelledby="t-origem">
+      <section
+        className="on-navy relative bg-navy-800 py-10 md:py-28"
+        aria-labelledby="t-origem"
+      >
         <Curva de="var(--color-navy-50)" forma="onda" />
         <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
-          <div className="grid gap-5 lg:grid-cols-[0.92fr_1fr] lg:items-end lg:gap-16">
+          <div className="grid gap-3.5 lg:grid-cols-[0.92fr_1fr] lg:items-end lg:gap-16">
             <Reveal>
               <p className="u-eyebrow text-white/50">Como começou</p>
               <h2
                 id="t-origem"
-                className="u-titulo mt-2.5 max-w-[20ch] text-[clamp(1.55rem,5.4vw,2.85rem)] text-white md:mt-4"
+                className="u-titulo mt-2 max-w-[20ch] text-[clamp(1.4rem,5.4vw,2.85rem)] text-white md:mt-4"
               >
                 Partindo dos alunos, muita dedicação e trabalho coletivo.
               </h2>
-              <p className="mt-3 max-w-[34ch] text-[0.875rem] font-semibold leading-snug text-white/55 md:text-[0.9375rem]">
+              <p className="mt-2 max-w-[34ch] text-[0.8125rem] font-semibold leading-snug text-white/55 md:mt-3 md:text-[0.9375rem]">
                 Aqui o trabalho em equipe importa
               </p>
             </Reveal>
 
             <div>
               <TextoScrub
-                className="u-measure text-[1rem] leading-[1.75] text-white/75 md:text-[1.0625rem] md:leading-[1.8]"
+                className="u-measure text-[0.875rem] leading-[1.6] text-white/75 md:text-[1.0625rem] md:leading-[1.8]"
                 texto="Um grupo de alunos queria aprender Voleibol e competir. Os professores viram a necessidade de organização e começaram a auxiliar o projeto em seu desenvolvimento."
               />
-              <Reveal className="mt-5">
+              <Reveal className="mt-3.5 md:mt-5">
                 <BotaoLink href="/sobre" tom="contornoClaro">
                   Conheça o projeto
                 </BotaoLink>
@@ -155,7 +158,7 @@ export default function Home() {
 
           {/* A legenda não descreve a foto, situa a etapa. É ela que faz as
               quatro imagens virarem uma sequência em vez de uma grade. */}
-          <Reveal stagger className="mt-9 grid grid-cols-2 gap-3 md:mt-14 md:grid-cols-4 md:gap-5">
+          <Reveal stagger className="mt-5 grid grid-cols-2 gap-2.5 md:mt-14 md:grid-cols-4 md:gap-5">
             {origem.map((f, i) => (
               <figure key={f.src} className="js-reveal m-0">
                 <div className="relative aspect-4/3 overflow-hidden rounded-[14px] bg-navy-900">
@@ -185,7 +188,7 @@ export default function Home() {
 
       {/* ---------- princípios ---------- */}
       <section className="relative u-sec bg-ink-50" aria-labelledby="t-principios">
-        <Curva de="var(--color-navy-950)" forma="dupla" />
+        <Curva de="var(--color-navy-800)" forma="dupla" />
         <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
           <Reveal className="max-w-[52ch]">
             <p className="u-eyebrow text-ink-400">Valores e princípios</p>
@@ -232,7 +235,7 @@ export default function Home() {
 
       {/* ---------- modalidades ---------- */}
       <section className="relative u-sec bg-white" aria-labelledby="t-modalidades">
-        <Curva de="var(--color-navy-800)" forma="onda" />
+        <Curva de="var(--color-ink-50)" forma="onda" />
         <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
           <Reveal className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8">
             <div>

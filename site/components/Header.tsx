@@ -322,112 +322,122 @@ export function Header() {
         <div className="flex min-h-full flex-col px-5 pb-7 pt-20">
           <nav aria-label="Principal, móvel" className="flex flex-col gap-7">
             <ul className="flex flex-col gap-0.5">
-              {navegacao
-                .filter((item) => !item.submenu)
-                .map((item, i) => {
-                  const ativo = item.href === "/" ? rota === "/" : rota.startsWith(item.href);
+              {navegacao.map((item, i) => {
+                const ativo = item.href === "/" ? rota === "/" : rota.startsWith(item.href);
+
+                if (item.submenu) {
                   return (
-                    <li key={item.href}>
+                    <li key={item.href} className="py-2.5">
                       <Link
                         href={item.href}
-                        aria-current={ativo ? "page" : undefined}
-                        className={`flex min-h-[44px] items-center text-[1.0625rem] font-semibold
-                                    tracking-[-0.01em] transition-colors duration-150
-                                    ${ativo ? "text-white" : "text-white/55 hover:text-white"}`}
+                        className="flex min-h-[36px] items-center justify-between gap-3"
                         style={{
                           transition: `opacity .26s ${i * 30}ms, transform .26s ${i * 30}ms`,
                           opacity: aberto ? 1 : 0,
                           transform: aberto ? "none" : "translateY(8px)",
                         }}
                       >
-                        {item.rotulo}
-                        {ativo && <span aria-hidden className="ml-2.5 h-1 w-1 rounded-full bg-gold-300" />}
+                        <span className="text-[1.0625rem] font-semibold tracking-[-0.01em] text-white/55">
+                          {item.rotulo}
+                        </span>
+                        <span className="flex items-center gap-1 text-[0.75rem] font-semibold text-white/50">
+                          Ver todas
+                          <Icone nome="CaretRight" className="h-3 w-3" />
+                        </span>
                       </Link>
-
-                      {/* subitem recuado com fio à esquerda: no celular ele
-                          precisa parecer filho da linha de cima, e não mais
-                          um destino de mesmo peso */}
-                      {item.filhos && (
-                        <ul className="mb-1 ml-1 flex flex-col border-l border-white/12 pl-4">
-                          {item.filhos.map((f) => {
-                            const filhoAtivo = rota === f.href;
-                            return (
-                              <li key={f.href}>
-                                <Link
-                                  href={f.href}
-                                  aria-current={filhoAtivo ? "page" : undefined}
-                                  className={`flex min-h-[40px] items-center text-[0.9375rem]
-                                              font-medium transition-colors duration-150
-                                              ${filhoAtivo ? "text-white" : "text-white/45 hover:text-white"}`}
-                                >
-                                  {f.rotulo}
-                                </Link>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      )}
+                      <ul className="mt-3 grid grid-cols-2 gap-2.5">
+                        {modalidades.map((m) => (
+                          <li key={m.slug}>
+                            <Link
+                              href={`/modalidades/${m.slug}`}
+                              className="group relative flex aspect-16/10 items-end overflow-hidden
+                                         rounded-[11px] bg-navy-800 ring-1 ring-white/10
+                                         transition-transform duration-200 active:scale-[0.98]"
+                            >
+                              {m.capa ? (
+                                <Image
+                                  src={m.capa.src}
+                                  alt=""
+                                  fill
+                                  sizes="46vw"
+                                  style={{ objectPosition: m.capa.posicao ?? "50% 50%" }}
+                                  className="object-cover opacity-80 transition-opacity duration-200
+                                             group-hover:opacity-100"
+                                />
+                              ) : (
+                                <Image
+                                  src="/escudo.png"
+                                  alt=""
+                                  width={120}
+                                  height={120}
+                                  className="absolute left-1/2 top-1/2 h-[52%] w-auto -translate-x-1/2
+                                             -translate-y-1/2 opacity-25"
+                                />
+                              )}
+                              <span
+                                aria-hidden
+                                className="absolute inset-0"
+                                style={{
+                                  background:
+                                    "linear-gradient(180deg, rgba(0,14,34,0) 34%, rgba(0,14,34,.9) 100%)",
+                                }}
+                              />
+                              <span className="relative p-2 text-[0.75rem] font-semibold leading-tight text-white">
+                                {m.nome}
+                              </span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
                     </li>
                   );
-                })}
-            </ul>
+                }
 
-            <div>
-              <Link
-                href="/modalidades"
-                className="flex min-h-[36px] items-center justify-between gap-3 px-0.5"
-              >
-                <span className="u-eyebrow text-white/35">Modalidades</span>
-                <span className="flex items-center gap-1 text-[0.75rem] font-semibold text-white/50">
-                  Ver todas
-                  <Icone nome="CaretRight" className="h-3 w-3" />
-                </span>
-              </Link>
-              <ul className="mt-3 grid grid-cols-2 gap-2.5">
-                {modalidades.map((m) => (
-                  <li key={m.slug}>
+                return (
+                  <li key={item.href}>
                     <Link
-                      href={`/modalidades/${m.slug}`}
-                      className="group relative flex aspect-16/10 items-end overflow-hidden
-                                 rounded-[11px] bg-navy-800 ring-1 ring-white/10
-                                 transition-transform duration-200 active:scale-[0.98]"
+                      href={item.href}
+                      aria-current={ativo ? "page" : undefined}
+                      className={`flex min-h-[44px] items-center text-[1.0625rem] font-semibold
+                                  tracking-[-0.01em] transition-colors duration-150
+                                  ${ativo ? "text-white" : "text-white/55 hover:text-white"}`}
+                      style={{
+                        transition: `opacity .26s ${i * 30}ms, transform .26s ${i * 30}ms`,
+                        opacity: aberto ? 1 : 0,
+                        transform: aberto ? "none" : "translateY(8px)",
+                      }}
                     >
-                      {m.capa ? (
-                        <Image
-                          src={m.capa.src}
-                          alt=""
-                          fill
-                          sizes="46vw"
-                          style={{ objectPosition: m.capa.posicao ?? "50% 50%" }}
-                          className="object-cover opacity-80 transition-opacity duration-200
-                                     group-hover:opacity-100"
-                        />
-                      ) : (
-                        <Image
-                          src="/escudo.png"
-                          alt=""
-                          width={120}
-                          height={120}
-                          className="absolute left-1/2 top-1/2 h-[52%] w-auto -translate-x-1/2
-                                     -translate-y-1/2 opacity-25"
-                        />
-                      )}
-                      <span
-                        aria-hidden
-                        className="absolute inset-0"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, rgba(0,14,34,0) 34%, rgba(0,14,34,.9) 100%)",
-                        }}
-                      />
-                      <span className="relative p-2 text-[0.75rem] font-semibold leading-tight text-white">
-                        {m.nome}
-                      </span>
+                      {item.rotulo}
+                      {ativo && <span aria-hidden className="ml-2.5 h-1 w-1 rounded-full bg-gold-300" />}
                     </Link>
+
+                    {/* subitem recuado com fio à esquerda: no celular ele
+                        precisa parecer filho da linha de cima, e não mais
+                        um destino de mesmo peso */}
+                    {item.filhos && (
+                      <ul className="mb-1 ml-1 flex flex-col border-l border-white/12 pl-4">
+                        {item.filhos.map((f) => {
+                          const filhoAtivo = rota === f.href;
+                          return (
+                            <li key={f.href}>
+                              <Link
+                                href={f.href}
+                                aria-current={filhoAtivo ? "page" : undefined}
+                                className={`flex min-h-[40px] items-center text-[0.9375rem]
+                                            font-medium transition-colors duration-150
+                                            ${filhoAtivo ? "text-white" : "text-white/45 hover:text-white"}`}
+                              >
+                                {f.rotulo}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
                   </li>
-                ))}
-              </ul>
-            </div>
+                );
+              })}
+            </ul>
           </nav>
 
           <div className="mt-auto flex items-center justify-between gap-4 pt-8">

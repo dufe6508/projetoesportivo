@@ -254,9 +254,15 @@ export default function Titulos() {
                 Fale conosco para obter mais informações.
               </p>
             </div>
-            <Acoes className="shrink-0">
-              <BotaoLink href="/modalidades">Ver as equipes</BotaoLink>
-              <BotaoLink href="/apoie" tom="contorno">
+            <Acoes className="w-full flex-nowrap shrink-0 sm:w-auto">
+              <BotaoLink href="/modalidades" className="min-h-[40px] flex-1 px-3 text-[0.8125rem] xs:px-4 sm:flex-none sm:px-6 sm:text-[0.9375rem]">
+                Ver as equipes
+              </BotaoLink>
+              <BotaoLink
+                href="/apoie"
+                tom="contorno"
+                className="min-h-[40px] flex-1 px-3 text-[0.8125rem] xs:px-4 sm:flex-none sm:px-6 sm:text-[0.9375rem]"
+              >
                 Apoiar
               </BotaoLink>
             </Acoes>
