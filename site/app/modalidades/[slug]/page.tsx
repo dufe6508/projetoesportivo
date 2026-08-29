@@ -285,6 +285,12 @@ export default async function Pagina({ params }: Params) {
               </li>
             ))}
           </ul>
+
+          <Acoes className="mt-7 md:mt-9">
+            <BotaoLink href="/titulos" tom="contorno">
+              Conhecer as competições
+            </BotaoLink>
+          </Acoes>
         </div>
       </section>
       )}
