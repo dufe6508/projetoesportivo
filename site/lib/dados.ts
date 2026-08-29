@@ -611,8 +611,17 @@ export const contato = {
   mapa: "Av. Senador Levindo Coelho, 250 - Vale do Jatobá, Belo Horizonte - MG, 30662-290",
   instagram: "https://www.instagram.com/claudiobrandaoprojetoesportivo/",
   instagramHandle: "@claudiobrandaoprojetoesportivo",
+  email: "claudiobrandaoesportes@gmail.com",
   razaoSocial: "Associação Esportiva Escola da Bola",
   cnpj: "68.369.689/0001-60",
+};
+
+/** Crédito de desenvolvimento no rodapé. */
+export const desenvolvedor = {
+  nome: "Mateus Fernandes",
+  whatsapp: "https://wa.me/5531999848388",
+  instagram: "https://www.instagram.com/offernandesllz/",
+  instagramHandle: "@offernandesllz",
 };
 
 /* ------------------------------------------------------------------

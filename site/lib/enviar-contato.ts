@@ -2,7 +2,7 @@
 
 import { Resend } from "resend";
 
-const EMAIL_DESTINO = "mateusfsanto123@gmail.com";
+const EMAIL_DESTINO = "claudiobrandaoesportes@gmail.com";
 const ESCUDO_URL = "https://claudiobrandaoesportes.com.br/escudo.png";
 
 function escapeHtml(valor: string) {
@@ -97,7 +97,7 @@ export async function enviarContato(dados: FormData): Promise<EnvioContato> {
     from: "Contato do site <onboarding@resend.dev>",
     to: EMAIL_DESTINO,
     ...(replyToValido && { replyTo: replyToValido }),
-    subject: `[Cláudio Brandão] ${assunto || "Contato"} — ${nome}`,
+    subject: `[Cláudio Brandão] ${assunto || "Contato"}, de ${nome}`,
     text: [
       `Nome: ${nome}`,
       `E-mail: ${email}`,

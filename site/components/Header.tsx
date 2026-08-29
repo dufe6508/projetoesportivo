@@ -276,6 +276,15 @@ export function Header() {
               <Icone nome="InstagramLogo" className="h-[20px] w-[20px]" />
             </a>
 
+            <a
+              href={`mailto:${contato.email}`}
+              aria-label={`Enviar e-mail para ${contato.email}`}
+              className="hidden h-11 w-11 place-items-center text-white/70 transition-colors
+                         duration-150 hover:text-white lg:grid"
+            >
+              <Icone nome="EnvelopeSimple" className="h-[19px] w-[19px]" />
+            </a>
+
             <span className="hidden sm:block">
               <BotaoLink
                 href="/apoie"
@@ -440,20 +449,30 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="mt-auto flex items-center justify-between gap-4 pt-8">
+          <div className="mt-auto flex flex-col gap-5 pt-8">
             {/* só o rótulo: o handle inteiro tem 31 caracteres e, em 360px,
-                empurrava o botão para fora da linha */}
-            <a
-              href={contato.instagram}
-              className="inline-flex min-h-[44px] items-center gap-2 text-[0.875rem] font-medium
-                         text-white/55 transition-colors duration-150 hover:text-white"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Icone nome="InstagramLogo" className="h-[18px] w-[18px]" />
-              Instagram
-            </a>
-            <BotaoLink href="/apoie" tom="ouro" className="shrink-0">
+                empurrava o layout */}
+            <div className="flex items-center gap-5">
+              <a
+                href={contato.instagram}
+                className="inline-flex min-h-[44px] items-center gap-2 text-[0.875rem] font-medium
+                           text-white/55 transition-colors duration-150 hover:text-white"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Icone nome="InstagramLogo" className="h-[18px] w-[18px]" />
+                Instagram
+              </a>
+              <a
+                href={`mailto:${contato.email}`}
+                className="inline-flex min-h-[44px] items-center gap-2 text-[0.875rem] font-medium
+                           text-white/55 transition-colors duration-150 hover:text-white"
+              >
+                <Icone nome="EnvelopeSimple" className="h-[18px] w-[18px]" />
+                E-mail
+              </a>
+            </div>
+            <BotaoLink href="/apoie" tom="ouro" className="w-full">
               Seja um patrocinador
             </BotaoLink>
           </div>

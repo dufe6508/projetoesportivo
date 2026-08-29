@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Icone } from "./Icone";
-import { contato, navegacao, modalidadesAtivas as modalidades } from "@/lib/dados";
+import { contato, desenvolvedor, navegacao, modalidadesAtivas as modalidades } from "@/lib/dados";
 
 /**
  * Rodapé.
@@ -41,16 +41,26 @@ export function Footer() {
             <address className="mt-4 text-[0.8125rem] not-italic leading-relaxed">
               {contato.endereco} · {contato.bairro}
             </address>
-            <a
-              href={contato.instagram}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-1 inline-flex min-h-[40px] items-center gap-2 text-[0.8125rem]
-                         text-white/80 transition-colors duration-150 hover:text-white"
-            >
-              <Icone nome="InstagramLogo" className="h-4 w-4" />
-              {contato.instagramHandle}
-            </a>
+            <div className="mt-1 flex flex-col gap-1.5">
+              <a
+                href={contato.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-[40px] items-center gap-2 text-[0.8125rem]
+                           text-white/80 transition-colors duration-150 hover:text-white"
+              >
+                <Icone nome="InstagramLogo" className="h-4 w-4" />
+                {contato.instagramHandle}
+              </a>
+              <a
+                href={`mailto:${contato.email}`}
+                className="inline-flex min-h-[40px] items-center gap-2 text-[0.8125rem]
+                           text-white/80 transition-colors duration-150 hover:text-white"
+              >
+                <Icone nome="EnvelopeSimple" className="h-4 w-4" />
+                {contato.email}
+              </a>
+            </div>
           </div>
 
           {/* linha única no celular, com quebra: mais curto que uma coluna */}
@@ -118,6 +128,29 @@ export function Footer() {
           </p>
           <p>{new Date().getFullYear()} Projeto Esportivo Cláudio Brandão</p>
         </div>
+
+        <p className="mt-3 text-[0.6875rem] text-white/25">
+          Desenvolvido por{" "}
+          <a
+            href={desenvolvedor.whatsapp}
+            target="_blank"
+            rel="noreferrer"
+            className="text-white/40 underline decoration-white/20 underline-offset-2
+                       transition-colors duration-150 hover:text-white/70"
+          >
+            {desenvolvedor.nome}
+          </a>{" "}
+          <span className="opacity-60">·</span>{" "}
+          <a
+            href={desenvolvedor.instagram}
+            target="_blank"
+            rel="noreferrer"
+            className="text-white/40 underline decoration-white/20 underline-offset-2
+                       transition-colors duration-150 hover:text-white/70"
+          >
+            {desenvolvedor.instagramHandle}
+          </a>
+        </p>
       </div>
     </footer>
   );
