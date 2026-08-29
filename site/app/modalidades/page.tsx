@@ -56,14 +56,14 @@ export default function Modalidades() {
           <Reveal className="mt-10 flex flex-col items-start gap-5 rounded-[18px] bg-ink-25 p-5 ring-1 ring-ink-200 md:mt-16 md:flex-row md:items-center md:justify-between md:p-9">
             <div>
               <h2 className="u-titulo text-[1.25rem] text-navy-800 md:text-[1.5rem]">
-                Quer participar?
+                Quer saber onde essas equipes jogam?
               </h2>
               <p className="mt-1.5 max-w-[44ch] text-[0.875rem] leading-relaxed text-ink-500">
-                Fale conosco para obter mais informações.
+                Veja os campeonatos e conquistas de cada equipe.
               </p>
             </div>
-            <BotaoLink href="/contato" className="shrink-0">
-              Falar com a coordenação
+            <BotaoLink href="/titulos" className="shrink-0">
+              Conhecer as competições
             </BotaoLink>
           </Reveal>
         </div>

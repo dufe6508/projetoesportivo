@@ -6,7 +6,7 @@ import { Curva } from "@/components/Curva";
 import { Icone } from "@/components/Icone";
 import { Escudo, QuadroTitulos } from "@/components/QuadroTitulos";
 import { Reveal } from "@/components/Motion";
-import { BotaoLink, Acoes } from "@/components/Botao";
+import { BotaoLink } from "@/components/Botao";
 import {
   competicoes,
   titulosPorEquipe,
@@ -248,24 +248,15 @@ export default function Titulos() {
           <Reveal className="flex flex-col items-start gap-5 rounded-[18px] bg-ink-25 p-5 ring-1 ring-ink-200 md:flex-row md:items-center md:justify-between md:p-9">
             <div>
               <h2 className="u-titulo text-[1.25rem] text-navy-800 md:text-[1.5rem]">
-                Quer participar?
+                Quer conhecer quem está por trás disso?
               </h2>
               <p className="mt-1.5 max-w-[46ch] text-[0.875rem] leading-relaxed text-ink-500">
-                Fale conosco para obter mais informações.
+                Veja a gestão, os responsáveis e os documentos do projeto.
               </p>
             </div>
-            <Acoes className="w-full flex-nowrap shrink-0 sm:w-auto">
-              <BotaoLink href="/modalidades" className="min-h-[40px] flex-1 px-3 text-[0.8125rem] xs:px-4 sm:flex-none sm:px-6 sm:text-[0.9375rem]">
-                Ver as equipes
-              </BotaoLink>
-              <BotaoLink
-                href="/apoie"
-                tom="contorno"
-                className="min-h-[40px] flex-1 px-3 text-[0.8125rem] xs:px-4 sm:flex-none sm:px-6 sm:text-[0.9375rem]"
-              >
-                Apoiar
-              </BotaoLink>
-            </Acoes>
+            <BotaoLink href="/transparencia" className="shrink-0">
+              Conhecer a gestão
+            </BotaoLink>
           </Reveal>
         </div>
       </section>

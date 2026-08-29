@@ -129,6 +129,22 @@ export default function Apoie() {
           <Reveal className="mt-6 md:mt-10">
             <Pix />
           </Reveal>
+
+          {!TELA_COMPLETA && (
+            <Reveal className="mt-10 flex flex-col items-start gap-5 rounded-[18px] bg-ink-25 p-5 ring-1 ring-ink-200 md:mt-16 md:flex-row md:items-center md:justify-between md:p-9">
+              <div>
+                <h2 className="u-titulo text-[1.25rem] text-navy-800 md:text-[1.5rem]">
+                  Prefere outra forma de ajudar?
+                </h2>
+                <p className="mt-1.5 max-w-[44ch] text-[0.875rem] leading-relaxed text-ink-500">
+                  Fale com a gente sobre patrocínio, parceria ou voluntariado.
+                </p>
+              </div>
+              <BotaoLink href="/contato" className="shrink-0">
+                Falar com a gente
+              </BotaoLink>
+            </Reveal>
+          )}
         </div>
       </section>
       {TELA_COMPLETA && (
