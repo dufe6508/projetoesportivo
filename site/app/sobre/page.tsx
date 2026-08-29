@@ -489,7 +489,10 @@ export default function Sobre() {
         </div>
       </section>
 
-      {/* ---------- sobre o instituto ---------- */}
+      {/* ---------- sobre o instituto ----------
+           Temporariamente fora do ar, a pedido do cliente. Reativar: tirar
+           o comentário. */}
+      {/*
       <section className="relative u-sec bg-white" aria-labelledby="t-instituto">
         <Curva de="var(--color-navy-800)" forma="onda" virada />
         <div className="relative mx-auto max-w-[900px] px-5 text-center md:px-10">
@@ -529,6 +532,7 @@ export default function Sobre() {
           </Reveal>
         </div>
       </section>
+      */}
 
       {/* ---------- fechamento ---------- */}
       <section className="on-navy relative isolate overflow-hidden bg-navy-950" aria-labelledby="t-fechamento">
