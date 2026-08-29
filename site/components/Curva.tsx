@@ -46,12 +46,15 @@ export function Curva({
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute inset-x-0 top-0 leading-[0] ${className}`}
+      // -mt-px: sem isso, arredondamento de subpixel do navegador ao escalar
+      // o viewBox para a altura em px deixava um fio da cor de fundo errada
+      // entre o topo do SVG e a borda da seção anterior.
+      className={`pointer-events-none absolute inset-x-0 -top-px leading-[0] ${className}`}
     >
       <svg
         viewBox="0 0 1440 90"
         preserveAspectRatio="none"
-        className="block h-[34px] w-full md:h-[62px]"
+        className="block h-[35px] w-full md:h-[63px]"
         style={virada ? { transform: "scaleX(-1)" } : undefined}
       >
         <path d={formas[forma]} fill={de} />

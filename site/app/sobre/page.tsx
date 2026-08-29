@@ -273,33 +273,33 @@ export default function Sobre() {
             </h2>
           </Reveal>
 
-          <div className="mt-8 flex flex-col gap-8 md:mt-14 md:gap-16">
+          <div className="mt-6 flex flex-col gap-5 md:mt-12 md:gap-10">
             {etapasRotina.map((e, i) => (
               <Reveal key={e.titulo}>
                 <div
-                  className={`grid items-center gap-5 md:grid-cols-2 md:gap-12 ${
+                  className={`grid items-center gap-4 md:grid-cols-[0.85fr_1fr] md:gap-10 ${
                     i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
                   }`}
                 >
-                  <div className="relative aspect-4/3 overflow-hidden rounded-[18px] bg-navy-900">
+                  <div className="relative aspect-16/10 overflow-hidden rounded-[14px] bg-navy-900 md:aspect-4/3">
                     <Image
                       src={e.foto.src}
                       alt={e.foto.alt}
                       fill
                       loading="lazy"
-                      sizes="(max-width: 768px) 100vw, 50vw"
+                      sizes="(max-width: 768px) 100vw, 45vw"
                       style={{ objectPosition: e.foto.posicao }}
                       className="object-cover"
                     />
                   </div>
                   <div>
-                    <span className="u-tabular text-[0.75rem] font-bold text-ink-400">
+                    <span className="u-tabular text-[0.6875rem] font-bold text-ink-400">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="u-titulo mt-2 text-[1.375rem] text-navy-800 md:text-[1.75rem]">
+                    <h3 className="u-titulo mt-1.5 text-[1.125rem] text-navy-800 md:text-[1.5rem]">
                       {e.titulo}
                     </h3>
-                    <p className="mt-3 max-w-[46ch] text-[0.9375rem] leading-relaxed text-ink-500 md:text-[1rem]">
+                    <p className="mt-2 max-w-[46ch] text-[0.8125rem] leading-relaxed text-ink-500 md:mt-3 md:text-[0.9375rem]">
                       {e.texto}
                     </p>
                   </div>
@@ -308,10 +308,15 @@ export default function Sobre() {
             ))}
           </div>
 
-          {/* ---------- a rotina, em imagem ---------- */}
-          <div className="mt-14 md:mt-20">
-            <Reveal>
+          {/* ---------- a rotina, em imagem ----------
+               Uma coluna a mais e ladrilho mais baixo (3:4 → 4:3) que a
+               Galeria padrão do site: aqui são nove fotos de rotina, não a
+               dupla-dígito de um álbum, e o recorte mais raso deixa a fileira
+               ler como mosaico compacto em vez de pilha de retratos. */}
+          <div className="mt-10 md:mt-16">
+            <Reveal className="flex items-baseline justify-between gap-4">
               <h3 className="u-eyebrow text-ink-400">Registros da rotina</h3>
+              <span className="text-[0.75rem] text-ink-400">Toque para ampliar</span>
             </Reveal>
             <Reveal className="mt-4 md:mt-6">
               <Galeria fotos={rotina} rotulo="Rotina do projeto" />
@@ -321,7 +326,7 @@ export default function Sobre() {
       </section>
 
       {/* citação */}
-      <section className="relative bg-navy-50 py-14 md:py-24">
+      <section className="relative bg-navy-100 py-14 md:py-24">
         <Curva de="var(--color-ink-0)" forma="onda" virada />
         <div className="relative mx-auto max-w-[900px] px-5 text-center md:px-10">
           <Reveal>
@@ -341,7 +346,7 @@ export default function Sobre() {
 
       {/* ---------- nossos combinados ---------- */}
       <section className="relative u-sec bg-ink-50" aria-labelledby="t-combinados">
-        <Curva de="var(--color-navy-50)" forma="dupla" />
+        <Curva de="var(--color-navy-100)" forma="dupla" />
         <div className="relative mx-auto max-w-[1320px] px-5 md:px-10">
           <Reveal>
             <p className="u-eyebrow text-ink-400">O que se cobra</p>
@@ -416,28 +421,28 @@ export default function Sobre() {
             </p>
           </Reveal>
 
-          <Reveal stagger className="mt-9 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
+          <Reveal stagger className="mt-7 grid gap-3.5 md:mt-14 md:grid-cols-2 md:gap-6">
             <article
-              className="js-reveal group flex h-full flex-col gap-6 overflow-hidden rounded-[20px]
-                         bg-white/[0.06] p-6 ring-1 ring-white/12 transition-[transform,box-shadow]
+              className="js-reveal group flex h-full flex-col gap-3.5 overflow-hidden rounded-[16px]
+                         bg-white/[0.06] p-4 ring-1 ring-white/12 transition-[transform,box-shadow]
                          duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1
-                         hover:bg-white/[0.09] md:p-9"
+                         hover:bg-white/[0.09] md:gap-6 md:rounded-[20px] md:p-9"
             >
               <span
                 aria-hidden
-                className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white/10
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/10
                            text-white ring-1 ring-white/15 transition-colors duration-300
-                           group-hover:bg-gold-300 group-hover:text-navy-900"
+                           group-hover:bg-gold-300 group-hover:text-navy-900 md:h-12 md:w-12"
               >
-                <Icone nome="Heartbeat" className="h-5 w-5" />
+                <Icone nome="Heartbeat" className="h-4 w-4 md:h-5 md:w-5" />
               </span>
 
               <div className="flex-1">
-                <p className="u-eyebrow text-white/50">Pessoa física</p>
-                <h3 className="u-titulo mt-2 text-[1.375rem] text-white md:text-[1.625rem]">
+                <p className="u-eyebrow text-[0.6875rem] text-white/50">Pessoa física</p>
+                <h3 className="u-titulo mt-1.5 text-[1.0625rem] text-white md:mt-2 md:text-[1.625rem]">
                   Contribua com uma doação
                 </h3>
-                <p className="mt-3 max-w-[42ch] text-[0.875rem] leading-relaxed text-white/70 md:text-[0.9375rem]">
+                <p className="mt-2 max-w-[42ch] text-[0.8125rem] leading-relaxed text-white/70 md:mt-3 md:text-[0.9375rem]">
                   Qualquer pessoa pode contribuir por meio de doações espontâneas, em qualquer
                   valor, ou destinando até 6% do Imposto de Renda pela Lei de Incentivo Federal ao
                   Esporte. O apoio vira material, uniforme e transporte das equipes.
@@ -450,26 +455,26 @@ export default function Sobre() {
             </article>
 
             <article
-              className="js-reveal group flex h-full flex-col gap-6 overflow-hidden rounded-[20px]
-                         bg-white/[0.06] p-6 ring-1 ring-white/12 transition-[transform,box-shadow]
+              className="js-reveal group flex h-full flex-col gap-3.5 overflow-hidden rounded-[16px]
+                         bg-white/[0.06] p-4 ring-1 ring-white/12 transition-[transform,box-shadow]
                          duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1
-                         hover:bg-white/[0.09] md:p-9"
+                         hover:bg-white/[0.09] md:gap-6 md:rounded-[20px] md:p-9"
             >
               <span
                 aria-hidden
-                className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white/10
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/10
                            text-white ring-1 ring-white/15 transition-colors duration-300
-                           group-hover:bg-gold-300 group-hover:text-navy-900"
+                           group-hover:bg-gold-300 group-hover:text-navy-900 md:h-12 md:w-12"
               >
-                <Icone nome="Buildings" className="h-5 w-5" />
+                <Icone nome="Buildings" className="h-4 w-4 md:h-5 md:w-5" />
               </span>
 
               <div className="flex-1">
-                <p className="u-eyebrow text-white/50">Pessoa jurídica</p>
-                <h3 className="u-titulo mt-2 text-[1.375rem] text-white md:text-[1.625rem]">
+                <p className="u-eyebrow text-[0.6875rem] text-white/50">Pessoa jurídica</p>
+                <h3 className="u-titulo mt-1.5 text-[1.0625rem] text-white md:mt-2 md:text-[1.625rem]">
                   Patrocine o projeto
                 </h3>
-                <p className="mt-3 max-w-[42ch] text-[0.875rem] leading-relaxed text-white/70 md:text-[0.9375rem]">
+                <p className="mt-2 max-w-[42ch] text-[0.8125rem] leading-relaxed text-white/70 md:mt-3 md:text-[0.9375rem]">
                   Empresas podem contribuir diretamente com doações ou por meio das leis federais
                   e estaduais de incentivo ao esporte, associando a marca a um projeto de impacto
                   social real, com prestação de contas.
@@ -490,18 +495,18 @@ export default function Sobre() {
       </section>
 
       {/* ---------- sobre o instituto ---------- */}
-      <section className="relative u-sec bg-white" aria-labelledby="t-instituto">
+      <section className="relative u-sec-tight bg-white" aria-labelledby="t-instituto">
         <Curva de="var(--color-navy-800)" forma="onda" virada />
-        <div className="relative mx-auto max-w-[900px] px-5 text-center md:px-10">
+        <div className="relative mx-auto max-w-[760px] px-5 text-center md:px-10">
           <Reveal>
             <p className="u-eyebrow text-ink-400">Sobre o instituto</p>
             <h2
               id="t-instituto"
-              className="u-display mx-auto mt-2.5 max-w-[18ch] text-[clamp(1.7rem,6.4vw,3.2rem)] text-navy-800 md:mt-4"
+              className="u-display mx-auto mt-2 max-w-[18ch] text-[clamp(1.5rem,5.6vw,2.5rem)] text-navy-800 md:mt-3"
             >
               Quem somos e por que existimos
             </h2>
-            <div className="u-measure mx-auto mt-5 flex flex-col gap-3.5 text-[0.9375rem] leading-[1.7] text-ink-500 md:mt-8 md:gap-4 md:text-[1.0625rem] md:leading-[1.8]">
+            <div className="u-measure mx-auto mt-4 flex flex-col gap-2.5 text-[0.875rem] leading-[1.65] text-ink-500 md:mt-6 md:gap-3 md:text-[0.9375rem] md:leading-[1.7]">
               <p>
                 A Associação Esportiva Escola da Bola nasceu de uma demanda simples: um grupo de
                 alunos que queria aprender Voleibol e competir. Dez anos depois, viramos uma
@@ -520,7 +525,7 @@ export default function Sobre() {
                 social que uma comunidade pode oferecer aos seus jovens.
               </p>
             </div>
-            <Acoes className="mt-7 justify-center md:mt-10">
+            <Acoes className="mt-5 justify-center md:mt-8">
               <BotaoLink href="/modalidades">Conhecer as modalidades</BotaoLink>
               <BotaoLink href="/contato" tom="contorno">
                 Falar com a gente
