@@ -612,6 +612,8 @@ export const contato = {
   instagram: "https://www.instagram.com/claudiobrandaoprojetoesportivo/",
   instagramHandle: "@claudiobrandaoprojetoesportivo",
   email: "claudiobrandaoesportes@gmail.com",
+  /** compose do Gmail direto no navegador, em vez do cliente de e-mail do SO */
+  linkGmail: `https://mail.google.com/mail/?view=cm&fs=1&to=claudiobrandaoesportes@gmail.com`,
   razaoSocial: "Associação Esportiva Escola da Bola",
   cnpj: "68.369.689/0001-60",
 };

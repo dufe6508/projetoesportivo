@@ -552,7 +552,13 @@ export default function Sobre() {
               <BotaoLink href="/apoie" tom="ouro">
                 Apoiar
               </BotaoLink>
-              <BotaoLink href={`mailto:${contato.email}`} tom="contornoClaro" icone="EnvelopeSimple">
+              <BotaoLink
+                href={contato.linkGmail}
+                target="_blank"
+                rel="noreferrer"
+                tom="contornoClaro"
+                icone="EnvelopeSimple"
+              >
                 Enviar e-mail
               </BotaoLink>
             </Acoes>

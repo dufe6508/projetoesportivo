@@ -277,7 +277,9 @@ export function Header() {
             </a>
 
             <a
-              href={`mailto:${contato.email}`}
+              href={contato.linkGmail}
+              target="_blank"
+              rel="noreferrer"
               aria-label={`Enviar e-mail para ${contato.email}`}
               className="hidden h-11 w-11 place-items-center text-white/70 transition-colors
                          duration-150 hover:text-white lg:grid"
@@ -464,7 +466,9 @@ export function Header() {
                 Instagram
               </a>
               <a
-                href={`mailto:${contato.email}`}
+                href={contato.linkGmail}
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex min-h-[44px] items-center gap-2 text-[0.875rem] font-medium
                            text-white/55 transition-colors duration-150 hover:text-white"
               >

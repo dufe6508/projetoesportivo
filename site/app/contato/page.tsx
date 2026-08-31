@@ -77,7 +77,9 @@ export default function Contato() {
                 <div className="u-courtrule pt-7 text-navy-800">
                   <h2 className="u-eyebrow text-ink-400">E-mail</h2>
                   <a
-                    href={`mailto:${contato.email}`}
+                    href={contato.linkGmail}
+                    target="_blank"
+                    rel="noreferrer"
                     className="group mt-3 inline-flex min-h-[44px] items-center gap-2 text-[1.0625rem] text-navy-800"
                   >
                     <span className="border-b border-navy-800/25 transition-colors duration-150 group-hover:border-navy-800">

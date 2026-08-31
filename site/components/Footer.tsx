@@ -53,7 +53,9 @@ export function Footer() {
                 {contato.instagramHandle}
               </a>
               <a
-                href={`mailto:${contato.email}`}
+                href={contato.linkGmail}
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex min-h-[40px] items-center gap-2 text-[0.8125rem]
                            text-white/80 transition-colors duration-150 hover:text-white"
               >
