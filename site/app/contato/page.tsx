@@ -94,17 +94,6 @@ export default function Contato() {
                     <span className="text-navy-800">CNPJ {contato.cnpj}</span>
                   </p>
                 </div>
-
-                <div className="overflow-hidden rounded-[22px] border border-ink-200">
-                  {/* endereço exato, não mais a região */}
-                  <iframe
-                    title="Mapa da Av. Senador Levindo Coelho, 250, Vale do Jatobá, Belo Horizonte"
-                    src={`https://maps.google.com/maps?q=${encodeURIComponent(contato.mapa)}&z=17&output=embed`}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="block h-[300px] w-full border-0"
-                  />
-                </div>
               </div>
             </Reveal>
           </div>

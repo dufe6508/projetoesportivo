@@ -25,7 +25,6 @@ const ficha = [
   { rotulo: "CNPJ", valor: contato.cnpj },
   { rotulo: "Natureza", valor: institucional.natureza },
   { rotulo: "Fundação", valor: institucional.fundacao },
-  { rotulo: "Sede", valor: `${contato.endereco}, ${contato.bairro}` },
 ];
 
 export default function Transparencia() {
